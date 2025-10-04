@@ -1,0 +1,77 @@
+[gd_scene load_steps=2 format=3 uid="uid://gy536ecr35e1"]
+
+[ext_resource type="Script" uid="uid://dppfx5vw2r4j7" path="res://GDScripts/mine_menu.gd" id="1_og3g2"]
+
+[node name="MineMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_og3g2")
+
+[node name="VBoxMenu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -79.5
+offset_bottom = 79.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxMenu"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[font_size=64]H[/font_size][font_size=1]H[/font_size][font_size=64]MMO[/font_size]
+[font_size=8]Halloween hardly massively multiplayer online game[/font_size]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxPlayerName" type="HBoxContainer" parent="VBoxMenu"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayerName" type="TextEdit" parent="VBoxMenu/HBoxPlayerName"]
+custom_minimum_size = Vector2(297, 32)
+layout_mode = 2
+placeholder_text = "UserName"
+
+[node name="HBoxServer" type="HBoxContainer" parent="VBoxMenu"]
+layout_mode = 2
+alignment = 1
+
+[node name="IP" type="TextEdit" parent="VBoxMenu/HBoxServer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+text = "ws://localhost:1337"
+placeholder_text = "ws://127.0.0.1:1337"
+
+[node name="Join" type="Button" parent="VBoxMenu/HBoxServer"]
+layout_mode = 2
+text = "Join"
+
+[node name="Button" type="Button" parent="VBoxMenu"]
+layout_mode = 2
+text = "RPC TEST"
+
+[node name="GameVersion" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "v0.0.0_1"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[connection signal="pressed" from="VBoxMenu/HBoxServer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="VBoxMenu/Button" to="." method="_on_button_pressed"]

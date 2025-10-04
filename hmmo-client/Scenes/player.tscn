@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx6mh138molva"]
+
+[ext_resource type="Script" uid="uid://5kcyj07k30q2" path="res://GDScripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://d0mqwsd3yvc0x" path="res://icon.svg" id="1_v0iea"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cvnsp"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_cvnsp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_cvnsp")
+
+[node name="PlayerVisual_TEMP" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2.3000002, 0, 0, 0, 1, 0, 0.87654054, 0)
+pixel_size = 0.001
+billboard = 2
+texture = ExtResource("1_v0iea")
+
+[node name="Name" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
+billboard = 1
+text = "Name"
+
+[node name="ID" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+billboard = 1
+text = "00000000000"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 3, 4)
