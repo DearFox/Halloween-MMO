@@ -1,3 +1,5 @@
 [gd_scene format=3 uid="uid://d20xedtl1h82u"]
 
 [node name="MineMenu" type="Node2D"]
+
+[node name="TEMP_World" type="Node2D" parent="."]

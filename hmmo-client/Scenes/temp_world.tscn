@@ -1,6 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://voviw1y84nnq"]
-
-[ext_resource type="PackedScene" uid="uid://bx6mh138molva" path="res://Scenes/player.tscn" id="1_wnvw0"]
+[gd_scene load_steps=4 format=3 uid="uid://voviw1y84nnq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cmjao"]
 
@@ -22,9 +20,6 @@ mesh = SubResource("BoxMesh_cmjao")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/CollisionShape3D"]
 shape = SubResource("BoxShape3D_wnvw0")
-
-[node name="Player" parent="." instance=ExtResource("1_wnvw0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wnvw0")
