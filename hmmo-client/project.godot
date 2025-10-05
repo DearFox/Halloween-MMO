@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 GGS="*res://GDScripts/Global/global_game_script.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

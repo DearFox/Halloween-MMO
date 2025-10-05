@@ -8,6 +8,7 @@ func _on_join_pressed() -> void:
 	GGS.create_client($VBoxMenu/HBoxServer/IP.text)
 	ws_peer = GGS.ws_peer
 	$ConnectionStatusCheck.start()
+	
 
 
 func _on_button_pressed() -> void:

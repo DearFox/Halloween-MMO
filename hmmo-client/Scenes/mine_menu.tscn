@@ -80,7 +80,7 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="ConnectionStatusCheck" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.5
 
 [connection signal="pressed" from="VBoxMenu/HBoxServer/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="VBoxMenu/Button" to="." method="_on_button_pressed"]
