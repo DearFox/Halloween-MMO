@@ -4,7 +4,9 @@ extends Control
 
 var ws_peer:WebSocketMultiplayerPeer
 
-func _on_join_pressed() -> void:
+func _on_join_pressed() -> void: 
+	if $VBoxMenu/HBoxPlayerName/PlayerName.text: #TODO Не позволять игрокам использовать "пустые" ники лучше.
+		pdb.PlayerName = $VBoxMenu/HBoxPlayerName/PlayerName.text
 	GGS.create_client($VBoxMenu/HBoxServer/IP.text)
 	ws_peer = GGS.ws_peer
 	$ConnectionStatusCheck.start()

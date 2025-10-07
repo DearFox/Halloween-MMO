@@ -5,6 +5,7 @@ var ws_peer_conect: bool = false
 const TEMP_WORLD = preload("uid://voviw1y84nnq")
 const PLAYER = preload("uid://bx6mh138molva")
 
+
 # создать peer как клиент
 func create_client(url: String = "ws://localhost:1337") -> void:
 	
@@ -29,6 +30,8 @@ func _on_peer_connected(id: int) -> void:
 	print("peer_connected: ", id)
 	get_tree().root.add_child(TEMP_WORLD.instantiate())
 	get_node("/root/MineMenu").visible = false
+	await  get_tree().create_timer(1).timeout
+	register_client_on_server.rpc_id(1,pdb.PlayerName)
 	#add_player_character(id)
 	
 
@@ -59,13 +62,14 @@ func srv_ok() -> bool:
 		return true
 	return false
 
-func add_player_character(peer_id:int) -> void:
+func add_player_character(peer_id:int, player_name:String) -> void:
 	if peer_id == multiplayer.get_unique_id():
 		# Если создаётся клиентский игрок
 		print("Подключение этого клиента: ", peer_id)
 		var player_character:CharacterBody3D = PLAYER.instantiate()
 		player_character.set_multiplayer_authority(peer_id)
 		player_character.player_current = true
+		player_character.player_name = player_name
 		get_node("/root/TEMP_World").add_child(player_character)
 		player_character.position = Vector3(0,2,0)
 	else:
@@ -74,14 +78,25 @@ func add_player_character(peer_id:int) -> void:
 		var player_character:CharacterBody3D = PLAYER.instantiate()
 		player_character.set_multiplayer_authority(peer_id)
 		player_character.player_current = false
+		player_character.player_name = player_name
 		player_character.player_color = Color(1.0, 0.0, 0.0, 1.0)
 		get_node("/root/TEMP_World").call_deferred("add_child",player_character)
 		player_character.position = Vector3(1,2,0)
 
 
+
 @rpc("reliable")
-func add_newly_connected_player_character(new_peer_id: int):
-	add_player_character(new_peer_id)
+@warning_ignore("unused_parameter")
+func add_newly_connected_player_character(new_peer_id: int) -> void:pass
+#	add_player_character(new_peer_id)
+
+@rpc("reliable")
+func add_player_on_clients(new_peer_id:int, player_name:String) -> void:
+	add_player_character(new_peer_id, player_name)
+
+@rpc("call_remote", "reliable")
+@warning_ignore("unused_parameter")
+func register_client_on_server(PlayerName: String = pdb.PlayerName) -> void: pass
 
 # Тестовый RPC вызов
 @rpc("any_peer")

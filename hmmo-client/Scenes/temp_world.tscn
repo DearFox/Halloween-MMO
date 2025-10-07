@@ -14,6 +14,7 @@ light_specular = 16.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+layers = 3
 mesh = SubResource("BoxMesh_cmjao")
 
 [node name="CollisionShape3D" type="StaticBody3D" parent="MeshInstance3D"]

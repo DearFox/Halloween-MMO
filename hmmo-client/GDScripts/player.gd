@@ -5,16 +5,18 @@ const SPEED = 5.0
 #const JUMP_VELOCITY = 4.5
 
 var player_current: bool = false
-
 var player_color:Color = Color(0.0, 0.29, 3.413)
+var player_name:String
 
 func _enter_tree() -> void:
 	name = str(get_multiplayer_authority())
 	$ID.text = str(name)
+	$Name.text = player_name
 
 func _ready() -> void:
 	$Camera3D.current = player_current
 	$PlayerVisual_TEMP.modulate = player_color
+	
 
 func _physics_process(delta: float) -> void:
 	

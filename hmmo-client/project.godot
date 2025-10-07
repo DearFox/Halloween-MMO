@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GGS="*res://GDScripts/Global/global_game_script.gd"
+pdb="*res://GDScripts/Global/player_db.gd"
 
 [editor_plugins]
 
