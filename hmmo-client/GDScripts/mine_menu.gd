@@ -17,7 +17,6 @@ func _on_button_pressed() -> void:
 	GGS.rpc_test()
 
 func _tested():
-	print("Проверка статуса")
 	if ws_peer == null:
 		connection_status.text = "Статус соединения: Не определено"
 		return

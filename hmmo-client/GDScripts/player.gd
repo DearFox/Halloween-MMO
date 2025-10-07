@@ -16,6 +16,8 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	$Camera3D.current = player_current
 	$PlayerVisual_TEMP.modulate = player_color
+	if !is_multiplayer_authority():
+		$PositionSync.free()
 	
 
 func _physics_process(delta: float) -> void:
@@ -37,3 +39,13 @@ func _physics_process(delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_position_sync_timeout() -> void:
+	position_sync.rpc(position)
+	print("Синхронизация позиции " + name)
+
+@rpc("call_remote", "unreliable")
+func position_sync(pose:Vector3) -> void:
+	position = pose
+	print("Удаленная синхронизация позиции " + name)

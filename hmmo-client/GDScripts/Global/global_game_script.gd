@@ -5,7 +5,6 @@ var ws_peer_conect: bool = false
 const TEMP_WORLD = preload("uid://voviw1y84nnq")
 const PLAYER = preload("uid://bx6mh138molva")
 
-
 # создать peer как клиент
 func create_client(url: String = "ws://localhost:1337") -> void:
 	
@@ -87,12 +86,16 @@ func add_player_character(peer_id:int, player_name:String) -> void:
 
 @rpc("reliable")
 @warning_ignore("unused_parameter")
-func add_newly_connected_player_character(new_peer_id: int) -> void:pass
+func add_newly_connected_player_character(new_peer_id: int) -> void:pass # Легаси код, получается.
 #	add_player_character(new_peer_id)
 
 @rpc("reliable")
 func add_player_on_clients(new_peer_id:int, player_name:String) -> void:
 	add_player_character(new_peer_id, player_name)
+
+@rpc("reliable")
+func remove_player_on_clients(peer_id:int) -> void:
+	get_node("/root/TEMP_World/"+str(peer_id)).queue_free()
 
 @rpc("call_remote", "reliable")
 @warning_ignore("unused_parameter")
