@@ -43,8 +43,10 @@ jobs:
           chmod +x godot
 
           echo "⬇️ Downloading export templates..."
+          mkdir -p ~/.local/share/godot/export_templates/${VER}/
           mkdir -p ~/.local/share/godot/templates/${VER}/
           curl -L --retry 5 --retry-delay 5 -o templates.tpz "$TPL_URL"
+          unzip -q templates.tpz -d ~/.local/share/godot/export_templates/${VER}/
           unzip -q templates.tpz -d ~/.local/share/godot/templates/${VER}/
 
           echo "✅ Godot and export templates installed."
