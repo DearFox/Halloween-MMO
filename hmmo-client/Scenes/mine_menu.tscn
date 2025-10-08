@@ -60,10 +60,6 @@ text = "Статус соединения:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxMenu"]
-layout_mode = 2
-text = "RPC TEST"
-
 [node name="GameVersion" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -83,5 +79,4 @@ vertical_alignment = 2
 wait_time = 0.5
 
 [connection signal="pressed" from="VBoxMenu/HBoxServer/Join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="VBoxMenu/Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="ConnectionStatusCheck" to="." method="_tested"]
