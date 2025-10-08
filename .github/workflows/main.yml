@@ -70,7 +70,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: web-build
-          path: ${{ env.EXPORT_PATH }}
+          path: hmmo-client/build/web
 
   deploy:
     name: Deploy to GitHub Pages
