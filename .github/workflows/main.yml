@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ~/.local/share/godot/templates/${{ env.GODOT_VERSION }}
+            ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}
             ./godot
           key: godot-${{ env.GODOT_VERSION }}
 
