@@ -1,0 +1,76 @@
+name: Build & Deploy Godot 4.5 Web
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: "4.5-stable"
+  EXPORT_PRESET: "Web"           # имя из export_presets.cfg
+  EXPORT_PATH: "build/web"
+
+jobs:
+  build:
+    name: Build HTML5
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Клонируем код проекта
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Устанавливаем Godot (headless) + экспортные шаблоны
+      - name: Install Godot 4.5
+        run: |
+          echo "⬇️ Downloading Godot ${GODOT_VERSION}..."
+          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip -O godot.zip
+          unzip godot.zip
+          mv Godot_v${GODOT_VERSION}_linux.x86_64 godot
+          chmod +x godot
+
+          echo "⬇️ Downloading export templates..."
+          mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}/
+          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_export_templates.tpz -O templates.tpz
+          unzip templates.tpz -d ~/.local/share/godot/templates/${GODOT_VERSION}/
+
+          echo "✅ Godot installed successfully."
+
+      # 3️⃣ Собираем HTML5 экспорт
+      - name: Export Web build
+        run: |
+          mkdir -p ${EXPORT_PATH}
+          ./godot --headless --export-release "${EXPORT_PRESET}" "${EXPORT_PATH}/index.html"
+
+      # 4️⃣ (Необязательно) Сохраняем билд как артефакт
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: ${{ env.EXPORT_PATH }}
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      # 5️⃣ Загружаем билд из предыдущего job
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: web-build
+          path: ./public
+
+      # 6️⃣ Публикуем на GitHub Pages
+      - name: Deploy 🚀
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
