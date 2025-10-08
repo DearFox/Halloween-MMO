@@ -1,49 +1,65 @@
-name: Build & Deploy Godot 4.5 Web
+name: Build & Deploy Godot 4.5 Web (cached)
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 env:
   GODOT_VERSION: "4.5-stable"
-  EXPORT_PRESET: "Web"           # имя из export_presets.cfg
+  EXPORT_PRESET: "Web"          # имя из export_presets.cfg
   EXPORT_PATH: "build/web"
 
 jobs:
   build:
-    name: Build HTML5
     runs-on: ubuntu-latest
-
     steps:
-      # 1️⃣ Клонируем код проекта
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Устанавливаем Godot (headless) + экспортные шаблоны
-      - name: Install Godot 4.5
+      # 1️⃣ Кешируем Godot и экспортные шаблоны
+      - name: Cache Godot binaries and templates
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.local/share/godot/templates/${{ env.GODOT_VERSION }}
+            ./godot
+          key: godot-${{ env.GODOT_VERSION }}
+
+      # 2️⃣ Скачиваем Godot и шаблоны, если их нет в кеше
+      - name: Install Godot 4.5 (if not cached)
+        if: steps.cache-godot.outputs.cache-hit != 'true'
         run: |
-          echo "⬇️ Downloading Godot ${GODOT_VERSION}..."
-          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip -O godot.zip
-          unzip godot.zip
-          mv Godot_v${GODOT_VERSION}_linux.x86_64 godot
+          set -e
+          VER=${GODOT_VERSION}
+          BIN_URL="https://github.com/godotengine/godot/releases/download/${VER}/Godot_v${VER}_linux.x86_64.zip"
+          TPL_URL="https://github.com/godotengine/godot/releases/download/${VER}/Godot_v${VER}_export_templates.tpz"
+
+          echo "⬇️ Downloading Godot binary..."
+          curl -L --retry 5 --retry-delay 3 -o godot.zip "$BIN_URL"
+          unzip -q godot.zip
+          mv Godot_v${VER}_linux.x86_64 godot
           chmod +x godot
 
           echo "⬇️ Downloading export templates..."
-          mkdir -p ~/.local/share/godot/templates/${GODOT_VERSION}/
-          wget https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_export_templates.tpz -O templates.tpz
-          unzip templates.tpz -d ~/.local/share/godot/templates/${GODOT_VERSION}/
+          mkdir -p ~/.local/share/godot/templates/${VER}/
+          curl -L --retry 5 --retry-delay 5 -o templates.tpz "$TPL_URL"
+          unzip -q templates.tpz -d ~/.local/share/godot/templates/${VER}/
 
-          echo "✅ Godot installed successfully."
+          echo "✅ Godot and export templates installed."
 
-      # 3️⃣ Собираем HTML5 экспорт
-      - name: Export Web build
+      # 3️⃣ Проверяем установку
+      - name: Verify Godot installation
+        run: ./godot --version
+
+      # 4️⃣ Собираем Web билд
+      - name: Export Web (HTML5)
         run: |
           mkdir -p ${EXPORT_PATH}
           ./godot --headless --export-release "${EXPORT_PRESET}" "${EXPORT_PATH}/index.html"
 
-      # 4️⃣ (Необязательно) Сохраняем билд как артефакт
+      # 5️⃣ Загружаем артефакт (опционально)
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -60,14 +76,12 @@ jobs:
       id-token: write
 
     steps:
-      # 5️⃣ Загружаем билд из предыдущего job
-      - name: Download artifact
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: web-build
           path: ./public
 
-      # 6️⃣ Публикуем на GitHub Pages
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v4
         with:
