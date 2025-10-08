@@ -43,13 +43,17 @@ jobs:
           chmod +x godot
 
           echo "⬇️ Downloading export templates..."
-          mkdir -p ~/.local/share/godot/export_templates/${VER}/
-          mkdir -p ~/.local/share/godot/templates/${VER}/
+          mkdir -p ~/.local/share/godot/export_templates/4.5.stable
           curl -L --retry 5 --retry-delay 5 -o templates.tpz "$TPL_URL"
-          unzip -q templates.tpz -d ~/.local/share/godot/export_templates/${VER}/
-          unzip -q templates.tpz -d ~/.local/share/godot/templates/${VER}/
+          unzip -q templates.tpz -d templates_unpacked
 
-          echo "✅ Godot and export templates installed."
+          # шаблоны лежат внутри templates_unpacked/templates/
+          mv templates_unpacked/templates/web_release.zip ~/.local/share/godot/export_templates/4.5.stable/web_nothreads_release.zip
+          mv templates_unpacked/templates/web_debug.zip ~/.local/share/godot/export_templates/4.5.stable/web_nothreads_debug.zip
+
+          echo "✅ Godot export templates installed at:"
+          ls -l ~/.local/share/godot/export_templates/4.5.stable
+
 
       # 3️⃣ Проверяем установку
       - name: Verify Godot installation
