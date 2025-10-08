@@ -7,6 +7,7 @@ on:
 
 env:
   GODOT_VERSION: "4.5-stable"
+  GODOT_TEMPLATES_DIR: "4.5.stable"
   EXPORT_PRESET: "Web"          # имя из export_presets.cfg
   EXPORT_PATH: "build/web"
 
@@ -23,7 +24,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}
+            ~/.local/share/godot/export_templates/${{ env.GODOT_TEMPLATES_DIR }}
             ./godot
           key: godot-${{ env.GODOT_VERSION }}
 
@@ -33,6 +34,7 @@ jobs:
         run: |
           set -e
           VER=${GODOT_VERSION}
+          TPL_DIR=${GODOT_TEMPLATES_DIR}
           BIN_URL="https://github.com/godotengine/godot/releases/download/${VER}/Godot_v${VER}_linux.x86_64.zip"
           TPL_URL="https://github.com/godotengine/godot/releases/download/${VER}/Godot_v${VER}_export_templates.tpz"
 
@@ -43,16 +45,15 @@ jobs:
           chmod +x godot
 
           echo "⬇️ Downloading export templates..."
-          mkdir -p ~/.local/share/godot/export_templates/4.5.stable
+          mkdir -p ~/.local/share/godot/export_templates/${TPL_DIR}
           curl -L --retry 5 --retry-delay 5 -o templates.tpz "$TPL_URL"
           unzip -q templates.tpz -d templates_unpacked
 
-          # шаблоны лежат внутри templates_unpacked/templates/
-          mv templates_unpacked/templates/web_release.zip ~/.local/share/godot/export_templates/4.5.stable/web_nothreads_release.zip
-          mv templates_unpacked/templates/web_debug.zip ~/.local/share/godot/export_templates/4.5.stable/web_nothreads_debug.zip
+          mv templates_unpacked/templates/web_release.zip ~/.local/share/godot/export_templates/${TPL_DIR}/web_nothreads_release.zip
+          mv templates_unpacked/templates/web_debug.zip ~/.local/share/godot/export_templates/${TPL_DIR}/web_nothreads_debug.zip
 
           echo "✅ Godot export templates installed at:"
-          ls -l ~/.local/share/godot/export_templates/4.5.stable
+          ls -l ~/.local/share/godot/export_templates/${TPL_DIR}
 
 
       # 3️⃣ Проверяем установку
