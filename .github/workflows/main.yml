@@ -72,7 +72,7 @@ jobs:
         with:
           name: web-build
           path: hmmo-client/build/web
-
+  
   deploy:
     name: Deploy to GitHub Pages
     needs: build
@@ -88,6 +88,11 @@ jobs:
         with:
           name: web-build
           path: ./public
+
+      - name: Fix base href for GitHub Pages
+        run: |
+          sed -i 's|<head>|<head>\n  <base href="/Halloween-MMO/">|' ./public/index.html
+          echo "✅ Base href added to index.html"
 
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v4
