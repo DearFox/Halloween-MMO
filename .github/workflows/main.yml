@@ -62,8 +62,8 @@ jobs:
       # 4️⃣ Собираем Web билд
       - name: Export Web (HTML5)
         run: |
-          mkdir -p ${EXPORT_PATH}
-          ./godot --path hmmo-client --headless --export-release "${EXPORT_PRESET}" "${EXPORT_PATH}/index.html"
+            mkdir -p hmmo-client/${EXPORT_PATH}
+            ./godot --path hmmo-client --headless --export-release "${EXPORT_PRESET}" "hmmo-client/${EXPORT_PATH}/index.html"
 
       # 5️⃣ Загружаем артефакт (опционально)
       - name: Upload artifact
