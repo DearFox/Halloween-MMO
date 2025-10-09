@@ -49,8 +49,8 @@ jobs:
           curl -L --retry 5 --retry-delay 5 -o templates.tpz "$TPL_URL"
           unzip -q templates.tpz -d templates_unpacked
 
-          mv templates_unpacked/templates/web_release.zip ~/.local/share/godot/export_templates/${TPL_DIR}/web_nothreads_release.zip
-          mv templates_unpacked/templates/web_debug.zip ~/.local/share/godot/export_templates/${TPL_DIR}/web_nothreads_debug.zip
+          mv templates_unpacked/templates/web_nothreads_release.zip ~/.local/share/godot/export_templates/${TPL_DIR}/web_nothreads_release.zip
+          mv templates_unpacked/templates/web_nothreads_debug.zip ~/.local/share/godot/export_templates/${TPL_DIR}/web_nothreads_debug.zip
 
           echo "✅ Godot export templates installed at:"
           ls -l ~/.local/share/godot/export_templates/${TPL_DIR}
