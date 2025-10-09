@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 env:
-  GODOT_VERSION: "4.5-stable"
-  GODOT_TEMPLATES_DIR: "4.5.stable"
+  GODOT_VERSION: "4.3-stable"
+  GODOT_TEMPLATES_DIR: "4.3.stable"
   EXPORT_PRESET: "Web"          # имя из export_presets.cfg
   EXPORT_PATH: "build/web"
 
