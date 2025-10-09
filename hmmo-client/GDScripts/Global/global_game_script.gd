@@ -101,6 +101,15 @@ func remove_player_on_clients(peer_id:int) -> void:
 @warning_ignore("unused_parameter")
 func register_client_on_server(PlayerName: String = pdb.PlayerName) -> void: pass
 
+@rpc("call_remote", "reliable")
+@warning_ignore("unused_parameter")
+func send_my_chat_message_on_server(ChatMsg: String) -> void: pass # Если вы не поняли из название - это rpc отправляет клиентсткое чат сообщение на сервер
+
+@rpc("reliable")
+@warning_ignore("unused_parameter")
+func chat_message_on_client(ChatMsg: String) -> void:
+	get_node("/root/TEMP_World/GameChat").add_message(ChatMsg)
+
 # Тестовый RPC вызов
 @rpc("any_peer")
 func test() -> void:

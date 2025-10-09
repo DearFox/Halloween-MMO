@@ -43,9 +43,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_position_sync_timeout() -> void:
 	position_sync.rpc(position)
-	print("Синхронизация позиции " + name)
+	#print("Синхронизация позиции " + name)
 
 @rpc("call_remote", "unreliable")
 func position_sync(pose:Vector3) -> void:
 	position = pose
-	print("Удаленная синхронизация позиции " + name)
+	#print("Удаленная синхронизация позиции " + name)

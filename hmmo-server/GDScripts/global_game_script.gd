@@ -70,6 +70,20 @@ func register_client_on_server(PlayerName: String) -> void:
 			add_player_on_clients.rpc_id(ids,sender_id,sdb.players[sender_id]["name"])
 		add_player_on_clients.rpc_id(sender_id,ids,sdb.players[ids]["name"])
 
+@rpc("any_peer", "reliable")
+@warning_ignore("unused_parameter")
+func send_my_chat_message_on_server(ChatMsg: String) -> void: 
+	var sender_id:int = multiplayer.get_remote_sender_id()
+	var author:String = sdb.players[sender_id]["name"]
+	var format_message:String = "<"+author+"> : [color=gray]"+ChatMsg+"[/color]"
+	print(ws_peer.get_peer_address(sender_id) , format_message)
+	for ids in sdb.players.keys():
+		chat_message_on_client.rpc_id(ids,format_message)
+	
+
+@rpc("call_remote", "reliable")
+@warning_ignore("unused_parameter")
+func chat_message_on_client(ChatMsg: String) -> void: pass
 
 # Тестовый RPC вызов
 @rpc("any_peer")
