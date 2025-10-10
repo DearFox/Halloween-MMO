@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://voviw1y84nnq"]
+[gd_scene load_steps=6 format=3 uid="uid://voviw1y84nnq"]
 
 [ext_resource type="PackedScene" uid="uid://dlgga7aautg2e" path="res://Scenes/game_chat.tscn" id="1_wnvw0"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jje0v"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cmjao"]
 
@@ -58,3 +59,11 @@ shape = SubResource("BoxShape3D_wnvw0")
 environment = SubResource("Environment_wnvw0")
 
 [node name="GameChat" parent="." instance=ExtResource("1_wnvw0")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_jje0v")

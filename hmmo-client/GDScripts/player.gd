@@ -19,7 +19,10 @@ func _enter_tree() -> void:
 	$Name.text = player_name
 
 func _ready() -> void:
-	$Camera3D.current = player_current
+	if player_current:
+		$PhantomCamera3D.priority = 10
+		print($PhantomCamera3D.priority)
+	#$Camera3D.current = player_current
 	$PlayerVisual_TEMP.modulate = player_color
 	if !is_multiplayer_authority():
 		$PositionSync.free()

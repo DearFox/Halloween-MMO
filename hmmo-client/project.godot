@@ -19,10 +19,11 @@ config/icon="res://icon.svg"
 
 GGS="*res://GDScripts/Global/global_game_script.gd"
 pdb="*res://GDScripts/Global/player_db.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [input]
 
