@@ -70,6 +70,7 @@ func add_player_character(peer_id:int, player_name:String) -> void:
 		player_character.player_current = true
 		player_character.player_name = player_name
 		get_node("/root/TEMP_World").add_child(player_character)
+		get_node("/root/TEMP_World/PhantomCamera3D").follow_target = get_node("/root/TEMP_World/"+str(peer_id))
 		player_character.position = Vector3(0,2,0)
 	else:
 		# если создается удаленный экземпляр игрока

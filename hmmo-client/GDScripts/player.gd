@@ -7,7 +7,7 @@ const JUMP_VELOCITY: float = 6.5
 const SUIT_JUMP: int = 15
 const SUIT_SPEED: int = 250
 
-var suit: int = 0 #Костюм. 0 - никакой, 1 - высокий прыжок, 2 - рывок, 3 - прохождение через особые стены
+var suit: int = 1 #Костюм. 0 - никакой, 1 - высокий прыжок, 2 - рывок, 3 - прохождение через особые стены
 
 var player_current: bool = false
 var player_color:Color = Color(0.0, 0.29, 3.413)
@@ -19,10 +19,11 @@ func _enter_tree() -> void:
 	$Name.text = player_name
 
 func _ready() -> void:
-	if player_current:
-		$PhantomCamera3D.priority = 10
-		print($PhantomCamera3D.priority)
+	#if player_current:
+	#	$PhantomCamera3D.priority = 10
+	#	print($PhantomCamera3D.priority)
 	#$Camera3D.current = player_current
+	$ColorRect.visible = player_current
 	$PlayerVisual_TEMP.modulate = player_color
 	if !is_multiplayer_authority():
 		$PositionSync.free()
