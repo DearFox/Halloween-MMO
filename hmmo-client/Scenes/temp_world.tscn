@@ -24,6 +24,36 @@ mesh = SubResource("BoxMesh_cmjao")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/CollisionShape3D"]
 shape = SubResource("BoxShape3D_wnvw0")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, -12)
+layers = 3
+mesh = SubResource("BoxMesh_cmjao")
+
+[node name="CollisionShape3D" type="StaticBody3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/CollisionShape3D"]
+shape = SubResource("BoxShape3D_wnvw0")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 1, -12)
+layers = 3
+mesh = SubResource("BoxMesh_cmjao")
+
+[node name="CollisionShape3D" type="StaticBody3D" parent="MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/CollisionShape3D"]
+shape = SubResource("BoxShape3D_wnvw0")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, -7, 1, 0)
+layers = 3
+mesh = SubResource("BoxMesh_cmjao")
+
+[node name="CollisionShape3D" type="StaticBody3D" parent="MeshInstance3D4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D4/CollisionShape3D"]
+shape = SubResource("BoxShape3D_wnvw0")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wnvw0")
 

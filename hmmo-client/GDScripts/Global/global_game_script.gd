@@ -82,6 +82,10 @@ func add_player_character(peer_id:int, player_name:String) -> void:
 		get_node("/root/TEMP_World").call_deferred("add_child",player_character)
 		player_character.position = Vector3(1,2,0)
 
+func normalize(value: float, max_value: float) -> float:
+	if max_value == 0.0:
+		return 0.0
+	return clamp(value / max_value, 0.0, 1.0)
 
 
 @rpc("reliable")
