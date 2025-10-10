@@ -3,6 +3,9 @@ extends Control
 var min_pose:Vector2 = Vector2(0.20,0.10) #Представлены в виде процентов записанные в виде float
 var max_pose:Vector2 = Vector2(0.90,0.90) #Представлены в виде процентов записанные в виде float
 
+func _ready() -> void:
+	$ChatControl/RichTextLabel.scroll_following_visible_characters = false # Нужно что-бы исправить странный визуальный баг
+
 func add_message(ChatMsg: String) -> void:
 	$ChatControl/RichTextLabel.append_text("\n"+ChatMsg)
 
@@ -20,13 +23,16 @@ func _on_color_rect_gui_input(event: InputEvent) -> void:
 		$ChatControl.position.y = screen_size.y-size_y
 
 func chat_rich_text_on_down() -> void:
-	$ChatControl/RichTextLabel.scroll_following_visible_characters = false
-	$ChatControl/RichTextLabel.scroll_following_visible_characters = true
+	if get_node("ChatControl/RichTextLabel/").get_child(0,true) and get_node("ChatControl/RichTextLabel/").get_child(0,true).visible:
+		$ChatControl/RichTextLabel.scroll_following_visible_characters = false
+		$ChatControl/RichTextLabel.scroll_following_visible_characters = true
 
 func send_message(msg:String):
 	if msg and GGS.srv_ok():
 		GGS.send_my_chat_message_on_server.rpc_id(1,msg)
 		chat_rich_text_on_down()
+	if msg and !GGS.srv_ok():
+		add_message("< DEMO > : "+msg)
 
 func _on_send_pressed() -> void:
 	send_message($ChatControl/HBoxContainer/Message.text)
