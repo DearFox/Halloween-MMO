@@ -88,6 +88,9 @@ func normalize(value: float, max_value: float) -> float:
 		return 0.0
 	return clamp(value / max_value, 0.0, 1.0)
 
+func concat_ints(a: int, b: int) -> int:
+	return int(str(a) + str(b))
+
 
 @rpc("reliable")
 @warning_ignore("unused_parameter")

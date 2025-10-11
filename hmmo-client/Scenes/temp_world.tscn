@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://voviw1y84nnq"]
+[gd_scene load_steps=12 format=3 uid="uid://voviw1y84nnq"]
 
 [ext_resource type="PackedScene" uid="uid://dlgga7aautg2e" path="res://Scenes/game_chat.tscn" id="1_wnvw0"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jje0v"]
@@ -15,6 +15,14 @@
 script = ExtResource("4_exmi1")
 duration = 0.6
 transition = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e04i0"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_exmi1"]
+material = SubResource("StandardMaterial3D_e04i0")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pa5lr"]
 
 [node name="TEMP_World" type="Node3D"]
 
@@ -85,3 +93,14 @@ tween_on_load = false
 follow_damping = true
 follow_distance = 6.0
 spring_length = 6.0
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 10, -8, 4, 0)
+mesh = SubResource("BoxMesh_exmi1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D5"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D5/StaticBody3D"]
+shape = SubResource("BoxShape3D_pa5lr")

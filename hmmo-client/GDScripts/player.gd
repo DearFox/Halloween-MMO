@@ -7,7 +7,7 @@ const JUMP_VELOCITY: float = 6.5
 const SUIT_JUMP: int = 15
 const SUIT_SPEED: int = 250
 
-var suit: int = 1 #Костюм. 0 - никакой, 1 - высокий прыжок, 2 - рывок, 3 - прохождение через особые стены
+var suit: int = 3 #Костюм. 0 - никакой, 1 - высокий прыжок, 2 - рывок, 3 - прохождение через особые стены
 
 var player_current: bool = false
 var player_color:Color = Color(0.0, 0.29, 3.413)
@@ -59,6 +59,19 @@ func _physics_process(delta: float) -> void:
 						velocity.x = direction.x * SUIT_SPEED
 						velocity.z = direction.z * SUIT_SPEED
 						move_and_slide()
+				3:
+					if $SuitTimer.is_stopped():
+						#print(collision_mask)
+						if collision_mask == 5:
+							collision_mask = 1
+							$PlayerVisual_TEMP.modulate.a = 0.5
+							$SuitTimer.start()
+							return
+						if collision_mask == 1:
+							collision_mask = 5
+							$PlayerVisual_TEMP.modulate.a = 1
+							$SuitTimer.start()
+							return
 		# Handle jump.
 		if Input.is_action_pressed("ui_accept") and is_on_floor():
 			velocity.y = temp_jump
