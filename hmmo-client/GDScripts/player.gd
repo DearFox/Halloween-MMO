@@ -7,7 +7,7 @@ const JUMP_VELOCITY: float = 6.5
 const SUIT_JUMP: int = 15
 const SUIT_SPEED: int = 250
 
-var suit: int = 3 #Костюм. 0 - никакой, 1 - высокий прыжок, 2 - рывок, 3 - прохождение через особые стены
+var suit: int = 1 #Костюм. 0 - никакой, 1 - высокий прыжок, 2 - рывок, 3 - прохождение через особые стены
 
 var player_current: bool = false
 var player_color:Color = Color(0.0, 0.29, 3.413)
@@ -32,6 +32,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	
 	if GGS.srv_ok() and is_multiplayer_authority():
+		if global_position.y <= -10:
+			global_position = Vector3(0,2,0)
 		# Индикация спец приёма костюма
 		if $SuitTimer.is_stopped():
 			$ColorRect.color = Color(0.0, 1.0, 0.0, 1.0)

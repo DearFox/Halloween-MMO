@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bnpct1j6645wt" path="res://Assets/TEMP_Player.png" id="2_cvnsp"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cvnsp"]
+height = 1.4
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -11,7 +12,7 @@ collision_mask = 5
 script = ExtResource("1_cvnsp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("CylinderShape3D_cvnsp")
 debug_fill = false
 

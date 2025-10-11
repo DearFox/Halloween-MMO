@@ -48,8 +48,18 @@ alignment = 1
 [node name="IP" type="TextEdit" parent="VBoxMenu/HBoxServer"]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
-text = "ws://localhost:1337"
-placeholder_text = "ws://127.0.0.1:1337"
+placeholder_text = "wss://example.com"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxMenu/HBoxServer"]
+layout_mode = 2
+selected = 2
+item_count = 3
+popup/item_0/text = "<------ Custom server"
+popup/item_0/id = 0
+popup/item_1/text = "ws://localhost:1337"
+popup/item_1/id = 1
+popup/item_2/text = "wss://ru-temp-hmmo-server.uwu.name"
+popup/item_2/id = 2
 
 [node name="Join" type="Button" parent="VBoxMenu/HBoxServer"]
 layout_mode = 2

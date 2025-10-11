@@ -14,7 +14,7 @@ func create_client(url: String = "ws://localhost:1337") -> void:
 	if !multiplayer.is_connected("connection_failed", Callable(self, "_on_connection_failed")):
 		multiplayer.connect("connection_failed", Callable(self, "_on_connection_failed"))
 	# Сколько секунд должно пройти после потери соединения, прежде чем соединение будет разорвано со стороны клиента
-	ws_peer.set_handshake_timeout(1.0)
+	ws_peer.set_handshake_timeout(10.0)
 	var err: Error = ws_peer.create_client(url)
 	if err != OK:
 		printerr(error_string(err))
