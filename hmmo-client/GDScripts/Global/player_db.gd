@@ -7,5 +7,8 @@ var PlayerSuit1:bool = false
 var PlayerSuit2:bool = false
 var PlayerSuit3:bool = false
 
+#Переменные необходимые во время игры. Не должны сохраняться. Они тут что-бы не загружать еще сильнее глобальный игровой скрипт.
+var me_chatting:bool = false
+
 func loading_player_db() -> void: pass #TODO
 func save_player_db() -> void: pass #TODO

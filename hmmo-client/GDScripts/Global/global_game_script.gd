@@ -5,6 +5,8 @@ var ws_peer_conect: bool = false
 const TEMP_WORLD = preload("uid://voviw1y84nnq")
 const PLAYER = preload("uid://bx6mh138molva")
 
+
+
 # создать peer как клиент
 func create_client(url: String = "ws://localhost:1337") -> void:
 	

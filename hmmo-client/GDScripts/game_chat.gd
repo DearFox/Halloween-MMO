@@ -36,9 +36,20 @@ func send_message(msg:String):
 
 func _on_send_pressed() -> void:
 	send_message($ChatControl/HBoxContainer/Message.text)
+	$ChatControl/HBoxContainer/Send.release_focus()
 	$ChatControl/HBoxContainer/Message.text = ""
 
 
 func _on_message_text_submitted(new_text: String) -> void:
+	$ChatControl/HBoxContainer/Message.release_focus()
 	send_message(new_text)
 	$ChatControl/HBoxContainer/Message.text = ""
+
+
+func _on_message_focus_entered() -> void:
+	pdb.me_chatting = true
+
+
+
+func _on_message_focus_exited() -> void:
+	pdb.me_chatting = false

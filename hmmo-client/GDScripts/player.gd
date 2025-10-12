@@ -48,11 +48,11 @@ func _physics_process(delta: float) -> void:
 		var input_dir := Input.get_vector("left", "right", "up", "down")
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		var temp_jump: float = JUMP_VELOCITY
-		if Input.is_action_pressed("suit_ability"):
+		if Input.is_action_pressed("suit_ability") and !pdb.me_chatting:
 			#print("Спец сила костюма!")
 			match suit:
 				1: 
-					if Input.is_action_pressed("ui_accept") and is_on_floor() and $SuitTimer.is_stopped():
+					if Input.is_action_pressed("jump") and is_on_floor() and $SuitTimer.is_stopped():
 						temp_jump = SUIT_JUMP
 						$SuitTimer.start()
 				2:
@@ -75,11 +75,11 @@ func _physics_process(delta: float) -> void:
 							$SuitTimer.start()
 							return
 		# Handle jump.
-		if Input.is_action_pressed("ui_accept") and is_on_floor():
+		if Input.is_action_pressed("jump") and is_on_floor() and !pdb.me_chatting:
 			velocity.y = temp_jump
 
 			
-		if direction:
+		if direction and !pdb.me_chatting:
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
 		else:
