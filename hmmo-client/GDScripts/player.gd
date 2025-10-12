@@ -33,7 +33,9 @@ func _ready() -> void:
 	$PlayerVisual_TEMP.modulate = player_color
 	if !is_multiplayer_authority():
 		$PositionSync.free()
-	
+		$PositionSync.wait_time = 0.05 # 20 раз в секунду
+		$PositionSync.start()
+
 
 func _physics_process(delta: float) -> void:
 	
