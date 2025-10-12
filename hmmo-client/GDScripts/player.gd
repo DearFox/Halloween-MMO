@@ -27,7 +27,7 @@ func _ready() -> void:
 	$PlayerVisual_TEMP.modulate = player_color
 	if !is_multiplayer_authority():
 		$PositionSync.free()
-		$PositionSync.wait_time = 0.02 # 20 раз в секунду
+		$PositionSync.wait_time = 0.01 # 20 раз в секунду
 		$PositionSync.start()
 
 func _physics_process(delta: float) -> void:
@@ -87,7 +87,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 	else:
-		global_position = global_position.lerp(last_poss, 15 * delta)
+		global_position = global_position.lerp(last_poss, 5 * delta)
 	
 	move_and_slide()
 
