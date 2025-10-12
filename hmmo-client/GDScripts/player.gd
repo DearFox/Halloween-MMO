@@ -13,6 +13,12 @@ var player_current: bool = false
 var player_color:Color = Color(0.0, 0.29, 3.413)
 var player_name:String
 var last_poss:Vector3 = Vector3(0,0,0)
+
+var prev_pos: Vector3
+var target_pos: Vector3
+var lerp_time := 0.05
+var t := 1.0
+
 func _enter_tree() -> void:
 	name = str(get_multiplayer_authority())
 	$ID.text = str(name)
@@ -87,8 +93,11 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 	else:
-		global_position = global_position.lerp(last_poss, 5 * delta)
-	
+		if t < 1.0:
+			t += delta / lerp_time
+			global_position = prev_pos.lerp(target_pos, t)
+		else:
+			global_position = target_pos	
 	move_and_slide()
 
 
@@ -98,5 +107,8 @@ func _on_position_sync_timeout() -> void:
 
 @rpc("call_remote", "unreliable")
 func position_sync(pose:Vector3) -> void:
-	last_poss = pose
+	prev_pos = global_position
+	target_pos = pose
+	t = 0.0
+
 	#print("Удаленная синхронизация позиции " + name)
