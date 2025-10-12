@@ -13,12 +13,6 @@ var player_current: bool = false
 var player_color:Color = Color(0.0, 0.29, 3.413)
 var player_name:String
 var last_poss:Vector3 = Vector3(0,0,0)
-var last_sync_time := 0.0
-var interp_duration := 0.01
-var prev_pos: Vector3
-var target_pos: Vector3
-var interp_timer := 0.0
-
 func _enter_tree() -> void:
 	name = str(get_multiplayer_authority())
 	$ID.text = str(name)
@@ -33,9 +27,8 @@ func _ready() -> void:
 	$PlayerVisual_TEMP.modulate = player_color
 	if !is_multiplayer_authority():
 		$PositionSync.free()
-		$PositionSync.wait_time = 0.05 # 20 раз в секунду
+		$PositionSync.wait_time = 0.02 # 20 раз в секунду
 		$PositionSync.start()
-
 
 func _physics_process(delta: float) -> void:
 	
@@ -94,9 +87,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 	else:
-		interp_timer += delta
-		var t = clamp(interp_timer / interp_duration, 0.0, 1.0)
-		global_position = prev_pos.lerp(target_pos, t)
+		global_position = global_position.lerp(last_poss, 15 * delta)
 	
 	move_and_slide()
 
@@ -107,9 +98,5 @@ func _on_position_sync_timeout() -> void:
 
 @rpc("call_remote", "unreliable")
 func position_sync(pose:Vector3) -> void:
-	interp_duration = max(0.01, Time.get_ticks_msec() / 1000.0 - last_sync_time)
-	last_sync_time = Time.get_ticks_msec() / 1000.0
-	prev_pos = global_position
-	target_pos = pose
-	interp_timer = 0.0
+	last_poss = pose
 	#print("Удаленная синхронизация позиции " + name)
