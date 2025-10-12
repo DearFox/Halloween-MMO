@@ -87,7 +87,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 	else:
-		global_position = global_position.lerp(last_poss, 5 * delta)
+		global_position = global_position.lerp(last_poss, 30 * delta)
 	
 	move_and_slide()
 
