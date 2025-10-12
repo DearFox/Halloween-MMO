@@ -35,7 +35,7 @@ billboard = 1
 text = "00000000000"
 
 [node name="PositionSync" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
 autostart = true
 
 [node name="SuitTimer" type="Timer" parent="."]
