@@ -14,7 +14,7 @@ func create_client(url: String = "ws://localhost:1337") -> void:
 	if !multiplayer.is_connected("connection_failed", Callable(self, "_on_connection_failed")):
 		multiplayer.connect("connection_failed", Callable(self, "_on_connection_failed"))
 	# Сколько секунд должно пройти после потери соединения, прежде чем соединение будет разорвано со стороны клиента
-	ws_peer.set_handshake_timeout(1.0)
+	ws_peer.set_handshake_timeout(10.0)
 	var err: Error = ws_peer.create_client(url)
 	if err != OK:
 		printerr(error_string(err))
@@ -70,6 +70,7 @@ func add_player_character(peer_id:int, player_name:String) -> void:
 		player_character.player_current = true
 		player_character.player_name = player_name
 		get_node("/root/TEMP_World").add_child(player_character)
+		get_node("/root/TEMP_World/PhantomCamera3D").follow_target = get_node("/root/TEMP_World/"+str(peer_id))
 		player_character.position = Vector3(0,2,0)
 	else:
 		# если создается удаленный экземпляр игрока
@@ -82,6 +83,13 @@ func add_player_character(peer_id:int, player_name:String) -> void:
 		get_node("/root/TEMP_World").call_deferred("add_child",player_character)
 		player_character.position = Vector3(1,2,0)
 
+func normalize(value: float, max_value: float) -> float:
+	if max_value == 0.0:
+		return 0.0
+	return clamp(value / max_value, 0.0, 1.0)
+
+func concat_ints(a: int, b: int) -> int:
+	return int(str(a) + str(b))
 
 
 @rpc("reliable")
@@ -100,6 +108,15 @@ func remove_player_on_clients(peer_id:int) -> void:
 @rpc("call_remote", "reliable")
 @warning_ignore("unused_parameter")
 func register_client_on_server(PlayerName: String = pdb.PlayerName) -> void: pass
+
+@rpc("call_remote", "reliable")
+@warning_ignore("unused_parameter")
+func send_my_chat_message_on_server(ChatMsg: String) -> void: pass # Если вы не поняли из название - это rpc отправляет клиентсткое чат сообщение на сервер
+
+@rpc("reliable")
+@warning_ignore("unused_parameter")
+func chat_message_on_client(ChatMsg: String) -> void:
+	get_node("/root/TEMP_World/GameChat").add_message(ChatMsg)
 
 # Тестовый RPC вызов
 @rpc("any_peer")

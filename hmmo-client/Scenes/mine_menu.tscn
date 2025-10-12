@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://gy536ecr35e1"]
+[gd_scene load_steps=3 format=3 uid="uid://gy536ecr35e1"]
 
 [ext_resource type="Script" uid="uid://dppfx5vw2r4j7" path="res://GDScripts/mine_menu.gd" id="1_og3g2"]
+[ext_resource type="Script" uid="uid://bi142u86xcvyh" path="res://GDScripts/splash.gd" id="2_hy3hu"]
 
 [node name="MineMenu" type="Control"]
 layout_mode = 3
@@ -47,8 +48,18 @@ alignment = 1
 [node name="IP" type="TextEdit" parent="VBoxMenu/HBoxServer"]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
-text = "ws://localhost:1337"
-placeholder_text = "ws://127.0.0.1:1337"
+placeholder_text = "wss://example.com"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxMenu/HBoxServer"]
+layout_mode = 2
+selected = 2
+item_count = 3
+popup/item_0/text = "<------ Custom server"
+popup/item_0/id = 0
+popup/item_1/text = "ws://localhost:1337"
+popup/item_1/id = 1
+popup/item_2/text = "wss://ru-temp-hmmo-server.uwu.name"
+popup/item_2/id = 2
 
 [node name="Join" type="Button" parent="VBoxMenu/HBoxServer"]
 layout_mode = 2
@@ -77,6 +88,27 @@ vertical_alignment = 2
 
 [node name="ConnectionStatusCheck" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="Splash" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -531.3188
+offset_top = -46.99063
+offset_right = 721.9612
+offset_bottom = -23.990631
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.5235988
+pivot_offset = Vector2(628.3059, 13.716553)
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_constants/outline_size = 3
+text = "Splash"
+horizontal_alignment = 1
+script = ExtResource("2_hy3hu")
 
 [connection signal="pressed" from="VBoxMenu/HBoxServer/Join" to="." method="_on_join_pressed"]
 [connection signal="timeout" from="ConnectionStatusCheck" to="." method="_tested"]

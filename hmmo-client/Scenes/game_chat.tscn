@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlgga7aautg2e"]
+
+[ext_resource type="Script" uid="uid://fxu1iximusdm" path="res://GDScripts/game_chat.gd" id="1_lmme8"]
+
+[node name="GameChat" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_lmme8")
+
+[node name="ChatControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+offset_right = 500.0
+grow_vertical = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ChatControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+scroll_following = true
+scroll_following_visible_characters = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChatControl"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Message" type="LineEdit" parent="ChatControl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Send" type="Button" parent="ChatControl/HBoxContainer"]
+layout_mode = 2
+text = "Enter"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 492.0
+offset_top = -250.0
+offset_right = 500.0
+offset_bottom = -242.0
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[connection signal="text_submitted" from="ChatControl/HBoxContainer/Message" to="." method="_on_message_text_submitted"]
+[connection signal="pressed" from="ChatControl/HBoxContainer/Send" to="." method="_on_send_pressed"]
+[connection signal="gui_input" from="ColorRect" to="." method="_on_color_rect_gui_input"]
