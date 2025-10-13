@@ -42,9 +42,15 @@ autostart = true
 one_shot = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 48.0
+offset_right = 96.0
+offset_bottom = 40.0
+vertical_alignment = 1
 
 [connection signal="timeout" from="PositionSync" to="." method="_on_position_sync_timeout"]

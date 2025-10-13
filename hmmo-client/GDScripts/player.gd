@@ -5,9 +5,9 @@ const SPEED: float = 5.0
 const JUMP_VELOCITY: float = 6.5
 
 const SUIT_JUMP: int = 15
-const SUIT_SPEED: int = 250
+const SUIT_SPEED: int = 15
 
-var suit: int = 1 #Костюм. 0 - никакой, 1 - высокий прыжок, 2 - рывок, 3 - прохождение через особые стены
+var suit: int = 0 #Костюм. 0 - никакой, 1 - высокий прыжок, 2 - рывок, 3 - прохождение через особые стены
 
 var player_current: bool = false
 var player_color:Color = Color(0.0, 0.29, 3.413)
@@ -30,6 +30,7 @@ func _ready() -> void:
 	#	print($PhantomCamera3D.priority)
 	#$Camera3D.current = player_current
 	$ColorRect.visible = player_current
+	$CollisionShape3D.disabled = !player_current
 	$PlayerVisual_TEMP.modulate = player_color
 	if !is_multiplayer_authority():
 		$PositionSync.free()
@@ -39,10 +40,10 @@ func _physics_process(delta: float) -> void:
 	if GGS.srv_ok() and is_multiplayer_authority():
 		if global_position.y <= -10:
 			global_position = Vector3(0,2,0)
-			if PhantomCamera3D != null:
-				print("Телепортируем камеру")
-			else:
-				print("Камера не найдена")
+			#if PhantomCamera3D != null:
+			#	print("Телепортируем камеру")
+			#else:
+			#	print("Камера не найдена")
 		# Индикация спец приёма костюма
 		if $SuitTimer.is_stopped():
 			$ColorRect.color = Color(0.0, 1.0, 0.0, 1.0)
@@ -85,6 +86,18 @@ func _physics_process(delta: float) -> void:
 							$PlayerVisual_TEMP.modulate.a = 1
 							$SuitTimer.start()
 							return
+		if Input.is_action_just_pressed("suit_1"):
+			suit = 1
+			$ColorRect/Label.text = "высокий прыжок"
+		if Input.is_action_just_pressed("suit_2"):
+			suit = 2
+			$ColorRect/Label.text = "рывок"
+		if Input.is_action_just_pressed("suit_3"):
+			suit = 3
+			$ColorRect/Label.text = "прохождение через особые стены"
+		if Input.is_action_just_pressed("no_suit"):
+			suit = 0
+			$ColorRect/Label.text = ""
 		# Handle jump.
 		if Input.is_action_pressed("jump") and is_on_floor() and !pdb.me_chatting:
 			velocity.y = temp_jump
