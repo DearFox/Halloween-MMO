@@ -33,7 +33,7 @@ func _ready() -> void:
 	$PlayerVisual_TEMP.modulate = player_color
 	if !is_multiplayer_authority():
 		$PositionSync.free()
-		$PositionSync.wait_time = 0.01 # 20 раз в секунду
+		# $PositionSync.wait_time = 0.01 # 20 раз в секунду
 		$PositionSync.start()
 
 func _physics_process(delta: float) -> void:
@@ -55,6 +55,7 @@ func _physics_process(delta: float) -> void:
 		var input_dir := Input.get_vector("left", "right", "up", "down")
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		var temp_jump: float = JUMP_VELOCITY
+		print(is_on_floor())
 		if Input.is_action_pressed("suit_ability") and !pdb.me_chatting:
 			#print("Спец сила костюма!")
 			match suit:
@@ -65,6 +66,7 @@ func _physics_process(delta: float) -> void:
 				2:
 					if velocity and $SuitTimer.is_stopped():
 						$SuitTimer.start()
+
 						velocity.x = direction.x * SUIT_SPEED
 						velocity.z = direction.z * SUIT_SPEED
 						move_and_slide()
@@ -87,11 +89,27 @@ func _physics_process(delta: float) -> void:
 
 			
 		if direction and !pdb.me_chatting:
-			velocity.x = direction.x * SPEED
-			velocity.z = direction.z * SPEED
+			if is_on_floor():
+				velocity.x = direction.x * SPEED
+				velocity.z = direction.z * SPEED
+			else:
+				# Ограниченное управление в воздухе - можем немного корректировать траекторию
+				var air_acceleration = SPEED * 2.0  # Ускорение в воздухе (слабее чем на земле)
+				
+				# Вычисляем желаемое изменение скорости
+				var desired_velocity_x = direction.x * SPEED
+				var desired_velocity_z = direction.z * SPEED
+				
+				# Плавно приближаемся к желаемой скорости, но не мгновенно
+				velocity.x = move_toward(velocity.x, desired_velocity_x, air_acceleration * delta)
+				velocity.z = move_toward(velocity.z, desired_velocity_z, air_acceleration * delta)
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			velocity.z = move_toward(velocity.z, 0, SPEED)
+			if is_on_floor():
+				velocity.x = move_toward(velocity.x, 0, SPEED)
+				velocity.z = move_toward(velocity.z, 0, SPEED)
+			else:
+				# В воздухе без ввода - сохраняем инерцию
+				pass
 	else:
 		if t < 1.0:
 			t += delta / lerp_time
