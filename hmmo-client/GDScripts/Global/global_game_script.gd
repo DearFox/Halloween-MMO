@@ -81,7 +81,7 @@ func add_player_character(peer_id:int, player_name:String) -> void:
 		player_character.set_multiplayer_authority(peer_id)
 		player_character.player_current = false
 		player_character.player_name = player_name
-		player_character.player_color = Color(1.0, 0.0, 0.0, 1.0)
+		player_character.player_color = Color(1.0, 0.56, 0.56, 1.0)
 		get_node("/root/TEMP_World").call_deferred("add_child",player_character)
 		player_character.position = Vector3(1,2,0)
 

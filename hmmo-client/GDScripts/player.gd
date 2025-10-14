@@ -7,10 +7,12 @@ const JUMP_VELOCITY: float = 6.5
 const SUIT_JUMP: int = 15
 const SUIT_SPEED: int = 15
 
+const ROTATE_MODEL_SPEED:float = 10.0
+
 var suit: int = 0 #Костюм. 0 - никакой, 1 - высокий прыжок, 2 - рывок, 3 - прохождение через особые стены
 
 var player_current: bool = false
-var player_color:Color = Color(0.0, 0.29, 3.413)
+var player_color:Color = Color(1.0, 1.0, 1.0, 1.0)
 var player_name:String
 var last_poss:Vector3 = Vector3(0,0,0)
 
@@ -18,6 +20,7 @@ var prev_pos: Vector3
 var target_pos: Vector3
 var lerp_time := 0.05
 var t := 1.0
+
 
 func _enter_tree() -> void:
 	name = str(get_multiplayer_authority())
@@ -32,10 +35,15 @@ func _ready() -> void:
 	$ColorRect.visible = player_current
 	$CollisionShape3D.disabled = !player_current
 	$PlayerVisual_TEMP.modulate = player_color
+	$blockbench_export.get_node("AnimationPlayer").set_default_blend_time(0.5)
 	if !is_multiplayer_authority():
 		$PositionSync.free()
 
 func _physics_process(delta: float) -> void:
+	if velocity.x or velocity.z:
+		$blockbench_export.get_node("AnimationPlayer").play("run")
+	else:
+		$blockbench_export.get_node("AnimationPlayer").play("idel")
 	
 	if GGS.srv_ok() and is_multiplayer_authority():
 		if global_position.y <= -10:
@@ -104,6 +112,8 @@ func _physics_process(delta: float) -> void:
 
 			
 		if direction and !pdb.me_chatting:
+			# Поворот модели игрока
+			$blockbench_export.basis = lerp($blockbench_export.basis, Basis.looking_at(direction), ROTATE_MODEL_SPEED * delta)
 			if is_on_floor():
 				var acceleration = SPEED * 10.0  # Скорость разгона (чем больше - тем быстрее)
 				velocity.x = move_toward(velocity.x, direction.x * SPEED, acceleration * delta)
