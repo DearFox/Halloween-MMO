@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://voviw1y84nnq"]
+[gd_scene load_steps=13 format=3 uid="uid://voviw1y84nnq"]
 
 [ext_resource type="PackedScene" uid="uid://dlgga7aautg2e" path="res://Scenes/game_chat.tscn" id="1_wnvw0"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jje0v"]
 [ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="3_e04i0"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_exmi1"]
+[ext_resource type="Script" uid="uid://tkxt4eq038mu" path="res://GDScripts/moving_object.gd" id="5_exmi1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cmjao"]
 
@@ -134,3 +135,26 @@ collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D5/StaticBody3D"]
 shape = SubResource("BoxShape3D_pa5lr")
+
+[node name="from_target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.769207, 0, -11.003175)
+
+[node name="to_target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.327976, 0, 4.8386316)
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.093252, 0, 0)
+script = ExtResource("5_exmi1")
+speed = 2.5
+move_from_node = NodePath("../from_target")
+move_to_node = NodePath("../to_target")
+back_move_type = 1
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="AnimatableBody3D"]
+transform = Transform3D(5.475, 0, 0, 0, 1, 0, 0, 0, 1.805, 0, 0, 0)
+shape = SubResource("BoxShape3D_wnvw0")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="AnimatableBody3D/CollisionShape3D2"]
+layers = 3
+mesh = SubResource("BoxMesh_cmjao")
+skeleton = NodePath("../../..")

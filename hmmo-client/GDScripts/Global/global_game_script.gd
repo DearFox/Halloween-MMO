@@ -4,9 +4,9 @@ var ws_peer: WebSocketMultiplayerPeer
 var ws_peer_conect: bool = false
 const TEMP_WORLD = preload("uid://voviw1y84nnq")
 const PLAYER = preload("uid://bx6mh138molva")
-
-
-
+var LAST_SERVER_TIME = 0
+var SERVER_TIME = 0
+var CURRENT_TIME = 0
 # создать peer как клиент
 func create_client(url: String = "ws://localhost:1337") -> void:
 	
@@ -125,8 +125,20 @@ func chat_message_on_client(ChatMsg: String) -> void:
 func test() -> void:
 	print(multiplayer.get_unique_id()," TESTED!")
 
+@rpc("reliable")
+@warning_ignore("unused_parameter")
+func time_sinc(current_time:int) -> void:
+	LAST_SERVER_TIME = current_time
+	print(LAST_SERVER_TIME)
+
 func rpc_test() -> void:
 	# Проверим подключение к севреру
 	if GGS.srv_ok():
 		print(multiplayer.get_unique_id(), " " ,rpc("test"))
 	pass # Replace with function body.
+
+func _physics_process(delta: float) -> void:
+	if LAST_SERVER_TIME != SERVER_TIME:
+		SERVER_TIME = LAST_SERVER_TIME
+		CURRENT_TIME = SERVER_TIME
+	CURRENT_TIME += delta*1000 

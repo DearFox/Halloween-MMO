@@ -8,6 +8,7 @@ const TEMP_WORLD = preload("uid://bauf4vug7xfn8")
 #Сразу после запуска запустить сервер
 func _ready() -> void:
 	create_server()
+	await _broadcast_time_sync()
 
 # создать peer как сервер
 func create_server(port: int = 1337) -> void:
@@ -59,6 +60,10 @@ func add_player_on_clients(new_peer_id:int, player_name:String) -> void:pass
 @warning_ignore("unused_parameter")
 func remove_player_on_clients(peer_id:int) -> void:pass
 
+@rpc("call_remote", "reliable")
+@warning_ignore("unused_parameter")
+func time_sinc(current_time:int) -> void:pass
+
 @rpc("any_peer","reliable")
 func register_client_on_server(PlayerName: String) -> void:
 	var sender_id:int = multiplayer.get_remote_sender_id()
@@ -93,3 +98,10 @@ func test() -> void:
 func rpc_test() -> void:
 	print(multiplayer.get_unique_id(), " " ,rpc("test"))
 	pass # Replace with function body.
+
+func _broadcast_time_sync() -> void:
+	while true:
+		var current_time = Time.get_ticks_msec()
+		time_sinc.rpc(current_time)
+		print(current_time)
+		await get_tree().create_timer(1.0).timeout
