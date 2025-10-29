@@ -4,8 +4,24 @@
 [ext_resource type="Texture2D" uid="uid://b77jd441b3510" path="res://Assets/player_anim_test.png" id="2_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://ck6monqwsq076" path="res://Assets/models/player_model.gltf" id="3_6t5aa"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_cvnsp"]
-height = 1.4
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
+radius = 0.3
+height = 1.85
+
+[sub_resource type="Animation" id="Animation_6t5aa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerVisual_TEMP:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_cvnsp"]
 resource_name = "walk"
@@ -23,21 +39,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 }
 
-[sub_resource type="Animation" id="Animation_6t5aa"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerVisual_TEMP:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vgqql"]
 _data = {
 &"RESET": SubResource("Animation_6t5aa"),
@@ -49,9 +50,9 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_cvnsp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-shape = SubResource("CylinderShape3D_cvnsp")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92499995, 0)
+shape = SubResource("CapsuleShape3D_6t5aa")
 debug_fill = false
 
 [node name="PlayerVisual_TEMP" type="Sprite3D" parent="."]

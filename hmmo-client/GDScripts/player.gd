@@ -37,7 +37,8 @@ func _ready() -> void:
 	#	print($PhantomCamera3D.priority)
 	#$Camera3D.current = player_current
 	$ColorRect.visible = player_current
-	$CollisionShape3D.disabled = !player_current
+	#$CollisionShape3D.disabled = !player_current
+	$CollisionShape3D2.disabled = !player_current
 	$PlayerVisual_TEMP.modulate = player_color
 	$blockbench_export.get_node("AnimationPlayer").set_default_blend_time(0.5)
 	if !is_multiplayer_authority():
