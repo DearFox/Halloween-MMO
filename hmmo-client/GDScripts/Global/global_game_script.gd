@@ -139,6 +139,8 @@ func rpc_test() -> void:
 
 func _physics_process(delta: float) -> void:
 	if LAST_SERVER_TIME != SERVER_TIME:
+
 		SERVER_TIME = LAST_SERVER_TIME
-		CURRENT_TIME = SERVER_TIME
+		if LAST_SERVER_TIME-CURRENT_TIME > 200 or LAST_SERVER_TIME-CURRENT_TIME < -600:
+			CURRENT_TIME = SERVER_TIME
 	CURRENT_TIME += delta*1000 
