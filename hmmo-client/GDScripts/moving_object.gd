@@ -115,6 +115,8 @@ func _get_node_position(node: Node3D, fallback: Vector3) -> Vector3:
 
 
 func _get_current_time_ms() -> Variant:
+	
+	
 	if _ggs == null or not is_instance_valid(_ggs):
 		_ggs = get_tree().root.get_node_or_null("GGS")
 	if _ggs == null:

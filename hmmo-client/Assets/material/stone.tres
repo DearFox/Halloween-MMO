@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dy2ouw5acbuyl"]
+
+[ext_resource type="Texture2D" uid="uid://dlti2yavdcub4" path="res://Assets/textures/rock.png" id="1_cl4oo"]
+
+[resource]
+resource_name = "stone"
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_cl4oo")

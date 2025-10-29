@@ -103,5 +103,5 @@ func _broadcast_time_sync() -> void:
 	while true:
 		var current_time = Time.get_ticks_msec()
 		time_sinc.rpc(current_time)
-		print(current_time)
+		#print(current_time)
 		await get_tree().create_timer(1.0).timeout

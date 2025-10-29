@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://gy536ecr35e1"]
+[gd_scene load_steps=8 format=3 uid="uid://gy536ecr35e1"]
 
 [ext_resource type="Script" uid="uid://dppfx5vw2r4j7" path="res://GDScripts/mine_menu.gd" id="1_og3g2"]
 [ext_resource type="Script" uid="uid://bi142u86xcvyh" path="res://GDScripts/splash.gd" id="2_hy3hu"]
+[ext_resource type="Material" uid="uid://j548dmdytskk" path="res://Assets/material/temp_mat_1.tres" id="3_flj7a"]
+[ext_resource type="Material" uid="uid://drb2pwihyd8jv" path="res://Assets/material/temp_mat_2.tres" id="4_b385q"]
+[ext_resource type="Material" uid="uid://dy2ouw5acbuyl" path="res://Assets/material/stone.tres" id="5_784s7"]
+[ext_resource type="Material" uid="uid://ciqanf7voevl6" path="res://Assets/material/grass.tres" id="6_5d2wl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_535j1"]
 
 [node name="MineMenu" type="Control"]
 layout_mode = 3
@@ -109,6 +115,26 @@ theme_override_constants/outline_size = 3
 text = "Splash"
 horizontal_alignment = 1
 script = ExtResource("2_hy3hu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+material_override = ExtResource("3_flj7a")
+mesh = SubResource("BoxMesh_535j1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -3, 0)
+material_override = ExtResource("4_b385q")
+mesh = SubResource("BoxMesh_535j1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -3, 0)
+material_override = ExtResource("5_784s7")
+mesh = SubResource("BoxMesh_535j1")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -3, 0)
+material_override = ExtResource("6_5d2wl")
+mesh = SubResource("BoxMesh_535j1")
 
 [connection signal="pressed" from="VBoxMenu/HBoxServer/Join" to="." method="_on_join_pressed"]
 [connection signal="timeout" from="ConnectionStatusCheck" to="." method="_tested"]
