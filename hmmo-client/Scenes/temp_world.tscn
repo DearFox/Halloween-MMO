@@ -115,8 +115,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.769207, 0, -3.0031748)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.796658, 0.55892336, -0.16136837)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.070085, 0.00799752, -2.962512)
-constant_linear_velocity = Vector3(0.73090744, 0.019427702, 0.09877231)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8321, 0.13457501, -2.3189378)
+constant_linear_velocity = Vector3(-2.665257, -0.07084193, -0.3602045)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target")
