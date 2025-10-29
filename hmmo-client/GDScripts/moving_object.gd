@@ -1,3 +1,4 @@
+@tool
 extends AnimatableBody3D
 
 enum MovementFunction {
@@ -34,9 +35,19 @@ func _ready() -> void:
 		_local_time_ms = 0.0
 	sync_to_physics = true
 	_previous_position = global_position
+	set_process(Engine.is_editor_hint())
 
 
 func _physics_process(delta: float) -> void:
+	_update_movement(delta)
+
+
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		_update_movement(delta)
+
+
+func _update_movement(delta: float) -> void:
 	if not movment_enabled:
 		constant_linear_velocity = Vector3.ZERO
 		_previous_position = global_position
@@ -115,6 +126,8 @@ func _get_node_position(node: Node3D, fallback: Vector3) -> Vector3:
 
 
 func _get_current_time_ms() -> Variant:
+	if Engine.is_editor_hint():
+		return null
 	if GGS.CURRENT_TIME != null:
 		return GGS.CURRENT_TIME
 	return null
