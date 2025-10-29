@@ -5,4 +5,4 @@ func _enter_tree() -> void:
 
 @rpc("call_remote", "unreliable")
 @warning_ignore("unused_parameter")
-func position_sync(pose:Vector3) -> void:pass
+func position_sync(pose:Vector3, angle:Vector3, velocity:Vector3, suit:int) -> void:pass

@@ -115,19 +115,7 @@ func _get_node_position(node: Node3D, fallback: Vector3) -> Vector3:
 
 
 func _get_current_time_ms() -> Variant:
-	
-	
-	if _ggs == null or not is_instance_valid(_ggs):
-		_ggs = get_tree().root.get_node_or_null("GGS")
-	if _ggs == null:
-		return null
-	if _ggs.has_method("get_current_time"):
-		var method_value = _ggs.call("get_current_time")
-		if typeof(method_value) == TYPE_FLOAT or typeof(method_value) == TYPE_INT:
-			return float(method_value)
-		return null
-	var property_value = _ggs.get("CURRENT_TIME")
-	if typeof(property_value) == TYPE_FLOAT or typeof(property_value) == TYPE_INT:
-		return float(property_value)
+	if GGS.CURRENT_TIME != null:
+		return GGS.CURRENT_TIME
 	return null
 	

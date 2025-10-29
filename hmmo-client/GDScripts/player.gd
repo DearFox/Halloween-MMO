@@ -20,6 +20,10 @@ var prev_pos: Vector3
 var target_pos: Vector3
 var lerp_time := 0.05
 var t := 1.0
+var prev_rot: Vector3 = Vector3.ZERO
+var target_rot: Vector3 = Vector3.ZERO
+var prev_velocity_sync: Vector3 = Vector3.ZERO
+var target_velocity_sync: Vector3 = Vector3.ZERO
 
 
 func _enter_tree() -> void:
@@ -115,7 +119,7 @@ func _physics_process(delta: float) -> void:
 			# Поворот модели игрока
 			$blockbench_export.basis = lerp($blockbench_export.basis, Basis.looking_at(direction), ROTATE_MODEL_SPEED * delta)
 			if is_on_floor():
-				var acceleration = SPEED * 10.0  # Скорость разгона (чем больше - тем быстрее)
+				var acceleration = SPEED * 10.0  # Ускорение (чем больше - тем быстрее)
 				velocity.x = move_toward(velocity.x, direction.x * SPEED, acceleration * delta)
 				velocity.z = move_toward(velocity.z, direction.z * SPEED, acceleration * delta)
 			else:
@@ -140,20 +144,57 @@ func _physics_process(delta: float) -> void:
 	else:
 		if t < 1.0:
 			t += delta / lerp_time
-			global_position = prev_pos.lerp(target_pos, t)
+			var progress: float = clampf(t, 0.0, 1.0)
+			global_position = prev_pos.lerp(target_pos, progress)
+			velocity = prev_velocity_sync.lerp(target_velocity_sync, progress)
+			_update_remote_visual_rotation(_lerp_rotation(prev_rot, target_rot, progress))
 		else:
 			global_position = target_pos
+			velocity = target_velocity_sync
+			_update_remote_visual_rotation(target_rot)
 	move_and_slide()
 
 
 func _on_position_sync_timeout() -> void:
-	position_sync.rpc(position)
+	position_sync.rpc(global_position, $blockbench_export.rotation, velocity, suit)
 	#print("Синхронизация позиции " + name)
 
 @rpc("call_remote", "unreliable")
-func position_sync(pose:Vector3) -> void:
+func position_sync(pose: Vector3, angle: Vector3, velocity: Vector3, suit: int) -> void:
+	if is_multiplayer_authority():
+		return
 	prev_pos = global_position
 	target_pos = pose
+	prev_rot = $blockbench_export.rotation
+	target_rot = angle
+	prev_velocity_sync = velocity
+	target_velocity_sync = velocity
+	_update_remote_suit(suit)
 	t = 0.0
 
 	#print("Удаленная синхронизация позиции " + name)
+
+func _lerp_rotation(from: Vector3, to: Vector3, weight: float) -> Vector3:
+	var clamped_weight: float = clampf(weight, 0.0, 1.0)
+	return Vector3(
+		lerp_angle(from.x, to.x, clamped_weight),
+		lerp_angle(from.y, to.y, clamped_weight),
+		lerp_angle(from.z, to.z, clamped_weight)
+	)
+
+func _update_remote_visual_rotation(target: Vector3) -> void:
+	$blockbench_export.rotation = target
+
+func _update_remote_suit(new_suit: int) -> void:
+	if suit == new_suit:
+		return
+	suit = new_suit
+	match suit:
+		1:
+			$ColorRect/Label.text = "высокий прыжок"
+		2:
+			$ColorRect/Label.text = "рывок"
+		3:
+			$ColorRect/Label.text = "прохождение через особые стены"
+		_:
+			$ColorRect/Label.text = ""
