@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://voviw1y84nnq"]
+[gd_scene load_steps=22 format=4 uid="uid://voviw1y84nnq"]
 
 [ext_resource type="PackedScene" uid="uid://dlgga7aautg2e" path="res://Scenes/game_chat.tscn" id="1_wnvw0"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jje0v"]
@@ -9,6 +9,9 @@
 [ext_resource type="Material" uid="uid://dy2ouw5acbuyl" path="res://Assets/material/stone.tres" id="6_vw5jw"]
 [ext_resource type="PackedScene" uid="uid://14k2pu38r5nx" path="res://Scenes/location_game_1.tscn" id="7_vw5jw"]
 [ext_resource type="PackedScene" uid="uid://dmined1tdbsqf" path="res://Scenes/location_game_2.tscn" id="9_b7fhl"]
+[ext_resource type="Shader" uid="uid://dxsyyb2wlsfqd" path="res://Shaders/ps1.gdshader" id="10_57lle"]
+[ext_resource type="Script" uid="uid://dcfnhmrsjy65i" path="res://GDScripts/camerafake.gd" id="11_15o1t"]
+[ext_resource type="Script" uid="uid://dxisuwhkxwdq4" path="res://GDScripts/mask_viewport_sync.gd" id="11_aduyq"]
 
 [sub_resource type="Environment" id="Environment_wnvw0"]
 background_mode = 1
@@ -67,6 +70,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_86sd4")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_15o1t"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_15o1t"]
+resource_local_to_scene = true
+shader = ExtResource("10_57lle")
+shader_parameter/mask_texture = SubResource("ViewportTexture_15o1t")
+shader_parameter/resolution_scale = 0.25
+shader_parameter/color_levels = 8
+shader_parameter/dither_strength = 0.3
+shader_parameter/enable_dither = true
+
 [node name="TEMP_World" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -76,10 +91,9 @@ light_specular = 16.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wnvw0")
 
-[node name="GameChat" parent="." instance=ExtResource("1_wnvw0")]
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8318573, 0.55498964, 0, -0.55498964, 0.8318573, 0, 3.362, 5.303)
+cull_mask = 1048573
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D"]
 process_priority = 300
@@ -115,8 +129,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.769207, 0, -3.0031748)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.796658, 0.55892336, -0.16136837)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8321, 0.13457501, -2.3189378)
-constant_linear_velocity = Vector3(-2.665257, -0.07084193, -0.3602045)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.543198, 0.5521863, -0.19562244)
+constant_linear_velocity = Vector3(-0.6695879, -0.01779703, -0.09048095)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target")
@@ -137,3 +151,28 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 9.817013, -3, -1.364975
 
 [node name="LocationGame_2" parent="." instance=ExtResource("9_b7fhl")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 41, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_15o1t")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="GameChat" parent="CanvasLayer2" instance=ExtResource("1_wnvw0")]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+render_target_update_mode = 4
+script = ExtResource("11_aduyq")
+
+[node name="Camera3D2" type="Camera3D" parent="SubViewport"]
+cull_mask = 2
+script = ExtResource("11_15o1t")
+source_camera_path = NodePath("../../Camera3D")

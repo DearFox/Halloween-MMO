@@ -50,6 +50,18 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_cvnsp")
 
+[node name="ID" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+layers = 2
+billboard = 1
+text = "00000000000"
+
+[node name="Name" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
+layers = 2
+billboard = 1
+text = "Name"
+
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92499995, 0)
 shape = SubResource("CapsuleShape3D_6t5aa")
@@ -65,16 +77,6 @@ texture = ExtResource("2_cvnsp")
 hframes = 5
 vframes = 3
 
-[node name="Name" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
-billboard = 1
-text = "Name"
-
-[node name="ID" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
-billboard = 1
-text = "00000000000"
-
 [node name="PositionSync" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
@@ -82,12 +84,15 @@ autostart = true
 [node name="SuitTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 25
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="ColorRect"]
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect"]
 layout_mode = 0
 offset_left = 48.0
 offset_right = 96.0

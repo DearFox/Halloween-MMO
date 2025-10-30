@@ -36,7 +36,7 @@ func _ready() -> void:
 	#	$PhantomCamera3D.priority = 10
 	#	print($PhantomCamera3D.priority)
 	#$Camera3D.current = player_current
-	$ColorRect.visible = player_current
+	$CanvasLayer/ColorRect.visible = player_current
 	#$CollisionShape3D.disabled = !player_current
 	$CollisionShape3D2.disabled = !player_current
 	$PlayerVisual_TEMP.modulate = player_color
@@ -59,10 +59,10 @@ func _physics_process(delta: float) -> void:
 			#	print("Камера не найдена")
 		# Индикация спец приёма костюма
 		if $SuitTimer.is_stopped():
-			$ColorRect.color = Color(0.0, 1.0, 0.0, 1.0)
+			$CanvasLayer/ColorRect.color = Color(0.0, 1.0, 0.0, 1.0)
 		else : 
 			var normal_time:float = GGS.normalize($SuitTimer.time_left,$SuitTimer.wait_time)
-			$ColorRect.color = Color(normal_time, 1.0-normal_time, 0.0, 1.0)
+			$CanvasLayer/ColorRect.color = Color(normal_time, 1.0-normal_time, 0.0, 1.0)
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -101,16 +101,16 @@ func _physics_process(delta: float) -> void:
 							return
 		if Input.is_action_just_pressed("suit_1"):
 			suit = 1
-			$ColorRect/Label.text = "высокий прыжок"
+			$CanvasLayer/ColorRect/Label.text = "высокий прыжок"
 		if Input.is_action_just_pressed("suit_2"):
 			suit = 2
-			$ColorRect/Label.text = "рывок"
+			$CanvasLayer/ColorRect/Label.text = "рывок"
 		if Input.is_action_just_pressed("suit_3"):
 			suit = 3
-			$ColorRect/Label.text = "прохождение через особые стены"
+			$CanvasLayer/ColorRect/Label.text = "прохождение через особые стены"
 		if Input.is_action_just_pressed("no_suit"):
 			suit = 0
-			$ColorRect/Label.text = ""
+			$CanvasLayer/ColorRect/Label.text = ""
 		# Handle jump.
 		if Input.is_action_pressed("jump") and is_on_floor() and !pdb.me_chatting:
 			velocity.y = temp_jump
@@ -192,10 +192,10 @@ func _update_remote_suit(new_suit: int) -> void:
 	suit = new_suit
 	match suit:
 		1:
-			$ColorRect/Label.text = "высокий прыжок"
+			$CanvasLayer/ColorRect/Label.text = "высокий прыжок"
 		2:
-			$ColorRect/Label.text = "рывок"
+			$CanvasLayer/ColorRect/Label.text = "рывок"
 		3:
-			$ColorRect/Label.text = "прохождение через особые стены"
+			$CanvasLayer/ColorRect/Label.text = "прохождение через особые стены"
 		_:
-			$ColorRect/Label.text = ""
+			$CanvasLayer/ColorRect/Label.text = ""
