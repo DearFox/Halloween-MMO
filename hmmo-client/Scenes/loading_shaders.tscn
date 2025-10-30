@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8e6elu68hxid"]
+[gd_scene load_steps=14 format=3 uid="uid://b8e6elu68hxid"]
 
 [ext_resource type="Material" uid="uid://j548dmdytskk" path="res://Assets/material/temp_mat_1.tres" id="1_rw2nf"]
 [ext_resource type="Script" uid="uid://083opw76lbl8" path="res://GDScripts/loading_shaders.gd" id="1_s3yfx"]
@@ -9,6 +9,7 @@
 [ext_resource type="Material" uid="uid://o8wjy323p672" path="res://Assets/material/waterfall_anim.tres" id="6_km10s"]
 [ext_resource type="Material" uid="uid://dmosj4gp1tihr" path="res://Assets/material/sunshine.tres" id="7_y3riv"]
 [ext_resource type="Material" uid="uid://bcyh5de5f6feo" path="res://Assets/material/texture_palitres.tres" id="8_8f323"]
+[ext_resource type="Material" uid="uid://dfsl28crppeab" path="res://Assets/material/darck.tres" id="9_m8uh6"]
 [ext_resource type="Material" uid="uid://bep5vrrlnhmx2" path="res://Assets/material/player_mat.tres" id="9_uo4f8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pyrs5"]
@@ -51,6 +52,11 @@ mesh = SubResource("BoxMesh_pyrs5")
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.81344604, -1.3862491e-08, -0.58164036, 0.21335132, 0.930296, 0.29837993, 0.54109764, -0.3668097, 0.7567455, -0.5, -0.5, 0.5)
 material_override = ExtResource("7_y3riv")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.81344604, -1.3862491e-08, -0.58164036, 0.21335132, 0.930296, 0.29837993, 0.54109764, -0.3668097, 0.7567455, -0.84897184, -0.5, -0.09923482)
+material_override = ExtResource("9_m8uh6")
 mesh = SubResource("BoxMesh_pyrs5")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="."]

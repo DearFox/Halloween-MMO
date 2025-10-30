@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://voviw1y84nnq"]
+[gd_scene load_steps=27 format=4 uid="uid://voviw1y84nnq"]
 
 [ext_resource type="PackedScene" uid="uid://dlgga7aautg2e" path="res://Scenes/game_chat.tscn" id="1_wnvw0"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jje0v"]
@@ -15,16 +15,21 @@
 [ext_resource type="PackedScene" uid="uid://by13w2l5mt3pu" path="res://Scenes/location_game_3.tscn" id="13_ply7x"]
 [ext_resource type="PackedScene" uid="uid://clotiduuir6fk" path="res://Scenes/marble_column_1.tscn" id="14_50b37"]
 [ext_resource type="PackedScene" uid="uid://bxock0gs55wh6" path="res://Scenes/sign_1.tscn" id="15_wm045"]
+[ext_resource type="PackedScene" uid="uid://cms0du08jewi5" path="res://Scenes/shop_1.tscn" id="16_wm045"]
+[ext_resource type="PackedScene" uid="uid://cxvbdo1k6xb5e" path="res://Scenes/darck.tscn" id="17_ec1nt"]
 
 [sub_resource type="Environment" id="Environment_wnvw0"]
 background_mode = 1
 background_color = Color(0.44, 0.38771334, 0.33879998, 1)
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+fog_enabled = true
+fog_mode = 1
 fog_light_color = Color(0.4392157, 0.3882353, 0.3372549, 1)
-fog_depth_curve = 0.5000014
-fog_depth_begin = 0.0
-fog_depth_end = 206.9
+fog_density = 1.0
+fog_depth_curve = 0.4999995
+fog_depth_begin = 22.6
+fog_depth_end = 41.1
 
 [sub_resource type="Resource" id="Resource_pa5lr"]
 script = ExtResource("4_exmi1")
@@ -138,8 +143,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.66753, 7.5310173, 1.185647
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.2191, 18.307247, 9.65936)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.111795, 0.08884819, -2.5514324)
-constant_linear_velocity = Vector3(2.2690706, 0.0603125, 0.30665687)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.276417, 0.0666433, -2.6643317)
+constant_linear_velocity = Vector3(2.0099044, 0.05342545, 0.27163264)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target")
@@ -156,8 +161,8 @@ mesh = SubResource("ArrayMesh_l7wbr")
 skeleton = NodePath("")
 
 [node name="AnimatableBody3D2" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.180954, 18.297586, 9.651764)
-constant_linear_velocity = Vector3(0.18330976, 0.04643964, 0.036557004)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.93657, 10.384913, 3.429762)
+constant_linear_velocity = Vector3(2.636799, 0.6677771, 0.5250849)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target2")
@@ -224,3 +229,33 @@ transform = Transform3D(-0.48890805, -0.10473248, 0, -0.10332048, 0.48231658, -0
 
 [node name="Sign_4" parent="." instance=ExtResource("15_wm045")]
 transform = Transform3D(0.4972982, -0.051908385, 0, 0.051908385, 0.4972982, 0, 0, 0, 0.5, 14.507772, -0.12645113, -4.1518455)
+
+[node name="Shop_1" parent="." instance=ExtResource("16_wm045")]
+transform = Transform3D(0.4541556, 0, 0.20914757, 0, 0.5, 0, -0.20914757, 0, 0.4541556, -2.0990343, 5.5033145, -13.561757)
+BuySuitItn = 3
+
+[node name="Shop_2" parent="." instance=ExtResource("16_wm045")]
+transform = Transform3D(0.49960104, 0, -0.01997, 0, 0.5, 0, 0.01997, 0, 0.49960104, 52.33111, 7.307722, -12.09858)
+BuySuitItn = 2
+
+[node name="Marble_Column_3" parent="." instance=ExtResource("14_50b37")]
+transform = Transform3D(0.33425778, 0, -0.21970832, 0, 0.4, 0, 0.21970832, 0, 0.33425778, 51.543064, 6.279526, -11.151271)
+
+[node name="Marble_Column_4" parent="." instance=ExtResource("14_50b37")]
+transform = Transform3D(0.33425778, 0, -0.21970832, 0, 0.4, 0, 0.21970832, 0, 0.33425778, 53.114117, 6.279526, -11.140241)
+
+[node name="Shop_3" parent="." instance=ExtResource("16_wm045")]
+transform = Transform3D(0.4925577, 0, 0.08594735, 0, 0.5, 0, -0.08594735, 0, 0.4925577, 107.62258, 14.529055, -9.149055)
+BuySuitItn = 1
+
+[node name="Marble_Column_5" parent="." instance=ExtResource("14_50b37")]
+transform = Transform3D(1.8847697, 0.66906136, 8.145673e-09, -0.66386294, 1.8701254, 0.24883085, 0.083241545, -0.23449442, 1.9844605, 59.03453, -9.536743e-07, -9.991716)
+
+[node name="Darck" parent="." instance=ExtResource("17_ec1nt")]
+transform = Transform3D(1, 0, 0, 0, 0.185, 0, 0, 0, 1, -15.166081, -6.406495, -31.742807)
+
+[node name="Darck2" parent="." instance=ExtResource("17_ec1nt")]
+transform = Transform3D(1, 0, 0, 0, 0.185, 0, 0, 0, 1, 78.896614, -1.4064951, -31.742807)
+
+[node name="Darck3" parent="." instance=ExtResource("17_ec1nt")]
+transform = Transform3D(1, 0, 0, 0, 0.185, 0, 0, 0, 1, 117.31831, 16.393143, -23.36555)

@@ -14,6 +14,10 @@ var suit_nodes: Array = ["blockbench_export/Node/Root/Body/Head/ghost_head_mesh"
 # suit_visible - 0 все выключены, 1 только слизь, 2 только демон, 3 только призрак. Основано на иерархии нодов в suit_nodes
 var suit_visible: Array = [[false,false,false,false,false],[false,false,false,false,true],[false,true,true,true,false],[true,false,false,false,false]]
 
+var suit_unlock: Array = [true, false, false, false]
+
+var shopping:int = -1 # -1 - вне магазина, 0-3 - в магазине
+
 var player_current: bool = false
 var player_color:Color = Color(1.0, 1.0, 1.0, 1.0)
 var player_name:String
@@ -76,6 +80,16 @@ func _physics_process(delta: float) -> void:
 		var temp_jump: float = JUMP_VELOCITY
 		# print(is_on_floor())
 		if Input.is_action_pressed("suit_ability") and !pdb.me_chatting:
+			if shopping > -1 and $SuitTimer.is_stopped():
+				$SuitTimer.start()
+				if !suit_unlock[shopping]:
+					GGS.chat_message_on_client("[color=purple][font_size=24]You've bought a new suit!\nPress [color=orange][u]"+ str(shopping) +"[/u][/color] to put it on.[/font_size][/color]")
+					GGS.chat_message_on_client("[color=purple][font_size=14]Вы купили новый костюм!\nНажмите [color=orange][u]"+ str(shopping) +"[/u][/color] что-бы надеть.[/font_size][/color]")
+					suit_unlock[shopping] = true
+				else :
+					GGS.chat_message_on_client("[color=red]You already have this suit![/color]")
+					GGS.chat_message_on_client("[color=red][font_size=14]У вас уже есть этот костюм![/font_size][/color]")
+				return
 			#print("Спец сила костюма!")
 			match suit:
 				1: 
@@ -102,13 +116,13 @@ func _physics_process(delta: float) -> void:
 							$PlayerVisual_TEMP.modulate.a = 1
 							$SuitTimer.start()
 							return
-		if Input.is_action_just_pressed("suit_1"):
+		if Input.is_action_just_pressed("suit_1") and suit_unlock[1]:
 			_update_suit(1)
-		if Input.is_action_just_pressed("suit_2"):
+		if Input.is_action_just_pressed("suit_2") and suit_unlock[2]:
 			_update_suit(2)
-		if Input.is_action_just_pressed("suit_3"):
+		if Input.is_action_just_pressed("suit_3") and suit_unlock[3]:
 			_update_suit(3)
-		if Input.is_action_just_pressed("no_suit"):
+		if Input.is_action_just_pressed("no_suit") and suit_unlock[0]:
 			_update_suit(0)
 		# Handle jump.
 		if Input.is_action_pressed("jump") and is_on_floor() and !pdb.me_chatting:

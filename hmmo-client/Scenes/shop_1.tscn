@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://cms0du08jewi5"]
+[gd_scene load_steps=8 format=4 uid="uid://cms0du08jewi5"]
 
 [ext_resource type="Material" uid="uid://bcyh5de5f6feo" path="res://Assets/material/texture_palitres.tres" id="1_u3tkk"]
+[ext_resource type="Script" uid="uid://cn4wumj28t2rx" path="res://GDScripts/shop_1.gd" id="1_xdctd"]
+[ext_resource type="PackedScene" uid="uid://ck6monqwsq076" path="res://Assets/models/player_model.gltf" id="3_73yb8"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_u3tkk"]
 _surfaces = [{
@@ -37,7 +39,11 @@ shadow_mesh = SubResource("ArrayMesh_u3tkk")
 [sub_resource type="BoxShape3D" id="BoxShape3D_73yb8"]
 size = Vector3(5, 8.3, 4.9)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_u3tkk"]
+radius = 7.0
+
 [node name="Shop_1" type="Node3D"]
+script = ExtResource("1_xdctd")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6168804, 1, 1.763752)
@@ -49,3 +55,55 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099999905, 4.15, 0.24999976)
 shape = SubResource("BoxShape3D_73yb8")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+shape = SubResource("SphereShape3D_u3tkk")
+
+[node name="blockbench_export" parent="." instance=ExtResource("3_73yb8")]
+transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, 4.3618855, 1.3996439)
+
+[node name="Head_mesh" parent="blockbench_export/Node/Root/Body/Head" index="0"]
+visible = false
+
+[node name="ghost_head_mesh" parent="blockbench_export/Node/Root/Body/Head" index="1"]
+visible = false
+
+[node name="demon_head_mesh" parent="blockbench_export/Node/Root/Body/Head" index="2"]
+visible = false
+
+[node name="Tile_mesh" parent="blockbench_export/Node/Root/Body/Tile" index="0"]
+visible = false
+
+[node name="demon_tile_mesh" parent="blockbench_export/Node/Root/Body/Tile" index="1"]
+visible = false
+
+[node name="Arm_Right_mesh" parent="blockbench_export/Node/Root/Body/Arm_Right" index="0"]
+visible = false
+
+[node name="Arm_Left_mesh" parent="blockbench_export/Node/Root/Body/Arm_Left" index="0"]
+visible = false
+
+[node name="demon_body_mesh" parent="blockbench_export/Node/Root/Body" index="4"]
+visible = false
+
+[node name="Body_mesh" parent="blockbench_export/Node/Root/Body" index="5"]
+visible = false
+
+[node name="Leg_Left_mesh" parent="blockbench_export/Node/Root/Leg_Left" index="0"]
+visible = false
+
+[node name="Leg_Right_mesh" parent="blockbench_export/Node/Root/Leg_Right" index="0"]
+visible = false
+
+[node name="slime_root_mesh" parent="blockbench_export/Node/Root" index="3"]
+visible = false
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+
+[editable path="blockbench_export"]
