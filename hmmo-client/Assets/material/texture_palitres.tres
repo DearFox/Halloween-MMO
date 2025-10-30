@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bcyh5de5f6feo"]
+
+[ext_resource type="Texture2D" uid="uid://lfu7xrdq4olj" path="res://Assets/textures/TexturesPalitres.png" id="1_7sp52"]
+
+[resource]
+resource_name = "TexturePalitre"
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_7sp52")

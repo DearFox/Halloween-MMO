@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://voviw1y84nnq"]
+[gd_scene load_steps=25 format=4 uid="uid://voviw1y84nnq"]
 
 [ext_resource type="PackedScene" uid="uid://dlgga7aautg2e" path="res://Scenes/game_chat.tscn" id="1_wnvw0"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jje0v"]
@@ -12,6 +12,9 @@
 [ext_resource type="Shader" uid="uid://dxsyyb2wlsfqd" path="res://Shaders/ps1.gdshader" id="10_57lle"]
 [ext_resource type="Script" uid="uid://dcfnhmrsjy65i" path="res://GDScripts/camerafake.gd" id="11_15o1t"]
 [ext_resource type="Script" uid="uid://dxisuwhkxwdq4" path="res://GDScripts/mask_viewport_sync.gd" id="11_aduyq"]
+[ext_resource type="PackedScene" uid="uid://by13w2l5mt3pu" path="res://Scenes/location_game_3.tscn" id="13_ply7x"]
+[ext_resource type="PackedScene" uid="uid://clotiduuir6fk" path="res://Scenes/marble_column_1.tscn" id="14_50b37"]
+[ext_resource type="PackedScene" uid="uid://bxock0gs55wh6" path="res://Scenes/sign_1.tscn" id="15_wm045"]
 
 [sub_resource type="Environment" id="Environment_wnvw0"]
 background_mode = 1
@@ -128,9 +131,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.769207, 0, -3.0031748)
 [node name="to_target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.796658, 0.55892336, -0.16136837)
 
+[node name="from_target2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.66753, 7.5310173, 1.1856476)
+
+[node name="to_target2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.2191, 18.307247, 9.65936)
+
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.992916, 0.5375594, -0.2699921)
-constant_linear_velocity = Vector3(-1.185538, -0.03151174, -0.16023529)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.111795, 0.08884819, -2.5514324)
+constant_linear_velocity = Vector3(2.2690706, 0.0603125, 0.30665687)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target")
@@ -142,6 +151,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("ConcavePolygonShape3D_l7wbr")
 
 [node name="Plane_003" type="MeshInstance3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("ArrayMesh_l7wbr")
+skeleton = NodePath("")
+
+[node name="AnimatableBody3D2" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.180954, 18.297586, 9.651764)
+constant_linear_velocity = Vector3(0.18330976, 0.04643964, 0.036557004)
+script = ExtResource("5_exmi1")
+speed = 2.0
+move_from_node = NodePath("../from_target2")
+move_to_node = NodePath("../to_target2")
+back_move_type = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("ConcavePolygonShape3D_l7wbr")
+
+[node name="Plane_003" type="MeshInstance3D" parent="AnimatableBody3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("ArrayMesh_l7wbr")
 skeleton = NodePath("")
@@ -176,3 +203,24 @@ script = ExtResource("11_aduyq")
 cull_mask = 2
 script = ExtResource("11_15o1t")
 source_camera_path = NodePath("../../Camera3D")
+
+[node name="LocationGame_3" parent="." instance=ExtResource("13_ply7x")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 89.83135, 16.399385, 6.146282)
+
+[node name="Marble_Column_1" parent="." instance=ExtResource("14_50b37")]
+transform = Transform3D(0.38297212, -0.17690119, -0.26839948, 0.20967057, 0.45391434, 0, 0.2436608, -0.11255097, 0.42185506, 49.403076, 7.584675, -9.564228)
+
+[node name="Marble_Column_2" parent="." instance=ExtResource("14_50b37")]
+transform = Transform3D(0.21023081, 0.40894395, -0.196387, -0.4106719, 0.079590715, -0.27388647, -0.19274725, 0.27646008, 0.36934844, 59.015915, 5.3378406, -4.683949)
+
+[node name="Sign_1" parent="." instance=ExtResource("15_wm045")]
+transform = Transform3D(0.48004413, -0.1264822, -0.05966503, 0.12551641, 0.4837378, -0.015600528, 0.06167084, 0, 0.49618214, 45.472908, 8.041193, -1.7156878)
+
+[node name="Sign_2" parent="." instance=ExtResource("15_wm045")]
+transform = Transform3D(-0.4744022, -0.15793216, 0, -0.15793216, 0.4744022, 0, 0, 0, 0.5, 88.76181, 18.70934, 5.0684023)
+
+[node name="Sign_3" parent="." instance=ExtResource("15_wm045")]
+transform = Transform3D(-0.48890805, -0.10473248, 0, -0.10332048, 0.48231658, -0.08182655, -0.017139796, 0.08001132, 0.49325898, 37.29158, 1.0255587, 0.372607)
+
+[node name="Sign_4" parent="." instance=ExtResource("15_wm045")]
+transform = Transform3D(0.4972982, -0.051908385, 0, 0.051908385, 0.4972982, 0, 0, 0, 0.5, 14.507772, -0.12645113, -4.1518455)

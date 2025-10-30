@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://b8e6elu68hxid"]
+
+[ext_resource type="Material" uid="uid://j548dmdytskk" path="res://Assets/material/temp_mat_1.tres" id="1_rw2nf"]
+[ext_resource type="Script" uid="uid://083opw76lbl8" path="res://GDScripts/loading_shaders.gd" id="1_s3yfx"]
+[ext_resource type="Material" uid="uid://h230bkphsgoi" path="res://Assets/material/waterfall.tres" id="2_s3yfx"]
+[ext_resource type="Material" uid="uid://drb2pwihyd8jv" path="res://Assets/material/temp_mat_2.tres" id="3_m8uh6"]
+[ext_resource type="Material" uid="uid://dy2ouw5acbuyl" path="res://Assets/material/stone.tres" id="4_mmpbq"]
+[ext_resource type="Material" uid="uid://ciqanf7voevl6" path="res://Assets/material/grass.tres" id="5_ovbxl"]
+[ext_resource type="Material" uid="uid://o8wjy323p672" path="res://Assets/material/waterfall_anim.tres" id="6_km10s"]
+[ext_resource type="Material" uid="uid://dmosj4gp1tihr" path="res://Assets/material/sunshine.tres" id="7_y3riv"]
+[ext_resource type="Material" uid="uid://bcyh5de5f6feo" path="res://Assets/material/texture_palitres.tres" id="8_8f323"]
+[ext_resource type="Material" uid="uid://bep5vrrlnhmx2" path="res://Assets/material/player_mat.tres" id="9_uo4f8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pyrs5"]
+material = ExtResource("2_s3yfx")
+
+[sub_resource type="Environment" id="Environment_s3yfx"]
+background_mode = 4
+ambient_light_source = 2
+ambient_light_color = Color(0.25, 0.25, 0.25, 1)
+ambient_light_energy = 16.0
+
+[node name="LoadingShaders" type="Node3D"]
+script = ExtResource("1_s3yfx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.92444396, 0.26366624, 0.2754696, -0.27427813, 0.96165043, 0, -0.26490545, -0.07555529, 0.9613098, -0.5, 0.5, -0.5)
+material_override = ExtResource("1_rw2nf")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.16199997, -3.5840453e-09, -0.9867908, 0.5604423, 0.8230671, 0.09200697, 0.8121951, -0.5679444, 0.13333686, 0.5, 0.5, -0.5)
+material_override = ExtResource("3_m8uh6")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9038437, 0.42786273, 0, -0.39758253, 0.8398781, 0.3695035, 0.15809678, -0.3339734, 0.9292293, -0.5, 0.5, 0.5)
+material_override = ExtResource("4_mmpbq")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.93444705, -0.356102, 0, 0.27858385, 0.7310317, 0.6228834, -0.22180998, -0.5820515, 0.78231466, 0.5, 0.5, 0.5)
+material_override = ExtResource("5_ovbxl")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.942694, 0.0981982, 0.31888136, 0, 0.955711, -0.29430726, -0.3336588, 0.27744165, 0.9009429, 0.5, -0.5, 0.5)
+material_override = ExtResource("6_km10s")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.81344604, -1.3862491e-08, -0.58164036, 0.21335132, 0.930296, 0.29837993, 0.54109764, -0.3668097, 0.7567455, -0.5, -0.5, 0.5)
+material_override = ExtResource("7_y3riv")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9945018, 0.045191713, -0.094466195, 0, 0.90208876, 0.43155053, 0.1047194, -0.4291778, 0.89712894, 0.5, -0.5, -0.5)
+material_override = ExtResource("8_8f323")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8597988, 0, -0.51063293, 0, 1, 0, 0.51063293, 0, 0.8597988, -0.5, -0.5, -1.1976857)
+material_override = ExtResource("9_uo4f8")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "Loading shaders"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s3yfx")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -2.437764)
+fov = 65.42634
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

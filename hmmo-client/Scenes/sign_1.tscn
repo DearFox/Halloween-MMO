@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=4 uid="uid://bxock0gs55wh6"]
+
+[ext_resource type="Material" uid="uid://bcyh5de5f6feo" path="res://Assets/material/texture_palitres.tres" id="1_j3ti6"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lcyr7"]
+_surfaces = [{
+"aabb": AABB(-1.5, 0, -0.5, 5, 5, 1),
+"format": 34896613377,
+"index_count": 132,
+"index_data": PackedByteArray("AAABAAIAAAACAAMAAAADAAQAAgAFAAMABQAEAAMABgAEAAUABAAGAAcABQAIAAYABwAGAAkABQAKAAgACgALAAgACgAMAAsABQAMAAoADAANAAsADAAOAA0ABQAOAAwACQANAA4ADgAFAA8ACQAOAA8AAgAPAAUABwAJAA8AAQAPAAIABwAPABAABwAQABEADwARABAABwARABIADwATABEAEwASABEADwABABMAFAASABMAFAAAABIAAAAUABUAAAAVAAEAEwAWABQAFQAXAAEAFwATAAEAFQAYABcAEwAZABYAGQAaABYAEwAXABsAEwAbABkAGwAXABgAGQAbABoAGwAYABoA"),
+"name": "TexturePalitre",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 28,
+"vertex_data": PackedByteArray("MzMAAAAAAAAzMy5s//8AADMzAAD//wAAZmYAAP//AABmZgAAAAAAAGZmo2z//wAAZmZfbBF1AABmZv//AAAAAMzMX2wRdQAAZma33qB7AADMzKNs//8AAP//xqZqeAAA//9vp///AADMzLfeoHsAAMzMA93//wAAZmYD3f//AABmZv////8AADMz/////wAAMzP//wAAAAAzM8Lc//8AADMz994fewAAMzOsbP10AAAAAPfeH3sAAAAALmz//wAAAACsbP10AAAAAMLc//8AAHoU1an/dwAAehRUq///AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_st45j"]
+resource_name = "Sign_1_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1.5, 0, -0.5, 5, 5, 1),
+"attribute_data": PackedByteArray("/////62eXBb/////1KKWDf/////UolwW/////5OgjA3/////raBHBP////+tnpkB/////9SidAT/////1KKZAf////9uogYB/////xKeAQT/////Ep4GAf////9ToNwD/////2+gmA3/////bqLSFv////8SnpIN/////xKe0hb/////Yp6tFf////99ogQN/////3iirxX/////wq5bCP////+pqgoN/////6+qEgT/////g6INBP////9ongsN/////2+eQAH/////haJDAf////9unhAE/////1KaCA3/////95sACP////9Ymg0E/////z+Y6gT/////Z5MRAP////8/mBEA/////2eT6gT/////9ph6AP////8IlWgE/////wiVegD/////9phoBP////+0mUkE/////7uXXwj/////u5coBP////+/mT8I/////4uTGAL/////EZrdA/////+Lk90D/////xGaGAL/////QpgaA/////9qk3gA/////0KYeAD/////apMaA/////8bmRYD/////0OUkAD/////G5mQAP////9DlBYD/////6St2wz/////ALDSCP////8BsOEM/////7GtyAj/////i5NmAP////8RmhcC/////4uTFwL/////EZpmAP////+xrcgI/////wGw2wT/////ALDSCP////+/rekE/////7+ZPwj/////u5cmDf////+7l18I/////8qZKg0="),
+"format": 34896613407,
+"index_count": 132,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAAAEAAMABAAAAAUABAAFAAYABgAFAAcACAAJAAoACAALAAkACAAMAAsADQAMAAgADAANAA4ADgANAA8AEAARABIAEQATABQAEQAVABMAFQARABYAEAAWABEAFwAWABAAFgAYABkAFgAaABgAFgAXABoAGwAaABcAGgAbABwAGgAcAB0AHgAfACAAHgAhAB8AIgAjACQAIgAlACMAJgAnACgAJgApACcAKgArACwAKgAtACsALgAvADAALgAxAC8AMgAzADQAMgA1ADMANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMA"),
+"material": ExtResource("1_j3ti6"),
+"name": "TexturePalitre",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 70,
+"vertex_data": PackedByteArray("MzMAAAAA/78zMy5s////vzMzAAD///+/MzOsbP10/78zM/feH3v/vzMz//8AAP+/MzPC3P///78zM///////v2Zm//8AAP+/ZmYD3f///79mZv//////v2Zmt96ge/+/ZmZfbBF1/79mZgAAAAD/v2Zmo2z///+/ZmYAAP///78zMwAA//8ZgGZmo2z//xmAZmYAAP//GYD//2+n//8ZgMzMo2z//xmAzMwD3f//GYBmZgPd//8ZgDMzLmz//xmAMzP/////GYBmZv////8ZgDMzwtz//xmAAAAubP//GYB6FFSr//8ZgAAAwtz//xmAMzMAAAAAVNVmZgAA//9U1WZmAAAAAFTVMzMAAP//VNVmZv//AAD/vzMz//////+/MzP//wAA/79mZv//////vwAAwtz//5DBehTVqf93kMEAAPfeH3uQwXoUVKv//5DBZmajbP//m7/MzF9sEXWbv2ZmX2wRdZu/zMyjbP//m78zM6xs/XS2wAAALmz//7bAMzMubP//tsAAAKxs/XS2wDMzwtz//568AAD33h97nrwzM/feH3uevAAAwtz//568zMyjbP//iMT//8amaniIxMzMX2wRdYjE//9vp///iMRmZrfeoHthvczMA93//2G9ZmYD3f//Yb3MzLfeoHthvf//b6f//yfFzMy33qB7J8X//8amangnxczMA93//yfFehRUq///TsEAAKxs/XROwXoU1an/d07BAAAubP//TsH/f/7//3/+//9/////f/7//3/+//9//v//f////3////9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA//////////////////////////////////////////////////////////////////////////9UVVRVVFVUVVRVVFVUVVRV////f////3////9/////f3xcte18XLbtfFy17Xxctu0AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////39NZBs3TWQbN01kGzdNZBs3////f////3////9/////f5+40BufuNAbn7jQG5+40Bsaj/ngGo/54BqP+eAaj/ng")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_lcyr7")
+
+[node name="Sign_1" type="Node3D"]
+
+[node name="Cube_001" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_st45j")
+skeleton = NodePath("")

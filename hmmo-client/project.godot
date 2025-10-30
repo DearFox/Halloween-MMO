@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="HMMO Client"
-run/main_scene="uid://gy536ecr35e1"
+run/main_scene="uid://b8e6elu68hxid"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
