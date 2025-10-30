@@ -107,4 +107,21 @@ autoplay = "walk"
 
 [node name="blockbench_export" parent="." instance=ExtResource("3_6t5aa")]
 
+[node name="ghost_head_mesh" parent="blockbench_export/Node/Root/Body/Head" index="1"]
+visible = false
+
+[node name="demon_head_mesh" parent="blockbench_export/Node/Root/Body/Head" index="2"]
+visible = false
+
+[node name="demon_tile_mesh" parent="blockbench_export/Node/Root/Body/Tile" index="1"]
+visible = false
+
+[node name="demon_body_mesh" parent="blockbench_export/Node/Root/Body" index="4"]
+visible = false
+
+[node name="slime_root_mesh" parent="blockbench_export/Node/Root" index="3"]
+visible = false
+
 [connection signal="timeout" from="PositionSync" to="." method="_on_position_sync_timeout"]
+
+[editable path="blockbench_export"]

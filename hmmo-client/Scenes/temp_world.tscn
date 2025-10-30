@@ -129,8 +129,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.769207, 0, -3.0031748)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.796658, 0.55892336, -0.16136837)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.543198, 0.5521863, -0.19562244)
-constant_linear_velocity = Vector3(-0.6695879, -0.01779703, -0.09048095)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.992916, 0.5375594, -0.2699921)
+constant_linear_velocity = Vector3(-1.185538, -0.03151174, -0.16023529)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target")
@@ -162,10 +162,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="GameChatCanvasLayer" type="CanvasLayer" parent="."]
 layer = 10
 
-[node name="GameChat" parent="CanvasLayer2" instance=ExtResource("1_wnvw0")]
+[node name="GameChat" parent="GameChatCanvasLayer" instance=ExtResource("1_wnvw0")]
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true

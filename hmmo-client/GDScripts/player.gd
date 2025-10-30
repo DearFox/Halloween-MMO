@@ -10,6 +10,9 @@ const SUIT_SPEED: int = 15
 const ROTATE_MODEL_SPEED:float = 10.0
 
 var suit: int = 0 #Костюм. 0 - никакой, 1 - высокий прыжок, 2 - рывок, 3 - прохождение через особые стены
+var suit_nodes: Array = ["blockbench_export/Node/Root/Body/Head/ghost_head_mesh","blockbench_export/Node/Root/Body/Head/demon_head_mesh","blockbench_export/Node/Root/Body/Tile/demon_tile_mesh","blockbench_export/Node/Root/Body/demon_body_mesh","blockbench_export/Node/Root/slime_root_mesh"]
+# suit_visible - 0 все выключены, 1 только слизь, 2 только демон, 3 только призрак. Основано на иерархии нодов в suit_nodes
+var suit_visible: Array = [[false,false,false,false,false],[false,false,false,false,true],[false,true,true,true,false],[true,false,false,false,false]]
 
 var player_current: bool = false
 var player_color:Color = Color(1.0, 1.0, 1.0, 1.0)
@@ -100,17 +103,13 @@ func _physics_process(delta: float) -> void:
 							$SuitTimer.start()
 							return
 		if Input.is_action_just_pressed("suit_1"):
-			suit = 1
-			$CanvasLayer/ColorRect/Label.text = "высокий прыжок"
+			_update_suit(1)
 		if Input.is_action_just_pressed("suit_2"):
-			suit = 2
-			$CanvasLayer/ColorRect/Label.text = "рывок"
+			_update_suit(2)
 		if Input.is_action_just_pressed("suit_3"):
-			suit = 3
-			$CanvasLayer/ColorRect/Label.text = "прохождение через особые стены"
+			_update_suit(3)
 		if Input.is_action_just_pressed("no_suit"):
-			suit = 0
-			$CanvasLayer/ColorRect/Label.text = ""
+			_update_suit(0)
 		# Handle jump.
 		if Input.is_action_pressed("jump") and is_on_floor() and !pdb.me_chatting:
 			velocity.y = temp_jump
@@ -170,7 +169,7 @@ func position_sync(pose: Vector3, angle: Vector3, velocity: Vector3, suit: int) 
 	target_rot = angle
 	prev_velocity_sync = velocity
 	target_velocity_sync = velocity
-	_update_remote_suit(suit)
+	_update_suit(suit)
 	t = 0.0
 
 	#print("Удаленная синхронизация позиции " + name)
@@ -186,10 +185,12 @@ func _lerp_rotation(from: Vector3, to: Vector3, weight: float) -> Vector3:
 func _update_remote_visual_rotation(target: Vector3) -> void:
 	$blockbench_export.rotation = target
 
-func _update_remote_suit(new_suit: int) -> void:
+func _update_suit(new_suit: int) -> void:
 	if suit == new_suit:
 		return
 	suit = new_suit
+	for i in suit_nodes.size():
+		get_node(suit_nodes[i]).visible = suit_visible[suit][i]
 	match suit:
 		1:
 			$CanvasLayer/ColorRect/Label.text = "высокий прыжок"

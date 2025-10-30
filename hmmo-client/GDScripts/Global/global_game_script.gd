@@ -118,7 +118,7 @@ func send_my_chat_message_on_server(ChatMsg: String) -> void: pass # Если в
 @rpc("reliable")
 @warning_ignore("unused_parameter")
 func chat_message_on_client(ChatMsg: String) -> void:
-	get_node("/root/TEMP_World/GameChat").add_message(ChatMsg)
+	get_node("/root/TEMP_World/GameChatCanvasLayer/GameChat").add_message(ChatMsg)
 
 # Тестовый RPC вызов
 @rpc("any_peer")
