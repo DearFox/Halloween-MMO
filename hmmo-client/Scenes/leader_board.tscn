@@ -1,15 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckfa7lcvumb52"]
+[gd_scene load_steps=5 format=4 uid="uid://ckfa7lcvumb52"]
 
 [ext_resource type="Material" uid="uid://bcyh5de5f6feo" path="res://Assets/material/texture_palitres.tres" id="1_1ykrp"]
 [ext_resource type="Script" uid="uid://dnrrntlcr6sdw" path="res://GDScripts/leader_board.gd" id="1_ce1ha"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_ce1ha"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_tw2ac"]
+_surfaces = [{
+"aabb": AABB(-0.1643365, 0, -1.4, 0.33834112, 3.4, 2.8),
+"format": 34896613377,
+"index_count": 132,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAwAEAAIABQADAAEAAAAFAAEABgAEAAMABQAGAAMABwACAAQABwAAAAIABgAHAAQAAAAHAAgABgAJAAcACAAHAAkAAAAIAAoACgAFAAAACQALAAgACAALAAwACAAMAAoACQANAAsACwAOAAwACwANAA4ACgAMAA4ADwANAAkADwAOAA0ACgAOAA8ABgAPAAkAEAAKAA8AEAAPAAYACgARAAUAEAARAAoABQASAAYAEAAGABIAEwAFABEABQATABIAEQAUABMAEgAVABAAEAAWABEAEQAWABQAEAAVABYAEwAUABcAEwAXABIAFgAXABQAEgAXABUAFgAVABcA"),
+"name": "TexturePalitre",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AABKS///AAAAAP//AAAAAAAA/////wAA/////wAAAAD///////8AAAAASksAAAAA//9KSwAAAAD//0pL//8AADtJSktE6wAAU9ZKSyvsAACYPEpLOssAADtJAABE6wAAmDwAADrLAABT1gAAK+wAAOfNAACtywAA581KS63LAADnzUpLUSgAABAySktRKAAAAtBKS+MLAACzPkpLFQoAALM+AAAVCgAA580AAFEoAAAQMgAAUSgAAALQAADjCwAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ce1ha"]
+resource_name = "Liderboard_Cube_002"
+_surfaces = [{
+"aabb": AABB(-0.1643365, 0, -1.4, 0.33834112, 3.4, 2.8),
+"attribute_data": PackedByteArray("/////wWhUhf/////ooBnAP////8FoWcA/////6KAUhf/////7ajxF/////8woxkA/////+2oGQD/////MKPxF/////9EoZUX/////z2AEwD/////RKETAP////89gJUX/////5SexRf/////f5kTAP////+UnhMA/////3+ZxRf/////xL7VCP////96vTkF/////8S+fwT/////rL3iB/////9mukIF/////2a6Ewj/////KaVCBf////+koSEF/////3+ffwT/////vaG5B/////9/n9UI/////zWl6gf/////8qCXCP////8JgQME//////KgAwT/////CYGXCP////9OMi5F/////3lTFE3/////JS8xTf////+UVfRE/////5CVcAj/////A5PTFP////8Dk3AI/////5CV0xT/////aZTgBv////+Kj8QU/////4qP4Ab/////aZTEFP////+ELOt1/////wBUBn3/////rC96ff////95U+t1/////5GRsQf/////Po+8E/////8+j7EH/////5GRvBP/////4ZdwCP////+QldMU/////5CVcAj/////4ZfTFP/////ik7EH/////5KRvBP/////kpGxB//////ik7wT/////0iRtQP/////pY1nD/////+ljbUD/////0iRZw//////BJngBv////9qlMQU/////2qU4Ab/////BJnEFP////+1kSUI/////42N1RP/////jY0lCP////+1kdUT"),
+"format": 34896613407,
+"index_count": 132,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAASABEAEwAQABUAFAAWABIAEgAWABcAEgAXABgAGQAYABcAGgAYABkAFAAbABYAGgAZABsAFAAVABsAGwAQABoAGwAVABAAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUA"),
+"material": ExtResource("1_1ykrp"),
+"name": "TexturePalitre",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 72,
+"vertex_data": PackedByteArray("AABKS////78AAP//AAD/vwAA//////+/AABKSwAA/78AAEpLAAD///////8AAP//AAD//wAA/////0pLAAD/////SksAAP+//////////7//////AAD/v///Skv///+///9KS///AIAAAP////8AgP///////wCAAABKS///AIAAAEpLAAD81QLQSkvjCyfV//9KSwAAedSzPkpLFQrq1ufNSktRKFbVEDJKS1EoV9XnzUpLrctU1VPWSksr7L/V//9KS///NdU7SUpLROs21QAASkv//4zUmDxKSzrLVNX/////AABU1QAA/////1TVAAD//wAAVNX///////9U1TtJAABE6/+/580AAK3L/7+YPAAAOsv/v1PWAAAr7P+/581KS1EoAIAQMgAAUSgAgBAySktRKACA580AAFEoAIA7SUpLROsOvpg8AAA6yw6+mDxKSzrLDr47SQAAROsOvhAyAABRKP+/AtAAAOML/7+zPgAAFQr/v+fNAABRKP+/sz5KSxUK0vsC0AAA4wvS+wLQSkvjC9L7sz4AABUK0vtT1kpLK+wngjtJAABE6yeCO0lKS0TrJ4JT1gAAK+wngpg8Sks6y/L+580AAK3L8v7nzUpLrcvy/pg8AAA6y/L+AtBKS+MLob/nzQAAUSihv+fNSktRKKG/AtAAAOMLob8QMkpLUSgNwrM+AAAVCg3Csz5KSxUKDcIQMgAAUSgNwufNSkuty0XBU9YAACvsRcFT1kpLK+xFwefNAACty0XB/3////9/////f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA/3////9/////f////3///x5W8FQdVXBVSVTaVTVXZFRXVVNVWFVTVVRVVFXVVRRVLlVoVTBVZ1VgVM9VVVVUVVTVqipU1aoqVNWqKlTVqioAAP9/AAD/fwAA/38AAP9//3////9/////f////3////9/////f////3////9///8AAP9/AAD/fwAA/38AAP9//38AAP9/AAD/fwAA/38AAP9/////f////3////9/////fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/////f////3////9/////fwAA/38AAP9/AAD/fwAA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_tw2ac")
 
 [node name="LeaderBoard" type="Node3D"]
 script = ExtResource("1_ce1ha")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0304663, 0.09578782)
 layers = 2
 billboard = 1
 texture_filter = 0
@@ -22,13 +52,13 @@ Player 9: 2
 "
 vertical_alignment = 0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1, -0.1)
-material_override = ExtResource("1_1ykrp")
-mesh = SubResource("PlaneMesh_ce1ha")
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
+
+[node name="Cube_002" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.6226834e-08, 0, -0.6, 0, 0.6, 0, 0.6, 0, -2.6226834e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_ce1ha")
+skeleton = NodePath("")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

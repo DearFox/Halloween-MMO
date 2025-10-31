@@ -36,7 +36,7 @@ vertical_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="PlayerName" type="TextEdit" parent="VBoxMenu/HBoxPlayerName"]
+[node name="PlayerName" type="LineEdit" parent="VBoxMenu/HBoxPlayerName"]
 custom_minimum_size = Vector2(297, 32)
 layout_mode = 2
 placeholder_text = "UserName"
@@ -45,7 +45,7 @@ placeholder_text = "UserName"
 layout_mode = 2
 alignment = 1
 
-[node name="IP" type="TextEdit" parent="VBoxMenu/HBoxServer"]
+[node name="IP" type="LineEdit" parent="VBoxMenu/HBoxServer"]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 placeholder_text = "wss://example.com"
@@ -110,5 +110,6 @@ text = "Splash"
 horizontal_alignment = 1
 script = ExtResource("2_hy3hu")
 
+[connection signal="text_submitted" from="VBoxMenu/HBoxPlayerName/PlayerName" to="." method="_on_player_name_text_submitted"]
 [connection signal="pressed" from="VBoxMenu/HBoxServer/Join" to="." method="_on_join_pressed"]
 [connection signal="timeout" from="ConnectionStatusCheck" to="." method="_tested"]
