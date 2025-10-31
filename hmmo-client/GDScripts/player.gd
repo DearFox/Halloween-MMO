@@ -59,6 +59,7 @@ func _physics_process(delta: float) -> void:
 		$blockbench_export.get_node("AnimationPlayer").play("idel")
 	
 	if GGS.srv_ok() and is_multiplayer_authority():
+		
 		if global_position.y <= -10:
 			global_position = Vector3(0,2,0)
 			#if PhantomCamera3D != null:
@@ -73,7 +74,12 @@ func _physics_process(delta: float) -> void:
 			$CanvasLayer/ColorRect.color = Color(normal_time, 1.0-normal_time, 0.0, 1.0)
 		# Add the gravity.
 		if not is_on_floor():
+			var temp_collision_pose_ray: Vector3 = $RayCast3D.get_collision_point()
+			down_position_animation(delta)
+			$DownPosition.visible = true
+			$DownPosition.global_position = temp_collision_pose_ray
 			velocity += get_gravity() * delta
+		else : $DownPosition.visible = false
 				# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var input_dir := Input.get_vector("left", "right", "up", "down")
@@ -182,7 +188,8 @@ func _on_position_sync_timeout() -> void:
 	#print("Синхронизация позиции " + name)
 
 @rpc("call_remote", "unreliable")
-func position_sync(pose: Vector3, angle: Vector3, velocity: Vector3, suit: int) -> void:
+@warning_ignore("shadowed_variable_base_class")
+func position_sync(pose: Vector3, angle: Vector3, velocity: Vector3, _suit: int) -> void:
 	if is_multiplayer_authority():
 		return
 	prev_pos = global_position
@@ -191,7 +198,7 @@ func position_sync(pose: Vector3, angle: Vector3, velocity: Vector3, suit: int) 
 	target_rot = angle
 	prev_velocity_sync = velocity
 	target_velocity_sync = velocity
-	_update_suit(suit)
+	_update_suit(_suit)
 	t = 0.0
 
 	#print("Удаленная синхронизация позиции " + name)
@@ -222,3 +229,6 @@ func _update_suit(new_suit: int) -> void:
 			$CanvasLayer/ColorRect/Label.text = "прохождение через особые стены"
 		_:
 			$CanvasLayer/ColorRect/Label.text = ""
+
+func down_position_animation(delta:float) -> void:
+	$DownPosition.rotate_y(deg_to_rad(250) * delta)

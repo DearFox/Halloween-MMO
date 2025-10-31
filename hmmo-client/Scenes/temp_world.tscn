@@ -145,8 +145,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.66753, 7.5310173, 1.185647
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.2191, 18.307247, 9.65936)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.233723, 0.27815363, -1.5889223)
-constant_linear_velocity = Vector3(-3.1121416, -0.08272451, -0.42060637)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.413706, 0.3095184, -1.4294504)
+constant_linear_velocity = Vector3(-3.0930066, -0.082212724, -0.4180086)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target")
@@ -163,8 +163,8 @@ mesh = SubResource("ArrayMesh_l7wbr")
 skeleton = NodePath("")
 
 [node name="AnimatableBody3D2" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.58043, 7.76221, 1.3674419)
-constant_linear_velocity = Vector3(-0.8702664, -0.22042473, -0.17332755)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.561554, 12.822451, 5.34648)
+constant_linear_velocity = Vector3(2.98972, 0.75713366, 0.5953577)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target2")
@@ -267,4 +267,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9857154, 0.5770719, 0)
 candy_count = 50
 
 [node name="LeaderBoard" parent="." instance=ExtResource("19_6qc4e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3113866, 6.1374817, -8.449771)
+transform = Transform3D(0.58943605, 0, 0.80781496, 0, 1, 0, -0.80781496, 0, 0.58943605, -6.9546256, 6.1374817, -9.4741335)

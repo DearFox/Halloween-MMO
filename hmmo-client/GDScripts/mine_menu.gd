@@ -31,3 +31,8 @@ func _tested():
 		2: 
 			connection_status.text = "Статус соединения: Подключено!"
 			connection_status.modulate = Color(0.0, 1.0, 0.0, 1.0)
+
+
+@warning_ignore("unused_parameter")
+func _on_player_name_text_submitted(new_text: String) -> void:
+	_on_join_pressed()

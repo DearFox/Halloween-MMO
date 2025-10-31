@@ -25,7 +25,7 @@ var current_time_ms: float = 0.0
 var progress: float = 0.0
 
 var _local_time_ms: float = 0.0
-var _ggs: Node = null
+#var _ggs: Node = null
 var _previous_position: Vector3 = Vector3.ZERO
 
 
