@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var BuySuitItn:int = 0
+@export var SuitPrice:int = 100
 #0 , 1  слизь, 2  демон, 3  призрак.
 var SuitsNames:Array = ["Никакой", "Слайма","Демона","Призрака"]
 
@@ -14,9 +15,10 @@ func _ready() -> void:
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D and body.is_multiplayer_authority():
 		body.shopping = BuySuitItn
+		body.shopping_cost = SuitPrice
 		print("Игрок вошел в магазин")
-		GGS.chat_message_on_client("[color=green][font_size=24]You have entered the store![/font_size][/color]\n[color=green]Click the [color=orange][u]shift[/u][/color] to buy a [color=orange][u]"+ SuitsNames[BuySuitItn] +"[/u][/color] suit.[/color]")
-		GGS.chat_message_on_client("[font_size=14][color=green]Вы зашли в магазин![/color]\n[color=green]Нажмите на [color=orange][u]shift[/u][/color] что-бы купить [color=orange][u]"+ SuitsNames[BuySuitItn] +"[/u][/color] костюм.[/color][/font_size]")
+		GGS.chat_message_on_client("[color=green][font_size=24]You have entered the store![/font_size][/color]\n[color=green]Click the [color=orange][u]shift[/u][/color] to buy a [color=orange][u]"+ SuitsNames[BuySuitItn] +"[/u][/color] suit.[/color] Price: " + str(SuitPrice) + " candy.")
+		GGS.chat_message_on_client("[font_size=14][color=green]Вы зашли в магазин![/color]\n[color=green]Нажмите на [color=orange][u]shift[/u][/color] что-бы купить [color=orange][u]"+ SuitsNames[BuySuitItn] +"[/u][/color] костюм.[/color][/font_size] Цена: " + str(SuitPrice) + " конфет.")
 
 
 func _on_area_3d_body_exited(body: Node3D) -> void:

@@ -64,11 +64,48 @@ func remove_player_on_clients(peer_id:int) -> void:pass
 @warning_ignore("unused_parameter")
 func time_sinc(current_time:int) -> void:pass
 
+# Получение количества конфет от клиента
+@rpc("any_peer", "unreliable")
+@warning_ignore("unused_parameter")
+func sent_candy_count(candy_count:int) -> void:
+	var sender_id:int = multiplayer.get_remote_sender_id()
+	print("Received candy count from player ", sender_id, ": ", candy_count)
+	if sender_id in sdb.players:
+		sdb.players[sender_id]["candy"] = candy_count
+		print("Player ", sender_id, " sent ", candy_count, " candies.")
+
+@rpc("any_peer", "reliable")
+func request_leaderboard() -> void:
+	var sender_id:int = multiplayer.get_remote_sender_id()
+	var leaderboard:Array = _build_leaderboard()
+	leaderboard_on_client.rpc_id(sender_id, leaderboard)
+
+func _build_leaderboard() -> Array:
+	var leaderboard:Array = []
+	for peer_id in sdb.players.keys():
+		var player_data:Dictionary = sdb.players[peer_id]
+		leaderboard.append({
+			"peer_id": peer_id,
+			"name": player_data.get("name", ""),
+			"candy": int(player_data.get("candy", 0))
+		})
+	leaderboard.sort_custom(Callable(self, "_sort_leaderboard_entry"))
+	return leaderboard
+
+func _sort_leaderboard_entry(a: Dictionary, b: Dictionary) -> bool:
+	var candy_a:int = int(a.get("candy", 0))
+	var candy_b:int = int(b.get("candy", 0))
+	if candy_a == candy_b:
+		var name_a:String = str(a.get("name", ""))
+		var name_b:String = str(b.get("name", ""))
+		return name_a < name_b
+	return candy_a > candy_b
+
 @rpc("any_peer","reliable")
 func register_client_on_server(PlayerName: String) -> void:
 	var sender_id:int = multiplayer.get_remote_sender_id()
 	print(ws_peer.get_peer_address(multiplayer.get_remote_sender_id()) , " " ,sender_id," is: ",PlayerName)
-	sdb.players[sender_id] = {"name": PlayerName} #TODO Добавить серверную проверку на "корректность" имени пользователя
+	sdb.players[sender_id] = {"name": PlayerName,"candy": 0} #TODO Добавить серверную проверку на "корректность" имени пользователя
 	add_player_character(sender_id)
 	for ids in sdb.players.keys():
 		if !ids == sender_id:
@@ -90,13 +127,18 @@ func send_my_chat_message_on_server(ChatMsg: String) -> void:
 @warning_ignore("unused_parameter")
 func chat_message_on_client(ChatMsg: String) -> void: pass
 
+@rpc("call_remote", "reliable")
+@warning_ignore("unused_parameter")
+func leaderboard_on_client(leaderboard:Array) -> void: pass
+
 # Тестовый RPC вызов
 @rpc("any_peer")
-func test() -> void:
-	print(multiplayer.get_unique_id()," TESTED!")
+func test(peer_id := -1) -> void:
+	print(multiplayer.get_unique_id(), " TESTED! sender:", peer_id)
 
 func rpc_test() -> void:
-	print(multiplayer.get_unique_id(), " " ,rpc("test"))
+	test.rpc()
+	print(multiplayer.get_unique_id(), " RPC test sent")
 	pass # Replace with function body.
 
 func _broadcast_time_sync() -> void:
@@ -105,3 +147,5 @@ func _broadcast_time_sync() -> void:
 		time_sinc.rpc(current_time)
 		#print(current_time)
 		await get_tree().create_timer(1.0).timeout
+		for ids in sdb.players.keys():
+			print("Player connected: ", sdb.players[ids])

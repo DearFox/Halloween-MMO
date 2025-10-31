@@ -17,6 +17,7 @@ var suit_visible: Array = [[false,false,false,false,false],[false,false,false,fa
 var suit_unlock: Array = [true, false, false, false]
 
 var shopping:int = -1 # -1 - вне магазина, 0-3 - в магазине
+var shopping_cost:int = 999999999999999
 
 var player_current: bool = false
 var player_color:Color = Color(1.0, 1.0, 1.0, 1.0)
@@ -80,15 +81,21 @@ func _physics_process(delta: float) -> void:
 		var temp_jump: float = JUMP_VELOCITY
 		# print(is_on_floor())
 		if Input.is_action_pressed("suit_ability") and !pdb.me_chatting:
-			if shopping > -1 and $SuitTimer.is_stopped():
+			if shopping > -1 and $SuitTimer.is_stopped() and shopping_cost <= pdb.PlayerCandy:
 				$SuitTimer.start()
 				if !suit_unlock[shopping]:
 					GGS.chat_message_on_client("[color=purple][font_size=24]You've bought a new suit!\nPress [color=orange][u]"+ str(shopping) +"[/u][/color] to put it on.[/font_size][/color]")
 					GGS.chat_message_on_client("[color=purple][font_size=14]Вы купили новый костюм!\nНажмите [color=orange][u]"+ str(shopping) +"[/u][/color] что-бы надеть.[/font_size][/color]")
 					suit_unlock[shopping] = true
+					pdb.PlayerCandy -= shopping_cost
+				
 				else :
 					GGS.chat_message_on_client("[color=red]You already have this suit![/color]")
 					GGS.chat_message_on_client("[color=red][font_size=14]У вас уже есть этот костюм![/font_size][/color]")
+				return
+			else: if shopping_cost > pdb.PlayerCandy and shopping > -1 and !suit_unlock[shopping]:
+				GGS.chat_message_on_client("[color=red]Not enough candy to buy this suit![/color]")
+				GGS.chat_message_on_client("[color=red][font_size=14]Недостаточно конфет что-бы купить этот костюм![/font_size][/color]")
 				return
 			#print("Спец сила костюма!")
 			match suit:

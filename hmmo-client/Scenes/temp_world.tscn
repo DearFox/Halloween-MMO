@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://voviw1y84nnq"]
+[gd_scene load_steps=28 format=4 uid="uid://voviw1y84nnq"]
 
 [ext_resource type="PackedScene" uid="uid://dlgga7aautg2e" path="res://Scenes/game_chat.tscn" id="1_wnvw0"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jje0v"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bxock0gs55wh6" path="res://Scenes/sign_1.tscn" id="15_wm045"]
 [ext_resource type="PackedScene" uid="uid://cms0du08jewi5" path="res://Scenes/shop_1.tscn" id="16_wm045"]
 [ext_resource type="PackedScene" uid="uid://cxvbdo1k6xb5e" path="res://Scenes/darck.tscn" id="17_ec1nt"]
+[ext_resource type="PackedScene" uid="uid://bupxwh3s3cab" path="res://Scenes/candy_1.tscn" id="18_jcv4p"]
 
 [sub_resource type="Environment" id="Environment_wnvw0"]
 background_mode = 1
@@ -120,7 +121,7 @@ follow_distance = 6.0
 spring_length = 6.0
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 10, 2.3941803, 0.92188644, -16.39198)
+transform = Transform3D(1, 0, 0, 0, 5, 0, 0, 0, 10, 2.3941803, 0.92188644, -16.963072)
 mesh = SubResource("BoxMesh_exmi1")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D5"]
@@ -143,8 +144,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.66753, 7.5310173, 1.185647
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.2191, 18.307247, 9.65936)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.276417, 0.0666433, -2.6643317)
-constant_linear_velocity = Vector3(2.0099044, 0.05342545, 0.27163264)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.692913, 0.26377863, -1.662011)
+constant_linear_velocity = Vector3(3.1065607, 0.082576305, 0.4198512)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target")
@@ -161,8 +162,8 @@ mesh = SubResource("ArrayMesh_l7wbr")
 skeleton = NodePath("")
 
 [node name="AnimatableBody3D2" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.93657, 10.384913, 3.429762)
-constant_linear_velocity = Vector3(2.636799, 0.6677771, 0.5250849)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.96031, 17.481956, 9.010406)
+constant_linear_velocity = Vector3(-1.5857987, -0.40164074, -0.31580263)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target2")
@@ -259,3 +260,7 @@ transform = Transform3D(1, 0, 0, 0, 0.185, 0, 0, 0, 1, 78.896614, -1.4064951, -3
 
 [node name="Darck3" parent="." instance=ExtResource("17_ec1nt")]
 transform = Transform3D(1, 0, 0, 0, 0.185, 0, 0, 0, 1, 117.31831, 16.393143, -23.36555)
+
+[node name="candy1" parent="." instance=ExtResource("18_jcv4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9857154, 0.5770719, 0)
+candy_count = 50

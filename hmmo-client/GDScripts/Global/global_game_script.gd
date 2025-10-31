@@ -7,6 +7,7 @@ const PLAYER = preload("uid://bx6mh138molva")
 var LAST_SERVER_TIME = 0
 var SERVER_TIME = 0
 var CURRENT_TIME = 0
+var LEADERBOARD_COUNTER:int = 0
 # создать peer как клиент
 func create_client(url: String = "ws://localhost:1337") -> void:
 	
@@ -115,15 +116,29 @@ func register_client_on_server(PlayerName: String = pdb.PlayerName) -> void: pas
 @warning_ignore("unused_parameter")
 func send_my_chat_message_on_server(ChatMsg: String) -> void: pass # Если вы не поняли из название - это rpc отправляет клиентсткое чат сообщение на сервер
 
+@rpc("call_remote", "reliable")
+@warning_ignore("unused_parameter")
+func request_leaderboard() -> void: pass
+
+@rpc("call_remote", "unreliable")
+@warning_ignore("unused_parameter")
+func sent_candy_count(candy_count:int) -> void: pass
+
 @rpc("reliable")
 @warning_ignore("unused_parameter")
 func chat_message_on_client(ChatMsg: String) -> void:
 	get_node("/root/TEMP_World/GameChatCanvasLayer/GameChat").add_message(ChatMsg)
 
+@rpc("reliable")
+@warning_ignore("unused_parameter")
+func leaderboard_on_client(leaderboard:Array) -> void:
+	pdb.PlayerLeaderboard = leaderboard.duplicate(true)
+	print("Leaderboard updated: ", leaderboard)
+
 # Тестовый RPC вызов
 @rpc("any_peer")
-func test() -> void:
-	print(multiplayer.get_unique_id()," TESTED!")
+func test(peer_id := -1) -> void:
+	print(multiplayer.get_unique_id(), " TESTED! sender:", peer_id)
 
 @rpc("reliable")
 @warning_ignore("unused_parameter")
@@ -134,13 +149,31 @@ func time_sinc(current_time:int) -> void:
 func rpc_test() -> void:
 	# Проверим подключение к севреру
 	if GGS.srv_ok():
-		print(multiplayer.get_unique_id(), " " ,rpc("test"))
+		test.rpc()
+		print(multiplayer.get_unique_id(), " RPC test sent")
 	pass # Replace with function body.
 
+func fetch_leaderboard() -> void:
+	if GGS.srv_ok():
+		request_leaderboard.rpc()
+	else:
+		push_warning("Cannot request leaderboard: not connected to server")
+
+
+
 func _physics_process(delta: float) -> void:
+	if LAST_SERVER_TIME != 0:
+		get_node("/root/TEMP_World/GameChatCanvasLayer/GameChat/CandyCounter").text = str(pdb.PlayerCandy)
 	if LAST_SERVER_TIME != SERVER_TIME:
 
 		SERVER_TIME = LAST_SERVER_TIME
 		if LAST_SERVER_TIME-CURRENT_TIME > 200 or LAST_SERVER_TIME-CURRENT_TIME < -600:
 			CURRENT_TIME = SERVER_TIME
+		print("candy sync: ", pdb.PlayerCandy)
+		sent_candy_count.rpc(pdb.PlayerCandy)
+		if LEADERBOARD_COUNTER >= 10:
+			fetch_leaderboard()
+			LEADERBOARD_COUNTER = 0
+		else:
+			LEADERBOARD_COUNTER += 1
 	CURRENT_TIME += delta*1000 
