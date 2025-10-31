@@ -8,6 +8,7 @@ func _ready() -> void:
 
 func add_message(ChatMsg: String) -> void:
 	$ChatControl/RichTextLabel.append_text("\n"+ChatMsg)
+	%CandyCounter.text = str(pdb.PlayerCandy)
 
 func _on_color_rect_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and event.button_mask == 1:

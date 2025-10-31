@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckfa7lcvumb52"]
+
+[ext_resource type="Material" uid="uid://bcyh5de5f6feo" path="res://Assets/material/texture_palitres.tres" id="1_1ykrp"]
+[ext_resource type="Script" uid="uid://dnrrntlcr6sdw" path="res://GDScripts/leader_board.gd" id="1_ce1ha"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ce1ha"]
+
+[node name="LeaderBoard" type="Node3D"]
+script = ExtResource("1_ce1ha")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+layers = 2
+billboard = 1
+texture_filter = 0
+text = "Leaderboard
+Fox: 100
+Cat: 99
+Player 478: 50
+Player 10: 10
+Player 9: 2
+"
+vertical_alignment = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1, -0.1)
+material_override = ExtResource("1_1ykrp")
+mesh = SubResource("PlaneMesh_ce1ha")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

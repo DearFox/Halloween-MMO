@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://voviw1y84nnq"]
+[gd_scene load_steps=29 format=4 uid="uid://voviw1y84nnq"]
 
 [ext_resource type="PackedScene" uid="uid://dlgga7aautg2e" path="res://Scenes/game_chat.tscn" id="1_wnvw0"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jje0v"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cms0du08jewi5" path="res://Scenes/shop_1.tscn" id="16_wm045"]
 [ext_resource type="PackedScene" uid="uid://cxvbdo1k6xb5e" path="res://Scenes/darck.tscn" id="17_ec1nt"]
 [ext_resource type="PackedScene" uid="uid://bupxwh3s3cab" path="res://Scenes/candy_1.tscn" id="18_jcv4p"]
+[ext_resource type="PackedScene" uid="uid://ckfa7lcvumb52" path="res://Scenes/leader_board.tscn" id="19_6qc4e"]
 
 [sub_resource type="Environment" id="Environment_wnvw0"]
 background_mode = 1
@@ -144,8 +145,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.66753, 7.5310173, 1.185647
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.2191, 18.307247, 9.65936)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.692913, 0.26377863, -1.662011)
-constant_linear_velocity = Vector3(3.1065607, 0.082576305, 0.4198512)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.233723, 0.27815363, -1.5889223)
+constant_linear_velocity = Vector3(-3.1121416, -0.08272451, -0.42060637)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target")
@@ -162,8 +163,8 @@ mesh = SubResource("ArrayMesh_l7wbr")
 skeleton = NodePath("")
 
 [node name="AnimatableBody3D2" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.96031, 17.481956, 9.010406)
-constant_linear_velocity = Vector3(-1.5857987, -0.40164074, -0.31580263)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.58043, 7.76221, 1.3674419)
+constant_linear_velocity = Vector3(-0.8702664, -0.22042473, -0.17332755)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target2")
@@ -232,7 +233,7 @@ transform = Transform3D(-0.48890805, -0.10473248, 0, -0.10332048, 0.48231658, -0
 transform = Transform3D(0.4972982, -0.051908385, 0, 0.051908385, 0.4972982, 0, 0, 0, 0.5, 14.507772, -0.12645113, -4.1518455)
 
 [node name="Shop_1" parent="." instance=ExtResource("16_wm045")]
-transform = Transform3D(0.4541556, 0, 0.20914757, 0, 0.5, 0, -0.20914757, 0, 0.4541556, -2.0990343, 5.5033145, -13.561757)
+transform = Transform3D(0.34199992, 0, 0.3647411, 0, 0.5, 0, -0.3647411, 0, 0.34199992, 2.6637049, 5.5033145, -16.599613)
 BuySuitItn = 3
 
 [node name="Shop_2" parent="." instance=ExtResource("16_wm045")]
@@ -264,3 +265,6 @@ transform = Transform3D(1, 0, 0, 0, 0.185, 0, 0, 0, 1, 117.31831, 16.393143, -23
 [node name="candy1" parent="." instance=ExtResource("18_jcv4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9857154, 0.5770719, 0)
 candy_count = 50
+
+[node name="LeaderBoard" parent="." instance=ExtResource("19_6qc4e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3113866, 6.1374817, -8.449771)

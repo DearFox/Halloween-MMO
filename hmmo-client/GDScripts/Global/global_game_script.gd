@@ -120,7 +120,7 @@ func send_my_chat_message_on_server(ChatMsg: String) -> void: pass # Если в
 @warning_ignore("unused_parameter")
 func request_leaderboard() -> void: pass
 
-@rpc("call_remote", "unreliable")
+@rpc("call_remote", "reliable")
 @warning_ignore("unused_parameter")
 func sent_candy_count(candy_count:int) -> void: pass
 
@@ -155,22 +155,19 @@ func rpc_test() -> void:
 
 func fetch_leaderboard() -> void:
 	if GGS.srv_ok():
-		request_leaderboard.rpc()
+		request_leaderboard.rpc_id(1)
 	else:
 		push_warning("Cannot request leaderboard: not connected to server")
 
 
 
 func _physics_process(delta: float) -> void:
-	if LAST_SERVER_TIME != 0:
-		get_node("/root/TEMP_World/GameChatCanvasLayer/GameChat/CandyCounter").text = str(pdb.PlayerCandy)
 	if LAST_SERVER_TIME != SERVER_TIME:
 
 		SERVER_TIME = LAST_SERVER_TIME
 		if LAST_SERVER_TIME-CURRENT_TIME > 200 or LAST_SERVER_TIME-CURRENT_TIME < -600:
 			CURRENT_TIME = SERVER_TIME
-		print("candy sync: ", pdb.PlayerCandy)
-		sent_candy_count.rpc(pdb.PlayerCandy)
+		
 		if LEADERBOARD_COUNTER >= 10:
 			fetch_leaderboard()
 			LEADERBOARD_COUNTER = 0

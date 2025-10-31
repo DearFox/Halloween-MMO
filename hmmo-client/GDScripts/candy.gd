@@ -37,14 +37,13 @@ func _physics_process(delta: float) -> void:
 		global_position = new_position
 
 func _on_body_entered(body):
-	print("Candy collected by: ", body)
-	if not is_active:
-		return
-	if body is CharacterBody3D:
-		var player: CharacterBody3D = body
+	if is_active and body is CharacterBody3D and body.is_multiplayer_authority():
+		print("Candy collected by: ", body)
 		pdb.PlayerCandy += candy_count
 		GGS.chat_message_on_client("You collected " + str(candy_count) + " candy!")
 		GGS.chat_message_on_client("Собрано " + str(candy_count) + " конфет!")
+		print("candy sync: ", pdb.PlayerCandy)
+		GGS.sent_candy_count.rpc_id(1,candy_count)
 
 		is_active = false
 		await despawn_candy()

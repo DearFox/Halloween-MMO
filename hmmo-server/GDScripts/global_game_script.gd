@@ -64,14 +64,17 @@ func remove_player_on_clients(peer_id:int) -> void:pass
 @warning_ignore("unused_parameter")
 func time_sinc(current_time:int) -> void:pass
 
-# Получение количества конфет от клиента
-@rpc("any_peer", "unreliable")
-@warning_ignore("unused_parameter")
+# Получение количества собранных в данный момент конфет от клиента
+@rpc("any_peer", "reliable")
 func sent_candy_count(candy_count:int) -> void:
 	var sender_id:int = multiplayer.get_remote_sender_id()
 	print("Received candy count from player ", sender_id, ": ", candy_count)
 	if sender_id in sdb.players:
-		sdb.players[sender_id]["candy"] = candy_count
+		var PlayerName:String = sdb.players[sender_id]["name"]
+		if sdb.candy_leaderboard.get(PlayerName):
+			sdb.candy_leaderboard[PlayerName] += candy_count
+		else : sdb.candy_leaderboard[PlayerName] = candy_count
+		#sdb.players[sender_id]["candy"] = candy_count
 		print("Player ", sender_id, " sent ", candy_count, " candies.")
 
 @rpc("any_peer", "reliable")
@@ -81,16 +84,25 @@ func request_leaderboard() -> void:
 	leaderboard_on_client.rpc_id(sender_id, leaderboard)
 
 func _build_leaderboard() -> Array:
+	if !sdb.candy_leaderboard:
+		return []
 	var leaderboard:Array = []
-	for peer_id in sdb.players.keys():
-		var player_data:Dictionary = sdb.players[peer_id]
-		leaderboard.append({
-			"peer_id": peer_id,
-			"name": player_data.get("name", ""),
-			"candy": int(player_data.get("candy", 0))
-		})
-	leaderboard.sort_custom(Callable(self, "_sort_leaderboard_entry"))
-	return leaderboard
+	for players in sdb.candy_leaderboard.keys():
+		leaderboard.append([players,sdb.candy_leaderboard[players]])
+	leaderboard.sort_custom(func(a, b): return a[1] > b[1])
+	return leaderboard.slice(0, min(5, leaderboard.size()))
+
+#func _build_leaderboard() -> Array:
+#	var leaderboard:Array = []
+#	for peer_id in sdb.players.keys():
+#		var player_data:Dictionary = sdb.players[peer_id]
+#		leaderboard.append({
+#			"peer_id": peer_id,
+#			"name": player_data.get("name", ""),
+#			"candy": int(player_data.get("candy", 0))
+#		})
+#	leaderboard.sort_custom(Callable(self, "_sort_leaderboard_entry"))
+#	return leaderboard
 
 func _sort_leaderboard_entry(a: Dictionary, b: Dictionary) -> bool:
 	var candy_a:int = int(a.get("candy", 0))
@@ -106,6 +118,8 @@ func register_client_on_server(PlayerName: String) -> void:
 	var sender_id:int = multiplayer.get_remote_sender_id()
 	print(ws_peer.get_peer_address(multiplayer.get_remote_sender_id()) , " " ,sender_id," is: ",PlayerName)
 	sdb.players[sender_id] = {"name": PlayerName,"candy": 0} #TODO Добавить серверную проверку на "корректность" имени пользователя
+	#sdb.candy_leaderboard[PlayerName] = 0
+	
 	add_player_character(sender_id)
 	for ids in sdb.players.keys():
 		if !ids == sender_id:
@@ -147,5 +161,5 @@ func _broadcast_time_sync() -> void:
 		time_sinc.rpc(current_time)
 		#print(current_time)
 		await get_tree().create_timer(1.0).timeout
-		for ids in sdb.players.keys():
-			print("Player connected: ", sdb.players[ids])
+		#for ids in sdb.players.keys():
+		#	print("Player connected: ", sdb.players[ids])

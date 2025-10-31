@@ -93,7 +93,8 @@ func _physics_process(delta: float) -> void:
 					GGS.chat_message_on_client("[color=red]You already have this suit![/color]")
 					GGS.chat_message_on_client("[color=red][font_size=14]У вас уже есть этот костюм![/font_size][/color]")
 				return
-			else: if shopping_cost > pdb.PlayerCandy and shopping > -1 and !suit_unlock[shopping]:
+			else: if $SuitTimer.is_stopped() and shopping_cost > pdb.PlayerCandy and shopping > -1 and !suit_unlock[shopping]:
+				$SuitTimer.start()
 				GGS.chat_message_on_client("[color=red]Not enough candy to buy this suit![/color]")
 				GGS.chat_message_on_client("[color=red][font_size=14]Недостаточно конфет что-бы купить этот костюм![/font_size][/color]")
 				return
