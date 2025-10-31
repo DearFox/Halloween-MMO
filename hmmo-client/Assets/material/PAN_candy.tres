@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c8ieyc5nes4vr"]
+
+[ext_resource type="Texture2D" uid="uid://ca6xb4akl2e0o" path="res://Assets/textures/PAN_Candy.png" id="1_ppwfi"]
+
+[resource]
+albedo_texture = ExtResource("1_ppwfi")

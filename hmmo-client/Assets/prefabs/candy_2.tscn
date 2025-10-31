@@ -1,0 +1,28 @@
+[gd_scene load_steps=8 format=3 uid="uid://osm5fgo6ec2b"]
+
+[ext_resource type="Script" uid="uid://5m0pxchhqixu" path="res://GDScripts/candy.gd" id="1_3eibx"]
+[ext_resource type="ArrayMesh" uid="uid://cfa5ybg7f4bca" path="res://Assets/models/candy.obj" id="2_bxnp4"]
+[ext_resource type="Script" uid="uid://puygqg8xjfeh" path="res://GDScripts/RandomTexturePicker.gd" id="3_5mbhv"]
+[ext_resource type="Texture2D" uid="uid://csfv5sbiq0moe" path="res://Assets/textures/Bi_Candy.png" id="4_hla0n"]
+[ext_resource type="Texture2D" uid="uid://ca6xb4akl2e0o" path="res://Assets/textures/PAN_Candy.png" id="5_kerrc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jcv4p"]
+radius = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gx70p"]
+
+[node name="candy1" type="Area3D"]
+collision_layer = 3
+collision_mask = 2
+script = ExtResource("1_3eibx")
+respawn_time_sec = 120.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_jcv4p")
+
+[node name="Candy" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.004188639, -0.29997078, 0, 0.29997078, 0.004188639, 0, 0, 0, 0.3, 0, 0, -0.14255595)
+material_override = SubResource("StandardMaterial3D_gx70p")
+mesh = ExtResource("2_bxnp4")
+script = ExtResource("3_5mbhv")
+textures = Array[Texture2D]([ExtResource("4_hla0n"), ExtResource("5_kerrc")])

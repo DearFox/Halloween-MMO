@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhicalgueksua"]
+
+[ext_resource type="Material" uid="uid://cc3ysonauoq4v" path="res://Assets/material/pumpkincandy.tres" id="1_2gbms"]
+[ext_resource type="ArrayMesh" uid="uid://coedo7r4511qu" path="res://Assets/models/pumpkincandy3x.obj" id="2_f6mv6"]
+
+[node name="Pumpkincandy3x" type="MeshInstance3D"]
+material_override = ExtResource("1_2gbms")
+mesh = ExtResource("2_f6mv6")
+surface_material_override/0 = ExtResource("1_2gbms")

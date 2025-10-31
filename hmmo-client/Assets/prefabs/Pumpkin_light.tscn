@@ -1,0 +1,57 @@
+[gd_scene load_steps=13 format=3 uid="uid://chl3a036ydiy1"]
+
+[ext_resource type="Script" uid="uid://5m0pxchhqixu" path="res://GDScripts/candy.gd" id="1_iaq0y"]
+[ext_resource type="ArrayMesh" uid="uid://nstt35fk20df" path="res://Assets/models/Pumpkin.obj" id="2_t32r0"]
+[ext_resource type="Script" uid="uid://puygqg8xjfeh" path="res://GDScripts/RandomTexturePicker.gd" id="3_sbto3"]
+[ext_resource type="Texture2D" uid="uid://dmhppkluhck1x" path="res://Assets/textures/Pumpkin11.png" id="4_t32r0"]
+[ext_resource type="Texture2D" uid="uid://bc2ilhylxuhxt" path="res://Assets/textures/Pumpkin12.png" id="5_sbto3"]
+[ext_resource type="Texture2D" uid="uid://doxl284px0iaj" path="res://Assets/textures/Pumpkin13.png" id="6_u6b5t"]
+[ext_resource type="Texture2D" uid="uid://dm0ayghulhovf" path="res://Assets/textures/Pumpkin14.png" id="7_13m3j"]
+[ext_resource type="Texture2D" uid="uid://vm6ygbw2qe3y" path="res://Assets/textures/Pumpkin15.png" id="8_3osd3"]
+[ext_resource type="Material" uid="uid://dmosj4gp1tihr" path="res://Assets/material/sunshine.tres" id="9_sbto3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jcv4p"]
+radius = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ysb5p"]
+albedo_texture = ExtResource("7_13m3j")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_u6b5t"]
+top_radius = 0.05
+bottom_radius = 0.2
+height = 1.0
+radial_segments = 6
+rings = 1
+
+[node name="candy1" type="Area3D"]
+collision_layer = 3
+collision_mask = 2
+script = ExtResource("1_iaq0y")
+candy_count = 10
+respawn_time_sec = 120.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_jcv4p")
+
+[node name="Pumpkin" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_ysb5p")
+mesh = ExtResource("2_t32r0")
+script = ExtResource("3_sbto3")
+textures = Array[Texture2D]([ExtResource("4_t32r0"), ExtResource("5_sbto3"), ExtResource("6_u6b5t"), ExtResource("7_13m3j"), ExtResource("8_3osd3")])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.199043, 0.9799908, 0, -0.9799908, -0.199043, 0.05538571, 0, 0.8931159)
+material_override = ExtResource("9_sbto3")
+mesh = SubResource("CylinderMesh_u6b5t")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.94935423, -0.2692045, -0.16203588, 0, -0.5156964, 0.85677195, -0.31420785, -0.81337994, -0.48957855, 0.27385277, 0.549768, 0.7153474)
+material_override = ExtResource("9_sbto3")
+mesh = SubResource("CylinderMesh_u6b5t")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8260393, 0.48288733, 0.29065293, 0, -0.5156964, 0.85677195, 0.5636126, -0.70772725, -0.42598546, -0.18666703, 0.549768, 0.67530215)
+material_override = ExtResource("9_sbto3")
+mesh = SubResource("CylinderMesh_u6b5t")
+skeleton = NodePath("../MeshInstance3D")

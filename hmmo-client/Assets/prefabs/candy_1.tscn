@@ -1,8 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bupxwh3s3cab"]
 
 [ext_resource type="Script" uid="uid://5m0pxchhqixu" path="res://GDScripts/candy.gd" id="1_qa6qv"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_ec1nt"]
+[ext_resource type="PackedScene" uid="uid://bhicalgueksua" path="res://Assets/prefabs/pumpkincandy_3x.tscn" id="2_yy2ey"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jcv4p"]
 radius = 0.9
@@ -11,9 +10,11 @@ radius = 0.9
 collision_layer = 3
 collision_mask = 2
 script = ExtResource("1_qa6qv")
+candy_count = 3
+respawn_time_sec = 120.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_ec1nt")
+[node name="Pumpkincandy3x" parent="." instance=ExtResource("2_yy2ey")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.28865576, -0.064547, 0.07784796)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_jcv4p")

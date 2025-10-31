@@ -1,0 +1,31 @@
+[gd_scene load_steps=11 format=3 uid="uid://bfuqbe5fbog35"]
+
+[ext_resource type="Script" uid="uid://5m0pxchhqixu" path="res://GDScripts/candy.gd" id="1_s5de7"]
+[ext_resource type="ArrayMesh" uid="uid://nstt35fk20df" path="res://Assets/models/Pumpkin.obj" id="2_hpbvs"]
+[ext_resource type="Script" uid="uid://puygqg8xjfeh" path="res://GDScripts/RandomTexturePicker.gd" id="3_q11qm"]
+[ext_resource type="Texture2D" uid="uid://dhawwl5ydett7" path="res://Assets/textures/Pumpkin01.png" id="4_xfmp7"]
+[ext_resource type="Texture2D" uid="uid://34josvqv7o1k" path="res://Assets/textures/Pumpkin02.png" id="5_8tlko"]
+[ext_resource type="Texture2D" uid="uid://8kkw1t3pur1v" path="res://Assets/textures/Pumpkin03.png" id="6_nl7tw"]
+[ext_resource type="Texture2D" uid="uid://dijmevgklcjtd" path="res://Assets/textures/Pumpkin04.png" id="7_17ut7"]
+[ext_resource type="Texture2D" uid="uid://3vjvrpd20aap" path="res://Assets/textures/Pumpkin05.png" id="8_sj72d"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jcv4p"]
+radius = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ysb5p"]
+
+[node name="candy1" type="Area3D"]
+collision_layer = 3
+collision_mask = 2
+script = ExtResource("1_s5de7")
+candy_count = 10
+respawn_time_sec = 120.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_jcv4p")
+
+[node name="Pumpkin" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_ysb5p")
+mesh = ExtResource("2_hpbvs")
+script = ExtResource("3_q11qm")
+textures = Array[Texture2D]([ExtResource("4_xfmp7"), ExtResource("5_8tlko"), ExtResource("6_nl7tw"), ExtResource("7_17ut7"), ExtResource("8_sj72d")])
