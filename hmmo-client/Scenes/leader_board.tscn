@@ -39,9 +39,8 @@ shadow_mesh = SubResource("ArrayMesh_tw2ac")
 script = ExtResource("1_ce1ha")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0304663, 0.09578782)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0304663, 0.15026933)
 layers = 2
-billboard = 1
 texture_filter = 0
 text = "Leaderboard
 Fox: 100

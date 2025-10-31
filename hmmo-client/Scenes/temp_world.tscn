@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://voviw1y84nnq"]
+[gd_scene load_steps=33 format=4 uid="uid://voviw1y84nnq"]
 
 [ext_resource type="PackedScene" uid="uid://dlgga7aautg2e" path="res://Scenes/game_chat.tscn" id="1_wnvw0"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_jje0v"]
@@ -17,8 +17,12 @@
 [ext_resource type="PackedScene" uid="uid://bxock0gs55wh6" path="res://Scenes/sign_1.tscn" id="15_wm045"]
 [ext_resource type="PackedScene" uid="uid://cms0du08jewi5" path="res://Scenes/shop_1.tscn" id="16_wm045"]
 [ext_resource type="PackedScene" uid="uid://cxvbdo1k6xb5e" path="res://Scenes/darck.tscn" id="17_ec1nt"]
-[ext_resource type="PackedScene" uid="uid://bupxwh3s3cab" path="res://Scenes/candy_1.tscn" id="18_jcv4p"]
+[ext_resource type="PackedScene" uid="uid://bupxwh3s3cab" path="res://Assets/prefabs/candy_1.tscn" id="18_jcv4p"]
 [ext_resource type="PackedScene" uid="uid://ckfa7lcvumb52" path="res://Scenes/leader_board.tscn" id="19_6qc4e"]
+[ext_resource type="PackedScene" uid="uid://bfuqbe5fbog35" path="res://Assets/prefabs/Pumpkin.tscn" id="20_i4k2b"]
+[ext_resource type="PackedScene" uid="uid://chl3a036ydiy1" path="res://Assets/prefabs/Pumpkin_light.tscn" id="21_u2y3w"]
+[ext_resource type="PackedScene" uid="uid://osm5fgo6ec2b" path="res://Assets/prefabs/candy_2.tscn" id="22_031bj"]
+[ext_resource type="PackedScene" uid="uid://cgsvcdkckdgpu" path="res://Assets/prefabs/candy_2x1.tscn" id="23_68i3l"]
 
 [sub_resource type="Environment" id="Environment_wnvw0"]
 background_mode = 1
@@ -145,8 +149,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.66753, 7.5310173, 1.185647
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.2191, 18.307247, 9.65936)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.413706, 0.3095184, -1.4294504)
-constant_linear_velocity = Vector3(-3.0930066, -0.082212724, -0.4180086)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.593544, 0.55352455, -0.18881845)
+constant_linear_velocity = Vector3(0.620869, 0.016506411, 0.08391698)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target")
@@ -163,8 +167,8 @@ mesh = SubResource("ArrayMesh_l7wbr")
 skeleton = NodePath("")
 
 [node name="AnimatableBody3D2" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.561554, 12.822451, 5.34648)
-constant_linear_velocity = Vector3(2.98972, 0.75713366, 0.5953577)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.348755, 15.807571, 7.69378)
+constant_linear_velocity = Vector3(-2.5210788, -0.63846874, -0.50207055)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target2")
@@ -262,9 +266,27 @@ transform = Transform3D(1, 0, 0, 0, 0.185, 0, 0, 0, 1, 78.896614, -1.4064951, -3
 [node name="Darck3" parent="." instance=ExtResource("17_ec1nt")]
 transform = Transform3D(1, 0, 0, 0, 0.185, 0, 0, 0, 1, 117.31831, 16.393143, -23.36555)
 
-[node name="candy1" parent="." instance=ExtResource("18_jcv4p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9857154, 0.5770719, 0)
-candy_count = 50
-
 [node name="LeaderBoard" parent="." instance=ExtResource("19_6qc4e")]
 transform = Transform3D(0.58943605, 0, 0.80781496, 0, 1, 0, -0.80781496, 0, 0.58943605, -6.9546256, 6.1374817, -9.4741335)
+
+[node name="candy2" parent="." instance=ExtResource("20_i4k2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 6, -3)
+is_bobbing = false
+
+[node name="candy3" parent="." instance=ExtResource("21_u2y3w")]
+transform = Transform3D(1, 0, 0, 0, 0.9997245, 0.023472523, 0, -0.023472523, 0.9997245, -11.852087, 2.1654615, -7.4854674)
+
+[node name="candy1" parent="." instance=ExtResource("18_jcv4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="candy4" parent="." instance=ExtResource("22_031bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+
+[node name="candy5" parent="." instance=ExtResource("23_68i3l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, -1)
+
+[node name="candy6" parent="." instance=ExtResource("23_68i3l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 7, -8)
+
+[node name="candy7" parent="." instance=ExtResource("22_031bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 7, -8)

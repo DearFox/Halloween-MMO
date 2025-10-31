@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bupxwh3s3cab"]
+[gd_scene load_steps=5 format=3 uid="uid://bupxwh3s3cab"]
 
 [ext_resource type="Script" uid="uid://5m0pxchhqixu" path="res://GDScripts/candy.gd" id="1_qa6qv"]
-[ext_resource type="PackedScene" uid="uid://bhicalgueksua" path="res://Assets/prefabs/pumpkincandy_3x.tscn" id="2_yy2ey"]
+[ext_resource type="Material" uid="uid://cc3ysonauoq4v" path="res://Assets/material/pumpkincandy.tres" id="2_egqcn"]
+[ext_resource type="ArrayMesh" uid="uid://coedo7r4511qu" path="res://Assets/models/pumpkincandy3x.obj" id="2_yy2ey"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jcv4p"]
 radius = 0.9
@@ -13,8 +14,10 @@ script = ExtResource("1_qa6qv")
 candy_count = 3
 respawn_time_sec = 120.0
 
-[node name="Pumpkincandy3x" parent="." instance=ExtResource("2_yy2ey")]
-transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.28865576, -0.064547, 0.07784796)
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_jcv4p")
+
+[node name="Pumpkincandy3x" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.22133195, 0, 0.04660648)
+material_override = ExtResource("2_egqcn")
+mesh = ExtResource("2_yy2ey")

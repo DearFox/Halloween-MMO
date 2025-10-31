@@ -10,6 +10,8 @@ extends Area3D
 @export var bobbing_amplitude: float = 0.25
 @export var bobbing_speed: float = 1.0
 
+var _base_height: float
+
 
 func respawn_candy() -> void:
 	is_active = true
@@ -25,6 +27,7 @@ func despawn_candy() -> void:
 func _ready() -> void:
 	connect("body_entered", Callable(self, "_on_body_entered"))
 	visible = is_active
+	_base_height = global_position.y
 
 # Вращение и покачивание не синхронизированы, так как не влияют на геймплей
 func _physics_process(delta: float) -> void:
@@ -33,7 +36,7 @@ func _physics_process(delta: float) -> void:
 	if is_bobbing:
 		var bobbing_offset: float = bobbing_amplitude * sin(GGS.CURRENT_TIME / 1000.0 * bobbing_speed * TAU)
 		var new_position: Vector3 = global_position
-		new_position.y = bobbing_offset
+		new_position.y = _base_height + bobbing_offset
 		global_position = new_position
 
 func _on_body_entered(body):
