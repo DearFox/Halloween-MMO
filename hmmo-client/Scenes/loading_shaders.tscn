@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8e6elu68hxid"]
+[gd_scene load_steps=26 format=3 uid="uid://b8e6elu68hxid"]
 
 [ext_resource type="Material" uid="uid://j548dmdytskk" path="res://Assets/material/temp_mat_1.tres" id="1_rw2nf"]
 [ext_resource type="Script" uid="uid://083opw76lbl8" path="res://GDScripts/loading_shaders.gd" id="1_s3yfx"]
@@ -6,12 +6,22 @@
 [ext_resource type="Material" uid="uid://drb2pwihyd8jv" path="res://Assets/material/temp_mat_2.tres" id="3_m8uh6"]
 [ext_resource type="Material" uid="uid://dy2ouw5acbuyl" path="res://Assets/material/stone.tres" id="4_mmpbq"]
 [ext_resource type="Material" uid="uid://tce315mbaqvn" path="res://Assets/material/down_position.tres" id="4_ovbxl"]
+[ext_resource type="Material" uid="uid://c8ieyc5nes4vr" path="res://Assets/material/PAN_candy.tres" id="4_y3riv"]
+[ext_resource type="Material" uid="uid://cc3ysonauoq4v" path="res://Assets/material/pumpkincandy.tres" id="5_8f323"]
 [ext_resource type="Material" uid="uid://ciqanf7voevl6" path="res://Assets/material/grass.tres" id="5_ovbxl"]
 [ext_resource type="Material" uid="uid://o8wjy323p672" path="res://Assets/material/waterfall_anim.tres" id="6_km10s"]
+[ext_resource type="Material" uid="uid://cuokrophqf6m8" path="res://Assets/material/BI_candy.tres" id="6_uo4f8"]
 [ext_resource type="Material" uid="uid://dmosj4gp1tihr" path="res://Assets/material/sunshine.tres" id="7_y3riv"]
 [ext_resource type="Material" uid="uid://bcyh5de5f6feo" path="res://Assets/material/texture_palitres.tres" id="8_8f323"]
 [ext_resource type="Material" uid="uid://dfsl28crppeab" path="res://Assets/material/darck.tres" id="9_m8uh6"]
 [ext_resource type="Material" uid="uid://bep5vrrlnhmx2" path="res://Assets/material/player_mat.tres" id="9_uo4f8"]
+[ext_resource type="PackedScene" uid="uid://ckfa7lcvumb52" path="res://Scenes/leader_board.tscn" id="16_8f323"]
+[ext_resource type="PackedScene" uid="uid://bupxwh3s3cab" path="res://Assets/prefabs/candy_1.tscn" id="17_h4vy8"]
+[ext_resource type="PackedScene" uid="uid://osm5fgo6ec2b" path="res://Assets/prefabs/candy_2.tscn" id="18_6dcd3"]
+[ext_resource type="PackedScene" uid="uid://cgsvcdkckdgpu" path="res://Assets/prefabs/candy_2x1.tscn" id="19_xd5df"]
+[ext_resource type="PackedScene" uid="uid://bfuqbe5fbog35" path="res://Assets/prefabs/Pumpkin.tscn" id="20_kg2fg"]
+[ext_resource type="PackedScene" uid="uid://chl3a036ydiy1" path="res://Assets/prefabs/Pumpkin_light.tscn" id="21_7e6ng"]
+[ext_resource type="PackedScene" uid="uid://bx6mh138molva" path="res://Scenes/player.tscn" id="22_6dcd3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pyrs5"]
 material = ExtResource("2_s3yfx")
@@ -22,12 +32,31 @@ ambient_light_source = 2
 ambient_light_color = Color(0.25, 0.25, 0.25, 1)
 ambient_light_energy = 16.0
 
+[sub_resource type="PrismMesh" id="PrismMesh_6dcd3"]
+material = ExtResource("4_ovbxl")
+size = Vector3(0.3, 0.3, 0.1)
+
 [node name="LoadingShaders" type="Node3D"]
 script = ExtResource("1_s3yfx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.92444396, 0.26366624, 0.2754696, -0.27427813, 0.96165043, 0, -0.26490545, -0.07555529, 0.9613098, -0.5, 0.5, -0.5)
 material_override = ExtResource("1_rw2nf")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.92444396, 0.26366624, 0.2754696, -0.27427813, 0.96165043, 0, -0.26490545, -0.07555529, 0.9613098, -0.95634174, 0.5, 0.19459438)
+material_override = ExtResource("4_y3riv")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.92444396, 0.26366624, 0.2754696, -0.27427813, 0.96165043, 0, -0.26490545, -0.07555529, 0.9613098, -0.27570653, -0.67860126, 0.19459438)
+material_override = ExtResource("5_8f323")
+mesh = SubResource("BoxMesh_pyrs5")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.92444396, 0.26366624, 0.2754696, -0.27427813, 0.96165043, 0, -0.26490545, -0.07555529, 0.9613098, -0.15851021, 1.0620823, -0.5)
+material_override = ExtResource("6_uo4f8")
 mesh = SubResource("BoxMesh_pyrs5")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
@@ -61,7 +90,7 @@ material_override = ExtResource("7_y3riv")
 mesh = SubResource("BoxMesh_pyrs5")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.81344604, -1.3862491e-08, -0.58164036, 0.21335132, 0.930296, 0.29837993, 0.54109764, -0.3668097, 0.7567455, -0.84897184, -0.5, -0.09923482)
+transform = Transform3D(0.81344604, -1.3862491e-08, -0.58164036, 0.21335132, 0.930296, 0.29837993, 0.54109764, -0.3668097, 0.7567455, -0.84897184, -0.5, -0.09174943)
 material_override = ExtResource("9_m8uh6")
 mesh = SubResource("BoxMesh_pyrs5")
 
@@ -88,7 +117,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 0.5
 one_shot = true
 autostart = true
 
@@ -100,5 +129,29 @@ environment = SubResource("Environment_s3yfx")
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.7326174, 1.9348136, -6.1246824)
 fov = 65.42634
+
+[node name="LeaderBoard" parent="." instance=ExtResource("16_8f323")]
+
+[node name="candy1" parent="." instance=ExtResource("17_h4vy8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6026984, 0)
+
+[node name="candy2" parent="." instance=ExtResource("18_6dcd3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2082753, 1.2136327, 0)
+
+[node name="candy3" parent="." instance=ExtResource("19_xd5df")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8871738, 0.95878685, 0)
+
+[node name="candy4" parent="." instance=ExtResource("20_kg2fg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3905072, -0.22761428, 2.3841858e-07)
+
+[node name="candy5" parent="." instance=ExtResource("21_7e6ng")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4613206, -0.2889502, 0)
+
+[node name="Player" parent="." instance=ExtResource("22_6dcd3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9123696, -0.09343672, 0.44964242)
+
+[node name="DownPosition" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 0, 2.3303323, 0)
+mesh = SubResource("PrismMesh_6dcd3")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

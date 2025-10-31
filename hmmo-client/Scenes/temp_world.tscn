@@ -149,8 +149,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.66753, 7.5310173, 1.185647
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.2191, 18.307247, 9.65936)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.593544, 0.55352455, -0.18881845)
-constant_linear_velocity = Vector3(0.620869, 0.016506411, 0.08391698)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.887701, 0.003149642, -2.9871607)
+constant_linear_velocity = Vector3(-0.47402295, -0.012600194, -0.06407056)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target")
@@ -167,8 +167,8 @@ mesh = SubResource("ArrayMesh_l7wbr")
 skeleton = NodePath("")
 
 [node name="AnimatableBody3D2" type="AnimatableBody3D" parent="." node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.348755, 15.807571, 7.69378)
-constant_linear_velocity = Vector3(-2.5210788, -0.63846874, -0.50207055)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.424263, 7.9759116, 1.535483)
+constant_linear_velocity = Vector3(1.1863707, 0.30045217, 0.23625432)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target2")
@@ -243,6 +243,7 @@ BuySuitItn = 3
 [node name="Shop_2" parent="." instance=ExtResource("16_wm045")]
 transform = Transform3D(0.49960104, 0, -0.01997, 0, 0.5, 0, 0.01997, 0, 0.49960104, 52.33111, 7.307722, -12.09858)
 BuySuitItn = 2
+SuitPrice = 200
 
 [node name="Marble_Column_3" parent="." instance=ExtResource("14_50b37")]
 transform = Transform3D(0.33425778, 0, -0.21970832, 0, 0.4, 0, 0.21970832, 0, 0.33425778, 51.543064, 6.279526, -11.151271)
@@ -253,6 +254,7 @@ transform = Transform3D(0.33425778, 0, -0.21970832, 0, 0.4, 0, 0.21970832, 0, 0.
 [node name="Shop_3" parent="." instance=ExtResource("16_wm045")]
 transform = Transform3D(0.4925577, 0, 0.08594735, 0, 0.5, 0, -0.08594735, 0, 0.4925577, 107.62258, 14.529055, -9.149055)
 BuySuitItn = 1
+SuitPrice = 500
 
 [node name="Marble_Column_5" parent="." instance=ExtResource("14_50b37")]
 transform = Transform3D(1.8847697, 0.66906136, 8.145673e-09, -0.66386294, 1.8701254, 0.24883085, 0.083241545, -0.23449442, 1.9844605, 59.03453, -9.536743e-07, -9.991716)
@@ -278,15 +280,112 @@ transform = Transform3D(1, 0, 0, 0, 0.9997245, 0.023472523, 0, -0.023472523, 0.9
 
 [node name="candy1" parent="." instance=ExtResource("18_jcv4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+respawn_time_sec = 60.0
 
 [node name="candy4" parent="." instance=ExtResource("22_031bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+respawn_time_sec = 30.0
 
 [node name="candy5" parent="." instance=ExtResource("23_68i3l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, -1)
+respawn_time_sec = 60.0
 
 [node name="candy6" parent="." instance=ExtResource("23_68i3l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 7, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5415454, 7, -4.8518896)
+respawn_time_sec = 60.0
 
 [node name="candy7" parent="." instance=ExtResource("22_031bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 7, -8)
+respawn_time_sec = 30.0
+
+[node name="candy8" parent="." instance=ExtResource("22_031bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.959131, 1.3960181, -1.5411243)
+respawn_time_sec = 30.0
+
+[node name="candy9" parent="." instance=ExtResource("23_68i3l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.393299, -2.8456397, -7.1787686)
+respawn_time_sec = 60.0
+
+[node name="candy10" parent="." instance=ExtResource("22_031bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.602603, -2.654262, -6.3365664)
+respawn_time_sec = 30.0
+
+[node name="candy11" parent="." instance=ExtResource("21_u2y3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.63713, 21.64583, -12.14491)
+
+[node name="candy12" parent="." instance=ExtResource("20_i4k2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.14463, 6.938711, 2.4874098)
+
+[node name="candy13" parent="." instance=ExtResource("23_68i3l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.880245, 9.825717, -5.2979617)
+respawn_time_sec = 60.0
+
+[node name="candy14" parent="." instance=ExtResource("22_031bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.800743, 4.6870975, -1.4506537)
+respawn_time_sec = 30.0
+
+[node name="candy15" parent="." instance=ExtResource("18_jcv4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.935062, 4.505384, -0.09730649)
+respawn_time_sec = 60.0
+
+[node name="candy16" parent="." instance=ExtResource("21_u2y3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78.91552, 14.268547, 8.101986)
+respawn_time_sec = 60.0
+
+[node name="candy17" parent="." instance=ExtResource("23_68i3l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91.34534, 25.12729, -1.5695885)
+respawn_time_sec = 60.0
+
+[node name="candy18" parent="." instance=ExtResource("20_i4k2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114.626884, 23.77104, 2.011848)
+
+[node name="candy19" parent="." instance=ExtResource("21_u2y3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 109.11384, 16.122671, -7.094927)
+
+[node name="candy20" parent="." instance=ExtResource("20_i4k2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101.73386, 21.334675, 11.628135)
+
+[node name="candy21" parent="." instance=ExtResource("22_031bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 89.966576, 19.202606, 5.6631393)
+respawn_time_sec = 30.0
+
+[node name="candy22" parent="." instance=ExtResource("22_031bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92.12286, 19.487164, 6.4966397)
+respawn_time_sec = 30.0
+
+[node name="candy23" parent="." instance=ExtResource("22_031bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.27381, 19.487164, 7.678323)
+respawn_time_sec = 40.0
+
+[node name="candy24" parent="." instance=ExtResource("21_u2y3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.33392, 13.787041, -10.828434)
+
+[node name="candy25" parent="." instance=ExtResource("18_jcv4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.827602, 2.8191214, 2.2191124)
+respawn_time_sec = 60.0
+
+[node name="candy26" parent="." instance=ExtResource("22_031bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.715843, 3.6674407, 5.463907)
+respawn_time_sec = 30.0
+
+[node name="candy27" parent="." instance=ExtResource("21_u2y3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.860888, -4.3295984, -8.095532)
+
+[node name="candy28" parent="." instance=ExtResource("18_jcv4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.122253, 4.319121, 5.912549)
+respawn_time_sec = 60.0
+
+[node name="candy29" parent="." instance=ExtResource("23_68i3l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.718857, 8.803221, -2.6343222)
+respawn_time_sec = 60.0
+
+[node name="candy30" parent="." instance=ExtResource("22_031bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.927975, 7.098007, -1.3583043)
+respawn_time_sec = 30.0
+
+[node name="candy31" parent="." instance=ExtResource("21_u2y3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101.91748, 29.607765, 0.84859693)
+
+[node name="candy32" parent="." instance=ExtResource("22_031bj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93.98592, 25.349876, 2.503167)
+respawn_time_sec = 20.0
