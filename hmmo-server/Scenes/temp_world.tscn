@@ -1,3 +1,12 @@
-[gd_scene format=3 uid="uid://bauf4vug7xfn8"]
+[gd_scene load_steps=2 format=3 uid="uid://bauf4vug7xfn8"]
+
+[ext_resource type="Script" uid="uid://bv2knj2npwoy4" path="res://GDScripts/backup_db_save_candy_leaderboard.gd" id="1_wnvw0"]
 
 [node name="TEMP_World" type="Node2D"]
+
+[node name="backup_db_save_candy_leaderboard" type="Timer" parent="."]
+wait_time = 1800.0
+autostart = true
+script = ExtResource("1_wnvw0")
+
+[connection signal="timeout" from="backup_db_save_candy_leaderboard" to="backup_db_save_candy_leaderboard" method="_on_timeout"]

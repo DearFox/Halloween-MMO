@@ -43,8 +43,8 @@ func _on_body_entered(body):
 	if is_active and body is CharacterBody3D and body.is_multiplayer_authority():
 		print("Candy collected by: ", body)
 		pdb.PlayerCandy += candy_count
-		GGS.chat_message_on_client("You collected " + str(candy_count) + " candy!")
-		GGS.chat_message_on_client("Собрано " + str(candy_count) + " конфет!")
+		GGS.chat_message_on_client("[color=gray][font_size=14]You collected " + str(candy_count) + " candy![/font_size][/color]")
+		GGS.chat_message_on_client("[color=gray][font_size=14]Собрано " + str(candy_count) + " конфет![/font_size][/color]")
 		print("candy sync: ", pdb.PlayerCandy)
 		GGS.sent_candy_count.rpc_id(1,candy_count)
 

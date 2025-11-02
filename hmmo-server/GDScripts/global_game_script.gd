@@ -9,6 +9,7 @@ const TEMP_WORLD = preload("uid://bauf4vug7xfn8")
 func _ready() -> void:
 	create_server()
 	await _broadcast_time_sync()
+	print("TESTED!!!")
 
 # создать peer как сервер
 func create_server(port: int = 1337) -> void:
@@ -22,7 +23,7 @@ func create_server(port: int = 1337) -> void:
 		return
 	multiplayer.multiplayer_peer = ws_peer
 	get_tree().root.add_child.call_deferred(TEMP_WORLD.instantiate())
-	print("Server created and set as multiplayer_peer on port ", port)
+	print("Start Server created and set as multiplayer_peer on port ", port)
 
 # функция при подключении пира
 func _on_peer_connected(id: int) -> void:
@@ -68,14 +69,16 @@ func time_sinc(current_time:int) -> void:pass
 @rpc("any_peer", "reliable")
 func sent_candy_count(candy_count:int) -> void:
 	var sender_id:int = multiplayer.get_remote_sender_id()
-	print("Received candy count from player ", sender_id, ": ", candy_count)
+	#print("Received candy count from player ", sender_id, ": ", candy_count)
+	if candy_count > 15:
+		print(sender_id, " судя по всему читер")
 	if sender_id in sdb.players:
 		var PlayerName:String = sdb.players[sender_id]["name"]
 		if sdb.candy_leaderboard.get(PlayerName):
 			sdb.candy_leaderboard[PlayerName] += candy_count
 		else : sdb.candy_leaderboard[PlayerName] = candy_count
 		#sdb.players[sender_id]["candy"] = candy_count
-		print("Player ", sender_id, " sent ", candy_count, " candies.")
+		#print("Player ", sender_id, " sent ", candy_count, " candies.")
 
 @rpc("any_peer", "reliable")
 func request_leaderboard() -> void:
@@ -88,7 +91,7 @@ func _build_leaderboard() -> Array:
 		return []
 	var leaderboard:Array = []
 	for players in sdb.candy_leaderboard.keys():
-		leaderboard.append([players,sdb.candy_leaderboard[players]])
+		leaderboard.append([players,int(sdb.candy_leaderboard[players])])
 	leaderboard.sort_custom(func(a, b): return a[1] > b[1])
 	return leaderboard.slice(0, min(5, leaderboard.size()))
 
@@ -132,7 +135,7 @@ func send_my_chat_message_on_server(ChatMsg: String) -> void:
 	var sender_id:int = multiplayer.get_remote_sender_id()
 	var author:String = sdb.players[sender_id]["name"]
 	var format_message:String = "<"+author+"> : [color=gray]"+ChatMsg+"[/color]"
-	print(ws_peer.get_peer_address(sender_id) , format_message)
+	print(sender_id , format_message)
 	for ids in sdb.players.keys():
 		chat_message_on_client.rpc_id(ids,format_message)
 	
