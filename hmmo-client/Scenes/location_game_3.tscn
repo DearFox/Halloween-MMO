@@ -92,7 +92,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 mesh = SubResource("ArrayMesh_6fksh")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Plane_008"]
+[node name="grass" type="StaticBody3D" parent="Plane_008"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane_008/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane_008/grass"]
 shape = SubResource("ConcavePolygonShape3D_72gu6")

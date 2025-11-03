@@ -36,3 +36,10 @@ func _tested():
 @warning_ignore("unused_parameter")
 func _on_player_name_text_submitted(new_text: String) -> void:
 	_on_join_pressed()
+
+
+
+func _on_sfx_volume_slider_drag_ended(value_changed: bool) -> void:
+	if value_changed:
+		$SFXDemo.play()
+	pass # Replace with function body.

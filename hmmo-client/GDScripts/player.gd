@@ -33,6 +33,7 @@ var target_rot: Vector3 = Vector3.ZERO
 var prev_velocity_sync: Vector3 = Vector3.ZERO
 var target_velocity_sync: Vector3 = Vector3.ZERO
 
+var material_steps:int = 0
 
 func _enter_tree() -> void:
 	name = str(get_multiplayer_authority())
@@ -57,9 +58,23 @@ func _physics_process(delta: float) -> void:
 		$blockbench_export.get_node("AnimationPlayer").play("run")
 	else:
 		$blockbench_export.get_node("AnimationPlayer").play("idel")
-	
+	if GGS.srv_ok() and !is_multiplayer_authority():
+		var RayCasted:RayCast3D = $RayCastServerPlayerOnFloor
+		if RayCasted.is_colliding():
+			if RayCasted.get_collider().name == "grass":
+				material_steps = 1
+			else : material_steps = 0
+			if prev_velocity_sync:
+				$StepsSounds.PlayStep(material_steps)
 	if GGS.srv_ok() and is_multiplayer_authority():
-		
+		var RayCasted:RayCast3D = $RayCast3D
+		if RayCasted.is_colliding():
+			if RayCasted.get_collider().name == "grass":
+				material_steps = 1
+			else : material_steps = 0
+		# Steps Sounds
+		if is_on_floor() and velocity:
+			$StepsSounds.PlayStep(material_steps)
 		if global_position.y <= -10:
 			global_position = Vector3(0,2,0)
 			#if PhantomCamera3D != null:
@@ -74,7 +89,7 @@ func _physics_process(delta: float) -> void:
 			$CanvasLayer/ColorRect.color = Color(normal_time, 1.0-normal_time, 0.0, 1.0)
 		# Add the gravity.
 		if not is_on_floor():
-			var temp_collision_pose_ray: Vector3 = $RayCast3D.get_collision_point()
+			var temp_collision_pose_ray: Vector3 = RayCasted.get_collision_point()
 			down_position_animation(delta)
 			$DownPosition.visible = true
 			$DownPosition.global_position = temp_collision_pose_ray

@@ -165,9 +165,9 @@ shape = SubResource("ConcavePolygonShape3D_gljqf")
 mesh = SubResource("ArrayMesh_55lfo")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Plane_005"]
+[node name="grass" type="StaticBody3D" parent="Plane_005"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane_005/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane_005/grass"]
 shape = SubResource("ConcavePolygonShape3D_582st")
 
 [node name="Plane_006" type="MeshInstance3D" parent="."]

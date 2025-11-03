@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bx6mh138molva"]
+[gd_scene load_steps=11 format=3 uid="uid://bx6mh138molva"]
 
 [ext_resource type="Script" uid="uid://5kcyj07k30q2" path="res://GDScripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://b77jd441b3510" path="res://Assets/player_anim_test.png" id="2_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://ck6monqwsq076" path="res://Assets/models/player_model.gltf" id="3_6t5aa"]
 [ext_resource type="Material" uid="uid://tce315mbaqvn" path="res://Assets/material/down_position.tres" id="4_vgqql"]
+[ext_resource type="PackedScene" uid="uid://bmmy5ed73ll18" path="res://Scenes/steps_sounds.tscn" id="5_fkybt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 radius = 0.3
@@ -137,14 +138,22 @@ visible = false
 visible = false
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 target_position = Vector3(0, -100, 0)
 debug_shape_custom_color = Color(0, 1, 0.116666794, 1)
-debug_shape_thickness = 5
 
 [node name="DownPosition" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 mesh = SubResource("PrismMesh_fkybt")
+
+[node name="StepsSounds" parent="." instance=ExtResource("5_fkybt")]
+
+[node name="RayCastServerPlayerOnFloor" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+target_position = Vector3(0, -0.3, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5
 
 [connection signal="timeout" from="PositionSync" to="." method="_on_position_sync_timeout"]
 
