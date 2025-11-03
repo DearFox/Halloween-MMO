@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bx6mh138molva"]
+[gd_scene load_steps=12 format=3 uid="uid://bx6mh138molva"]
 
 [ext_resource type="Script" uid="uid://5kcyj07k30q2" path="res://GDScripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://b77jd441b3510" path="res://Assets/player_anim_test.png" id="2_cvnsp"]
 [ext_resource type="PackedScene" uid="uid://ck6monqwsq076" path="res://Assets/models/player_model.gltf" id="3_6t5aa"]
 [ext_resource type="Material" uid="uid://tce315mbaqvn" path="res://Assets/material/down_position.tres" id="4_vgqql"]
 [ext_resource type="PackedScene" uid="uid://bmmy5ed73ll18" path="res://Scenes/steps_sounds.tscn" id="5_fkybt"]
+[ext_resource type="AudioStream" uid="uid://c8f2bgn5uwmhp" path="res://Assets/sounds/pop.ogg" id="6_x3wgy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 radius = 0.3
@@ -154,6 +155,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 target_position = Vector3(0, -0.3, 0)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 5
+
+[node name="pop" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_x3wgy")
+unit_size = 5.0
+bus = &"SFX"
 
 [connection signal="timeout" from="PositionSync" to="." method="_on_position_sync_timeout"]
 

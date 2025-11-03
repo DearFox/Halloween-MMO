@@ -106,6 +106,8 @@ func add_player_on_clients(new_peer_id:int, player_name:String) -> void:
 
 @rpc("reliable")
 func remove_player_on_clients(peer_id:int) -> void:
+	var remove_node:Node = get_node("/root/TEMP_World/"+str(peer_id))
+	GGS.chat_message_on_client(remove_node.player_name + " Leave server")
 	get_node("/root/TEMP_World/"+str(peer_id)).queue_free()
 
 @rpc("call_remote", "reliable")

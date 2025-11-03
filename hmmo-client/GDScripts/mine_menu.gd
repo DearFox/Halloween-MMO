@@ -41,5 +41,6 @@ func _on_player_name_text_submitted(new_text: String) -> void:
 
 func _on_sfx_volume_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
+		$SFXDemo.pitch_scale = randf_range(0.8,2.0)
 		$SFXDemo.play()
 	pass # Replace with function body.

@@ -4,6 +4,7 @@ extends CharacterBody3D
 const SPEED: float = 5.0
 const JUMP_VELOCITY: float = 6.5
 
+const SUIT_GHOST: float = 5.0
 const SUIT_JUMP: int = 15
 const SUIT_SPEED: int = 15
 
@@ -67,6 +68,7 @@ func _physics_process(delta: float) -> void:
 			if prev_velocity_sync:
 				$StepsSounds.PlayStep(material_steps)
 	if GGS.srv_ok() and is_multiplayer_authority():
+		var temp_jump: float = JUMP_VELOCITY
 		var RayCasted:RayCast3D = $RayCast3D
 		if RayCasted.is_colliding():
 			if RayCasted.get_collider().name == "grass":
@@ -93,69 +95,77 @@ func _physics_process(delta: float) -> void:
 			down_position_animation(delta)
 			$DownPosition.visible = true
 			$DownPosition.global_position = temp_collision_pose_ray
-			velocity += get_gravity() * delta
-		else : $DownPosition.visible = false
+			var temp_gravity:Vector3 = get_gravity()
+			if suit == 3:
+				temp_gravity -= Vector3(0,-SUIT_GHOST,0)
+			velocity += temp_gravity * delta
+		else : 
+			$DownPosition.visible = false
+			if suit == 3:
+				temp_jump = SUIT_GHOST
 				# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var input_dir := Input.get_vector("left", "right", "up", "down")
 		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		var temp_jump: float = JUMP_VELOCITY
 		# print(is_on_floor())
-		if Input.is_action_pressed("suit_ability") and !pdb.me_chatting:
-			if shopping > -1 and $SuitTimer.is_stopped() and shopping_cost <= pdb.PlayerCandy:
-				$SuitTimer.start()
-				if !suit_unlock[shopping]:
-					GGS.chat_message_on_client("[color=purple][font_size=24]You've bought a new suit!\nPress [color=orange][u]"+ str(shopping) +"[/u][/color] to put it on.[/font_size][/color]")
-					GGS.chat_message_on_client("[color=purple][font_size=14]Вы купили новый костюм!\nНажмите [color=orange][u]"+ str(shopping) +"[/u][/color] что-бы надеть.[/font_size][/color]")
-					suit_unlock[shopping] = true
-					pdb.PlayerCandy -= shopping_cost
-				
-				else :
-					GGS.chat_message_on_client("[color=red]You already have this suit![/color]")
-					GGS.chat_message_on_client("[color=red][font_size=14]У вас уже есть этот костюм![/font_size][/color]")
-				return
-			else: if $SuitTimer.is_stopped() and shopping_cost > pdb.PlayerCandy and shopping > -1 and !suit_unlock[shopping]:
-				$SuitTimer.start()
-				GGS.chat_message_on_client("[color=red]Not enough candy to buy this suit![/color]")
-				GGS.chat_message_on_client("[color=red][font_size=14]Недостаточно конфет что-бы купить этот костюм![/font_size][/color]")
-				return
-			#print("Спец сила костюма!")
-			match suit:
-				1: 
-					if Input.is_action_pressed("jump") and is_on_floor() and $SuitTimer.is_stopped():
-						temp_jump = SUIT_JUMP
-						$SuitTimer.start()
-				2:
-					if velocity and $SuitTimer.is_stopped():
-						$SuitTimer.start()
+		if !pdb.me_chatting:
+			if Input.is_action_just_pressed("spawn"):
+				global_position = Vector3(0,2,0)
+			if Input.is_action_pressed("suit_ability") and !pdb.me_chatting:
+				if shopping > -1 and $SuitTimer.is_stopped() and shopping_cost <= pdb.PlayerCandy:
+					$SuitTimer.start()
+					if !suit_unlock[shopping]:
+						GGS.chat_message_on_client("[color=purple][font_size=24]You've bought a new suit!\nPress [color=orange][u]"+ str(shopping) +"[/u][/color] to put it on.[/font_size][/color]")
+						GGS.chat_message_on_client("[color=purple][font_size=14]Вы купили новый костюм!\nНажмите [color=orange][u]"+ str(shopping) +"[/u][/color] что-бы надеть.[/font_size][/color]")
+						suit_unlock[shopping] = true
+						pdb.PlayerCandy -= shopping_cost
+					
+					else :
+						GGS.chat_message_on_client("[color=red]You already have this suit![/color]")
+						GGS.chat_message_on_client("[color=red][font_size=14]У вас уже есть этот костюм![/font_size][/color]")
+					return
+				else: if $SuitTimer.is_stopped() and shopping_cost > pdb.PlayerCandy and shopping > -1 and !suit_unlock[shopping]:
+					$SuitTimer.start()
+					GGS.chat_message_on_client("[color=red]Not enough candy to buy this suit![/color]")
+					GGS.chat_message_on_client("[color=red][font_size=14]Недостаточно конфет что-бы купить этот костюм![/font_size][/color]")
+					return
+				#print("Спец сила костюма!")
+				match suit:
+					1: 
+						if Input.is_action_pressed("jump") and is_on_floor() and $SuitTimer.is_stopped():
+							temp_jump = SUIT_JUMP
+							$SuitTimer.start()
+					2:
+						if velocity and $SuitTimer.is_stopped():
+							$SuitTimer.start()
 
-						velocity.x = direction.x * SUIT_SPEED
-						velocity.z = direction.z * SUIT_SPEED
-						move_and_slide()
-				3:
-					if $SuitTimer.is_stopped():
-						#print(collision_mask)
-						if collision_mask == 5:
-							collision_mask = 1
-							$PlayerVisual_TEMP.modulate.a = 0.5
-							$SuitTimer.start()
-							return
-						if collision_mask == 1:
-							collision_mask = 5
-							$PlayerVisual_TEMP.modulate.a = 1
-							$SuitTimer.start()
-							return
-		if Input.is_action_just_pressed("suit_1") and suit_unlock[1]:
-			_update_suit(1)
-		if Input.is_action_just_pressed("suit_2") and suit_unlock[2]:
-			_update_suit(2)
-		if Input.is_action_just_pressed("suit_3") and suit_unlock[3]:
-			_update_suit(3)
-		if Input.is_action_just_pressed("no_suit") and suit_unlock[0]:
-			_update_suit(0)
-		# Handle jump.
-		if Input.is_action_pressed("jump") and is_on_floor() and !pdb.me_chatting:
-			velocity.y = temp_jump
+							velocity.x = direction.x * SUIT_SPEED
+							velocity.z = direction.z * SUIT_SPEED
+							move_and_slide()
+					#3:
+					#	if $SuitTimer.is_stopped():
+					#		#print(collision_mask)
+					#		if collision_mask == 5:
+					#			collision_mask = 1
+					#			$PlayerVisual_TEMP.modulate.a = 0.5
+					#			$SuitTimer.start()
+					#			return
+					#		if collision_mask == 1:
+					#			collision_mask = 5
+					#			$PlayerVisual_TEMP.modulate.a = 1
+					#			$SuitTimer.start()
+					#			return
+			if Input.is_action_just_pressed("suit_1") and suit_unlock[1]:
+				_update_suit(1)
+			if Input.is_action_just_pressed("suit_2") and suit_unlock[2]:
+				_update_suit(2)
+			if Input.is_action_just_pressed("suit_3") and suit_unlock[3]:
+				_update_suit(3)
+			if Input.is_action_just_pressed("no_suit") and suit_unlock[0]:
+				_update_suit(0)
+			# Handle jump.
+			if Input.is_action_pressed("jump") and is_on_floor() and !pdb.me_chatting:
+				velocity.y = temp_jump
 
 			
 		if direction and !pdb.me_chatting:
@@ -237,13 +247,17 @@ func _update_suit(new_suit: int) -> void:
 		get_node(suit_nodes[i]).visible = suit_visible[suit][i]
 	match suit:
 		1:
-			$CanvasLayer/ColorRect/Label.text = "высокий прыжок"
+			$CanvasLayer/ColorRect/Label.text = "Super Jump"
 		2:
-			$CanvasLayer/ColorRect/Label.text = "рывок"
+			$CanvasLayer/ColorRect/Label.text = "Dash"
 		3:
-			$CanvasLayer/ColorRect/Label.text = "прохождение через особые стены"
+			$CanvasLayer/ColorRect/Label.text = ""
 		_:
 			$CanvasLayer/ColorRect/Label.text = ""
 
 func down_position_animation(delta:float) -> void:
 	$DownPosition.rotate_y(deg_to_rad(250) * delta)
+
+func pop()->void:
+	$pop.pitch_scale = randf_range(0.8,2.0)
+	$pop.play()
