@@ -3,11 +3,15 @@ extends Control
 var min_pose:Vector2 = Vector2(0.20,0.10) #Представлены в виде процентов записанные в виде float
 var max_pose:Vector2 = Vector2(0.90,0.90) #Представлены в виде процентов записанные в виде float
 
+
+
 func _ready() -> void:
 	$ChatControl/RichTextLabel.scroll_following_visible_characters = false # Нужно что-бы исправить странный визуальный баг
 
 func add_message(ChatMsg: String) -> void:
 	$ChatControl/RichTextLabel.append_text("\n"+ChatMsg)
+
+func update_candy() -> void:
 	%CandyCounter.text = str(pdb.PlayerCandy)
 
 func _on_color_rect_gui_input(event: InputEvent) -> void:
@@ -54,3 +58,9 @@ func _on_message_focus_entered() -> void:
 
 func _on_message_focus_exited() -> void:
 	pdb.me_chatting = false
+
+
+func _on_save_game_timeout() -> void:
+	if pdb.save_player_db():
+		$AnimationPlayer.play("progress_is_saved_info")
+	else : $AnimationPlayer.play("error")

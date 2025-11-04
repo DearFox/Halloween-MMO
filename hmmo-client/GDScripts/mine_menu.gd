@@ -4,6 +4,9 @@ extends Control
 
 var ws_peer:WebSocketMultiplayerPeer
 
+func _ready() -> void:
+	$VBoxMenu/HBoxPlayerName/PlayerName.text = pdb.PlayerName
+
 func _on_join_pressed() -> void: 
 	#print($VBoxMenu/HBoxServer/OptionButton.get_item_text($VBoxMenu/HBoxServer/OptionButton.selected))
 	if $VBoxMenu/HBoxPlayerName/PlayerName.text: #TODO Не позволять игрокам использовать "пустые" ники лучше.

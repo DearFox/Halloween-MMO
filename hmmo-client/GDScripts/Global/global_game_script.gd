@@ -65,6 +65,7 @@ func srv_ok() -> bool:
 	return false
 
 func add_player_character(peer_id:int, player_name:String) -> void:
+	GGS.chat_message_on_client(player_name+" Join server")
 	if peer_id == multiplayer.get_unique_id():
 		# Если создаётся клиентский игрок
 		print("Подключение этого клиента: ", peer_id)
@@ -103,6 +104,8 @@ func add_newly_connected_player_character(new_peer_id: int) -> void:pass # Ле�
 @rpc("reliable")
 func add_player_on_clients(new_peer_id:int, player_name:String) -> void:
 	add_player_character(new_peer_id, player_name)
+	#send_my_chat_message_on_server.rpc_id(1,"Hello " + player_name + " !\nI'm a bot, and I welcome you to the game!\nPlease behave yourself, and have a nice game!")
+	#send_my_chat_message_on_server.rpc_id(1,"Привет " + player_name + " !\nЯ бот, и я приветствую тебя в игре!\nПожалуйста ведите себя хорошо, и приятной вам игры!")
 
 @rpc("reliable")
 func remove_player_on_clients(peer_id:int) -> void:

@@ -44,6 +44,7 @@ func _on_body_entered(body):
 		body.pop()
 		print("Candy collected by: ", body)
 		pdb.PlayerCandy += candy_count
+		pdb.update_candy()
 		#GGS.chat_message_on_client("[color=gray][font_size=14]You collected " + str(candy_count) + " candy![/font_size][/color]")
 		#GGS.chat_message_on_client("[color=gray][font_size=14]Собрано " + str(candy_count) + " конфет![/font_size][/color]")
 		print("candy sync: ", pdb.PlayerCandy)
