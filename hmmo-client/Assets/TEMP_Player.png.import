@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bnpct1j6645wt"
 path.s3tc="res://.godot/imported/TEMP_Player.png-93c0155a70dd77e8bb2ef64f7dcf1d1e.s3tc.ctex"
+path.etc2="res://.godot/imported/TEMP_Player.png-93c0155a70dd77e8bb2ef64f7dcf1d1e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/TEMP_Player.png"
-dest_files=["res://.godot/imported/TEMP_Player.png-93c0155a70dd77e8bb2ef64f7dcf1d1e.s3tc.ctex"]
+dest_files=["res://.godot/imported/TEMP_Player.png-93c0155a70dd77e8bb2ef64f7dcf1d1e.s3tc.ctex", "res://.godot/imported/TEMP_Player.png-93c0155a70dd77e8bb2ef64f7dcf1d1e.etc2.ctex"]
 
 [params]
 
