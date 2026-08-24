@@ -8,22 +8,26 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="HMMO Client"
 run/main_scene="uid://b8e6elu68hxid"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GGS="*res://GDScripts/Global/global_game_script.gd"
 pdb="*res://GDScripts/Global/player_db.gd"
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+PhantomCameraManager="*uid://duq6jhf6unyis"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 
