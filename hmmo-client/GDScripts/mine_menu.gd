@@ -1,6 +1,7 @@
 extends Control
 
 @onready var connection_status: Label = $VBoxMenu/ConnectionStatus
+@onready var quit_timer: Timer = $quit_timer
 
 var ws_peer:WebSocketMultiplayerPeer
 
@@ -10,6 +11,17 @@ func _ready() -> void:
 	ServiceDiscovery.scanned_server.connect(_on_scan_server)
 	ServiceDiscovery.scanned.connect(_on_scan_scanned)
 	$VBoxMenu/HBoxServer/OptionButton.grab_focus()
+
+@warning_ignore("unused_parameter")
+func _process(delta: float) -> void:
+	# Выход из игры
+	if Input.is_action_pressed("Quit"):
+		if quit_timer.is_stopped():
+			quit_timer.start()
+		$quit_timer/AudioStreamPlayer.pitch_scale = (1 - quit_timer.time_left + 0.125) * 8
+		$quit_timer/AudioStreamPlayer.play()
+	else :
+		quit_timer.stop()
 
 func _on_scan_server(data):
 	add_server_button(data)
@@ -78,3 +90,6 @@ func _on_create_server_pressed() -> void:
 
 func _on_lan_scan_timeout() -> void:
 	ServiceDiscovery.scan_lan_servers()
+
+func _on_quit_timer_timeout() -> void:
+	get_tree().quit()

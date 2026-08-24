@@ -149,8 +149,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.66753, 7.5310173, 1.185647
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.2191, 18.307247, 9.65936)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." unique_id=1400980098 node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.132448, 0.24888106, -1.7377566)
-constant_linear_velocity = Vector3(-3.0948522, -0.08226394, -0.41826203)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.385868, 0.52142364, -0.35203314)
+constant_linear_velocity = Vector3(1.5644805, 0.041582495, 0.21142483)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target")
@@ -167,8 +167,8 @@ mesh = SubResource("ArrayMesh_l7wbr")
 skeleton = NodePath("")
 
 [node name="AnimatableBody3D2" type="AnimatableBody3D" parent="." unique_id=1967161242 node_paths=PackedStringArray("move_from_node", "move_to_node")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.18804, 8.929093, 2.2850018)
-constant_linear_velocity = Vector3(2.0052078, 0.50786316, 0.3993332)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.572403, 7.760177, 1.3658438)
+constant_linear_velocity = Vector3(0.8591699, 0.2175813, 0.17108546)
 script = ExtResource("5_exmi1")
 speed = 2.0
 move_from_node = NodePath("../from_target2")
@@ -261,12 +261,15 @@ transform = Transform3D(1.8847697, 0.66906136, 8.145673e-09, -0.66386294, 1.8701
 
 [node name="Darck" parent="." unique_id=222408480 instance=ExtResource("17_ec1nt")]
 transform = Transform3D(1, 0, 0, 0, 0.185, 0, 0, 0, 1, -15.166081, -6.406495, -31.742807)
+visible = false
 
 [node name="Darck2" parent="." unique_id=1074915801 instance=ExtResource("17_ec1nt")]
 transform = Transform3D(1, 0, 0, 0, 0.185, 0, 0, 0, 1, 78.896614, -1.4064951, -31.742807)
+visible = false
 
 [node name="Darck3" parent="." unique_id=829457691 instance=ExtResource("17_ec1nt")]
 transform = Transform3D(1, 0, 0, 0, 0.185, 0, 0, 0, 1, 117.31831, 16.393143, -23.36555)
+visible = false
 
 [node name="LeaderBoard" parent="." unique_id=374800891 instance=ExtResource("19_6qc4e")]
 transform = Transform3D(0.58943605, 0, 0.80781496, 0, 1, 0, -0.80781496, 0, 0.58943605, -6.9546256, 6.1374817, -9.4741335)

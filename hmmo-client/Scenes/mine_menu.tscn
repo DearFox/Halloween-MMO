@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://8ixaw2psje7s" path="res://Scenes/volume_slider.tscn" id="2_7jhvj"]
 [ext_resource type="Script" uid="uid://bi142u86xcvyh" path="res://GDScripts/splash.gd" id="2_hy3hu"]
 [ext_resource type="AudioStream" uid="uid://blj2qoy8i8b22" path="res://Assets/sounds/steps/metal_steps_01.ogg" id="4_q2sec"]
+[ext_resource type="AudioStream" uid="uid://bydnvabj0lsce" path="res://Assets/sounds/steps/metal_steps_15.ogg" id="5_vfwcg"]
 
 [node name="MineMenu" type="Control" unique_id=988508073]
 layout_mode = 3
@@ -189,9 +190,17 @@ text = "Create Server"
 wait_time = 3.0
 autostart = true
 
+[node name="quit_timer" type="Timer" parent="." unique_id=93693893]
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="quit_timer" unique_id=1122896997]
+stream = ExtResource("5_vfwcg")
+max_polyphony = 999
+
 [connection signal="text_submitted" from="VBoxMenu/HBoxPlayerName/PlayerName" to="." method="_on_player_name_text_submitted"]
 [connection signal="pressed" from="VBoxMenu/HBoxServer/Join" to="." method="_on_join_pressed"]
 [connection signal="drag_ended" from="VBoxMenu/VBoxContainer/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_drag_ended"]
 [connection signal="timeout" from="ConnectionStatusCheck" to="." method="_tested"]
 [connection signal="pressed" from="CreateServer" to="." method="_on_create_server_pressed"]
 [connection signal="timeout" from="LAN_Scan" to="." method="_on_lan_scan_timeout"]
+[connection signal="timeout" from="quit_timer" to="." method="_on_quit_timer_timeout"]
