@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://gy536ecr35e1"]
+[gd_scene format=3 uid="uid://gy536ecr35e1"]
 
 [ext_resource type="Script" uid="uid://dppfx5vw2r4j7" path="res://GDScripts/mine_menu.gd" id="1_og3g2"]
 [ext_resource type="PackedScene" uid="uid://8ixaw2psje7s" path="res://Scenes/volume_slider.tscn" id="2_7jhvj"]
 [ext_resource type="Script" uid="uid://bi142u86xcvyh" path="res://GDScripts/splash.gd" id="2_hy3hu"]
 [ext_resource type="AudioStream" uid="uid://blj2qoy8i8b22" path="res://Assets/sounds/steps/metal_steps_01.ogg" id="4_q2sec"]
 
-[node name="MineMenu" type="Control"]
+[node name="MineMenu" type="Control" unique_id=988508073]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_og3g2")
 
-[node name="VBoxMenu" type="VBoxContainer" parent="."]
+[node name="VBoxMenu" type="VBoxContainer" parent="." unique_id=2107332643]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -25,7 +25,7 @@ offset_bottom = 79.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxMenu"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxMenu" unique_id=502224490]
 layout_mode = 2
 bbcode_enabled = true
 text = "[font_size=64]H[/font_size][font_size=1]H[/font_size][font_size=64]MMO[/font_size]
@@ -34,25 +34,25 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxPlayerName" type="HBoxContainer" parent="VBoxMenu"]
+[node name="HBoxPlayerName" type="HBoxContainer" parent="VBoxMenu" unique_id=1768506060]
 layout_mode = 2
 alignment = 1
 
-[node name="PlayerName" type="LineEdit" parent="VBoxMenu/HBoxPlayerName"]
+[node name="PlayerName" type="LineEdit" parent="VBoxMenu/HBoxPlayerName" unique_id=1212804389]
 custom_minimum_size = Vector2(297, 32)
 layout_mode = 2
 placeholder_text = "UserName"
 
-[node name="HBoxServer" type="HBoxContainer" parent="VBoxMenu"]
+[node name="HBoxServer" type="HBoxContainer" parent="VBoxMenu" unique_id=1894790723]
 layout_mode = 2
 alignment = 1
 
-[node name="IP" type="LineEdit" parent="VBoxMenu/HBoxServer"]
+[node name="IP" type="LineEdit" parent="VBoxMenu/HBoxServer" unique_id=835582267]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 placeholder_text = "wss://example.com"
 
-[node name="OptionButton" type="OptionButton" parent="VBoxMenu/HBoxServer"]
+[node name="OptionButton" type="OptionButton" parent="VBoxMenu/HBoxServer" unique_id=67949547]
 layout_mode = 2
 selected = 2
 item_count = 3
@@ -63,72 +63,72 @@ popup/item_1/id = 1
 popup/item_2/text = "wss://ru-temp-hmmo-server.uwu.name"
 popup/item_2/id = 2
 
-[node name="Join" type="Button" parent="VBoxMenu/HBoxServer"]
+[node name="Join" type="Button" parent="VBoxMenu/HBoxServer" unique_id=1983393973]
 layout_mode = 2
 text = "Join"
 
-[node name="ConnectionStatus" type="Label" parent="VBoxMenu"]
+[node name="ConnectionStatus" type="Label" parent="VBoxMenu" unique_id=863456751]
 layout_mode = 2
 text = "Статус соединения:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxMenu" unique_id=1899268797]
 custom_minimum_size = Vector2(297, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label3" type="Label" parent="VBoxMenu/VBoxContainer"]
+[node name="Label3" type="Label" parent="VBoxMenu/VBoxContainer" unique_id=1189717477]
 layout_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxMenu/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxMenu/VBoxContainer" unique_id=524950670]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Sounds Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MasterLable" type="Label" parent="VBoxMenu/VBoxContainer"]
+[node name="MasterLable" type="Label" parent="VBoxMenu/VBoxContainer" unique_id=1364852570]
 layout_mode = 2
 text = "Master volume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MasterVolumeSlider" parent="VBoxMenu/VBoxContainer" instance=ExtResource("2_7jhvj")]
+[node name="MasterVolumeSlider" parent="VBoxMenu/VBoxContainer" unique_id=1058427498 instance=ExtResource("2_7jhvj")]
 layout_mode = 2
 tick_count = 10
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="SFXLable" type="Label" parent="VBoxMenu/VBoxContainer"]
+[node name="SFXLable" type="Label" parent="VBoxMenu/VBoxContainer" unique_id=981312201]
 layout_mode = 2
 text = "SFX volume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SFXVolumeSlider" parent="VBoxMenu/VBoxContainer" instance=ExtResource("2_7jhvj")]
+[node name="SFXVolumeSlider" parent="VBoxMenu/VBoxContainer" unique_id=822758930 instance=ExtResource("2_7jhvj")]
 layout_mode = 2
 tick_count = 10
 ticks_on_borders = true
 ticks_position = 3
 bus_name = "SFX"
 
-[node name="MusicLable" type="Label" parent="VBoxMenu/VBoxContainer"]
+[node name="MusicLable" type="Label" parent="VBoxMenu/VBoxContainer" unique_id=528947892]
 layout_mode = 2
 text = "Music volume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MusicVolumeSlider" parent="VBoxMenu/VBoxContainer" instance=ExtResource("2_7jhvj")]
+[node name="MusicVolumeSlider" parent="VBoxMenu/VBoxContainer" unique_id=1540733513 instance=ExtResource("2_7jhvj")]
 layout_mode = 2
 tick_count = 10
 ticks_on_borders = true
 ticks_position = 3
 bus_name = "Music"
 
-[node name="GameVersion" type="Label" parent="."]
+[node name="GameVersion" type="Label" parent="." unique_id=776293753]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -143,10 +143,10 @@ text = "v0.0.1"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="ConnectionStatusCheck" type="Timer" parent="."]
+[node name="ConnectionStatusCheck" type="Timer" parent="." unique_id=667139131]
 wait_time = 0.5
 
-[node name="Splash" type="Label" parent="."]
+[node name="Splash" type="Label" parent="." unique_id=1712694313]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -167,7 +167,7 @@ text = "Splash"
 horizontal_alignment = 1
 script = ExtResource("2_hy3hu")
 
-[node name="SFXDemo" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXDemo" type="AudioStreamPlayer2D" parent="." unique_id=1907078009]
 position = Vector2(576, 341)
 stream = ExtResource("4_q2sec")
 max_distance = 1000000.0
@@ -175,7 +175,18 @@ attenuation = 1e-05
 max_polyphony = 999
 bus = &"SFX"
 
+[node name="CreateServer" type="Button" parent="." unique_id=501332858]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_right = 8.0
+grow_vertical = 0
+text = "Create Server"
+
 [connection signal="text_submitted" from="VBoxMenu/HBoxPlayerName/PlayerName" to="." method="_on_player_name_text_submitted"]
 [connection signal="pressed" from="VBoxMenu/HBoxServer/Join" to="." method="_on_join_pressed"]
 [connection signal="drag_ended" from="VBoxMenu/VBoxContainer/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_drag_ended"]
 [connection signal="timeout" from="ConnectionStatusCheck" to="." method="_tested"]
+[connection signal="pressed" from="CreateServer" to="." method="_on_create_server_pressed"]

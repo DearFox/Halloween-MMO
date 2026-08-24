@@ -51,7 +51,7 @@ func add_player_character(peer_id) -> void:
 
 @rpc("call_remote", "reliable")
 @warning_ignore("unused_parameter")
-func add_newly_connected_player_character(new_peer_id:int) -> void:pass
+func add_newly_connected_player_character(new_peer_id:int) -> void:pass # Легаси код, получается.
 
 @rpc("call_remote", "reliable")
 @warning_ignore("unused_parameter")

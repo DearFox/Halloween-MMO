@@ -47,3 +47,15 @@ func _on_sfx_volume_slider_drag_ended(value_changed: bool) -> void:
 		$SFXDemo.pitch_scale = randf_range(0.8,2.0)
 		$SFXDemo.play()
 	pass # Replace with function body.
+
+
+func _on_create_server_pressed() -> void:
+	#GGS.create_server()
+	if $VBoxMenu/HBoxPlayerName/PlayerName.text: #TODO Не позволять игрокам использовать "пустые" ники лучше.
+		pdb.PlayerName = $VBoxMenu/HBoxPlayerName/PlayerName.text
+	if $VBoxMenu/HBoxServer/OptionButton.selected == 0:
+		GGS.create_server()
+	else :
+		GGS.create_server()
+	ws_peer = GGS.ws_peer
+	$ConnectionStatusCheck.start()
