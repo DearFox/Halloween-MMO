@@ -54,13 +54,13 @@ placeholder_text = "wss://example.com"
 
 [node name="OptionButton" type="OptionButton" parent="VBoxMenu/HBoxServer" unique_id=67949547]
 layout_mode = 2
-selected = 2
+selected = 0
 item_count = 3
 popup/item_0/text = "<------ Custom server"
 popup/item_0/id = 0
 popup/item_1/text = "ws://localhost:1337"
 popup/item_1/id = 1
-popup/item_2/text = "wss://ru-temp-hmmo-server.uwu.name"
+popup/item_2/text = "LAN Server..."
 popup/item_2/id = 2
 
 [node name="Join" type="Button" parent="VBoxMenu/HBoxServer" unique_id=1983393973]
@@ -185,8 +185,13 @@ offset_right = 8.0
 grow_vertical = 0
 text = "Create Server"
 
+[node name="LAN_Scan" type="Timer" parent="." unique_id=1419391530]
+wait_time = 3.0
+autostart = true
+
 [connection signal="text_submitted" from="VBoxMenu/HBoxPlayerName/PlayerName" to="." method="_on_player_name_text_submitted"]
 [connection signal="pressed" from="VBoxMenu/HBoxServer/Join" to="." method="_on_join_pressed"]
 [connection signal="drag_ended" from="VBoxMenu/VBoxContainer/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_drag_ended"]
 [connection signal="timeout" from="ConnectionStatusCheck" to="." method="_tested"]
 [connection signal="pressed" from="CreateServer" to="." method="_on_create_server_pressed"]
+[connection signal="timeout" from="LAN_Scan" to="." method="_on_lan_scan_timeout"]
