@@ -9,18 +9,41 @@ var server :UDPServer
 var server_data := {'Name':''}
 var scanned_servers := []
 
-var is_scanning := false
-var is_servering := false
+var is_scanning:bool = false
+var is_servering:bool = false
 
-var port = 4040
-var scan_time = 1
+var port:int = 4040
+var scan_time:float = 5
+
+# Список широковещательных адресов для сканирования
+var broadcast_addresses:PackedStringArray = [
+	"192.168.0.255",
+	"192.168.1.255",
+	"192.168.2.255",
+	"192.168.3.255",
+	"10.0.0.255",
+	"10.0.1.255",
+	"172.16.0.255",
+	"172.17.0.255",
+	"172.18.0.255",
+	"172.19.0.255",
+	"172.20.0.255",
+	"255.255.255.255"
+]
 
 func scan_lan_servers():
+	#print("scan_lan_servers")
 	# 启动客户端
 	client = PacketPeerUDP.new()
 	client.set_broadcast_enabled(true)
-	client.set_dest_address("255.255.255.255", port)
-	client.put_var({'type':'get_server'})
+	# Отправляем запрос на каждый широковещательный адрес
+	for addr in broadcast_addresses:
+		print(client.set_dest_address(addr, port))
+		client.put_var({'type': 'get_server'})
+		# Небольшая задержка между отправками, чтобы не перегружать сеть
+		await get_tree().create_timer(0.1).timeout
+	#client.set_dest_address("255.255.255.255", port)
+	#client.put_var({'type':'get_server'})
 	# 设置Timer等待2秒后完成扫描
 	get_tree().create_timer(scan_time).timeout.connect(_on_timer_timeout)
 

@@ -44,6 +44,10 @@ custom_minimum_size = Vector2(297, 32)
 layout_mode = 2
 placeholder_text = "UserName"
 
+[node name="RandomUsername" type="Button" parent="VBoxMenu/HBoxPlayerName" unique_id=1580213668]
+layout_mode = 2
+text = "🎲"
+
 [node name="HBoxServer" type="HBoxContainer" parent="VBoxMenu" unique_id=1894790723]
 layout_mode = 2
 alignment = 1
@@ -56,17 +60,20 @@ placeholder_text = "wss://example.com"
 [node name="OptionButton" type="OptionButton" parent="VBoxMenu/HBoxServer" unique_id=67949547]
 layout_mode = 2
 selected = 0
-item_count = 3
+item_count = 2
 popup/item_0/text = "<------ Custom server"
 popup/item_0/id = 0
 popup/item_1/text = "ws://localhost:1337"
 popup/item_1/id = 1
-popup/item_2/text = "LAN Server..."
-popup/item_2/id = 2
 
 [node name="Join" type="Button" parent="VBoxMenu/HBoxServer" unique_id=1983393973]
 layout_mode = 2
 text = "Join"
+
+[node name="LAN" type="Button" parent="VBoxMenu/HBoxServer" unique_id=468482648]
+layout_mode = 2
+tooltip_text = "Обновить список севреров в локальной сети"
+text = "↻ LAN"
 
 [node name="ConnectionStatus" type="Label" parent="VBoxMenu" unique_id=863456751]
 layout_mode = 2
@@ -187,8 +194,7 @@ grow_vertical = 0
 text = "Create Server"
 
 [node name="LAN_Scan" type="Timer" parent="." unique_id=1419391530]
-wait_time = 3.0
-autostart = true
+wait_time = 6.0
 
 [node name="quit_timer" type="Timer" parent="." unique_id=93693893]
 one_shot = true
@@ -198,7 +204,9 @@ stream = ExtResource("5_vfwcg")
 max_polyphony = 999
 
 [connection signal="text_submitted" from="VBoxMenu/HBoxPlayerName/PlayerName" to="." method="_on_player_name_text_submitted"]
+[connection signal="pressed" from="VBoxMenu/HBoxPlayerName/RandomUsername" to="." method="_on_random_username_pressed"]
 [connection signal="pressed" from="VBoxMenu/HBoxServer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="VBoxMenu/HBoxServer/LAN" to="." method="_on_lan_pressed"]
 [connection signal="drag_ended" from="VBoxMenu/VBoxContainer/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_drag_ended"]
 [connection signal="timeout" from="ConnectionStatusCheck" to="." method="_tested"]
 [connection signal="pressed" from="CreateServer" to="." method="_on_create_server_pressed"]

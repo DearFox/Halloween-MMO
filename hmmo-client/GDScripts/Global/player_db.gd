@@ -14,6 +14,7 @@ var PlayerLeaderboard:Array = []
 var me_chatting:bool = false
 
 func _ready() -> void:
+	PlayerName = GGS.generate_nickname()
 	loading_player_db()
 
 func loading_player_db() -> void:
@@ -28,7 +29,9 @@ func loading_player_db() -> void:
 		if dict != null: 
 			if dict["PlayerName"] != null:
 				PlayerName = dict["PlayerName"]
-			else : print("PlayerName", "Не найден!")
+			else :
+				print("PlayerName", "Не найден!")
+				PlayerName = GGS.generate_nickname()
 			if dict["suit_unlock"] != null:
 				suit_unlock = dict["suit_unlock"]
 			else : print("suit_unlock", "Не найден!")
